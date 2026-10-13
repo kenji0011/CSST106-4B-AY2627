@@ -1,62 +1,95 @@
 """
 CSST 106 - Perception and Computer Vision
-Laboratory Experiment 01: Image Representation & Fundamental Operations
+Laboratory Activity 01: Introduction to Computer Vision
 Student: Kean Gabriel Salvahan | Section: BSCS 4B | AY 2026-2027
 Laguna State Polytechnic University (LSPU)
+
+Objective:
+To familiarize students with the concept of computer vision, understand how digital
+images are represented and manipulated, and perform basic image operations using OpenCV.
 """
 
 import cv2
 import numpy as np
-import matplotlib.pyplot as plt
 
 def main():
-    # 1. Image Acquisition & Representation
-    img_path = 'sample.jpg'
-    img_bgr = cv2.imread(img_path)
-    if img_bgr is None:
-        # Generate synthetic test image if not found
-        img_bgr = np.zeros((400, 400, 3), dtype=np.uint8)
-        cv2.circle(img_bgr, (200, 200), 120, (0, 255, 255), -1)
-        cv2.rectangle(img_bgr, (80, 80), (320, 320), (255, 0, 128), 4)
+    print("=" * 60)
+    print("LABORATORY ACTIVITY 01: INTRODUCTION TO COMPUTER VISION")
+    print("=" * 60)
 
-    img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
-    height, width, channels = img_rgb.shape
-    print(f"[Lab 01] Image Loaded: {width}x{height}, Channels: {channels}, Dtype: {img_rgb.dtype}")
+    # ---------------------------------------------------------
+    # PART 1: UNDERSTANDING DIGITAL IMAGES
+    # ---------------------------------------------------------
 
-    # 2. Color Space Conversions
-    gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
-    hsv = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2HSV)
-    _, binary = cv2.threshold(gray, 128, 255, cv2.THRESH_BINARY)
-    inverted = cv2.bitwise_not(img_rgb)
+    # Step 2: Hands-on Exercise: Load and Explore an Image
+    image_path = 'sample.jpg'
+    img = cv2.imread(image_path)
+    if img is None:
+        # Create a sample color image if no file is present
+        img = np.zeros((400, 500, 3), dtype=np.uint8)
+        img[:] = (230, 216, 173) # Soft cyan-blue background in BGR
+        cv2.circle(img, (250, 200), 100, (60, 20, 220), -1) # Crimson circle in BGR
+        cv2.rectangle(img, (100, 80), (400, 320), (0, 200, 255), 4)
 
-    # 3. Channel Decomposition
-    r_channel = img_rgb[:, :, 0]
-    g_channel = img_rgb[:, :, 1]
-    b_channel = img_rgb[:, :, 2]
+    # Print shape: (height, width, channels)
+    h, w, c = img.shape
+    print(f"\n[Step 2] Image Shape: {img.shape}")
+    print(f" - Height (Rows): {h} px")
+    print(f" - Width (Columns): {w} px")
+    print(f" - Channels: {c} (BGR Ordering: Blue, Green, Red)")
+    print(f" - Total Pixels: {h * w:,}")
+    print(f" - Data Type: {img.dtype}")
 
-    # 4. Point Operations (Brightness & Contrast)
-    alpha = 1.3  # Contrast control (1.0-3.0)
-    beta = 30    # Brightness control (0-100)
-    adjusted = cv2.convertScaleAbs(img_rgb, alpha=alpha, beta=beta)
+    # Convert to Grayscale
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    print(f" - Grayscale Shape: {gray.shape} (Single Channel 2D Array)")
 
-    # 5. Geometric Transformations
-    rotated_90 = cv2.rotate(img_rgb, cv2.ROTATE_90_CLOCKWISE)
-    flipped_h = cv2.flip(img_rgb, 1)
+    # Step 3: Explore Image Properties
+    # Examine pixel values at specific coordinates (y, x)
+    sample_y, sample_x = h // 2, w // 2
+    b, g, r = img[sample_y, sample_x]
+    print(f"\n[Step 3] Pixel properties at coordinate (y={sample_y}, x={sample_x}):")
+    print(f" - BGR Values: Blue={b}, Green={g}, Red={r}")
+    print(f" - Grayscale Intensity: {gray[sample_y, sample_x]}")
 
-    # Visual Display
-    fig, axes = plt.subplots(2, 4, figsize=(14, 7))
-    axes[0, 0].imshow(img_rgb); axes[0, 0].set_title('Original RGB')
-    axes[0, 1].imshow(gray, cmap='gray'); axes[0, 1].set_title('Grayscale')
-    axes[0, 2].imshow(hsv); axes[0, 2].set_title('HSV Space')
-    axes[0, 3].imshow(binary, cmap='gray'); axes[0, 3].set_title('Binarized (Threshold 128)')
-    axes[1, 0].imshow(r_channel, cmap='Reds'); axes[1, 0].set_title('Red Channel')
-    axes[1, 1].imshow(g_channel, cmap='Greens'); axes[1, 1].set_title('Green Channel')
-    axes[1, 2].imshow(b_channel, cmap='Blues'); axes[1, 2].set_title('Blue Channel')
-    axes[1, 3].imshow(adjusted); axes[1, 3].set_title('Brightness & Contrast')
+    # Change a pixel's color to a new value (e.g. bright yellow [0, 255, 255] in BGR)
+    modified_img = img.copy()
+    new_color = [0, 255, 255] # Yellow in BGR
+    # Modify a 20x20 patch around coordinate to clearly observe the change
+    modified_img[sample_y-10:sample_y+10, sample_x-10:sample_x+10] = new_color
+    print(f" - Changed 20x20 patch at ({sample_y}, {sample_x}) to new BGR value: {new_color}")
 
-    for ax in axes.flat: ax.axis('off')
-    plt.tight_layout()
-    plt.show()
+    # ---------------------------------------------------------
+    # PART 2: BASIC IMAGE OPERATIONS
+    # ---------------------------------------------------------
+
+    # Step 4: Image Manipulation
+    # a. Crop a region of interest (ROI)
+    roi_y1, roi_y2 = int(h * 0.2), int(h * 0.8)
+    roi_x1, roi_x2 = int(w * 0.2), int(w * 0.8)
+    cropped_roi = img[roi_y1:roi_y2, roi_x1:roi_x2]
+    print(f"\n[Step 4] Cropped ROI Shape: {cropped_roi.shape}")
+
+    # b. Resize the image (smaller 0.5x and larger 1.5x)
+    resized_small = cv2.resize(img, (int(w * 0.5), int(h * 0.5)), interpolation=cv2.INTER_AREA)
+    resized_large = cv2.resize(img, (int(w * 1.5), int(h * 1.5)), interpolation=cv2.INTER_LINEAR)
+    print(f" - Resized (Smaller 0.5x): {resized_small.shape}")
+    print(f" - Resized (Larger 1.5x): {resized_large.shape}")
+
+    # c. Rotate the image by 90 degrees
+    rotated_90 = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
+    print(f" - Rotated 90 degrees clockwise: {rotated_90.shape}")
+
+    # Display outputs
+    cv2.imshow("1. Original Image (BGR)", img)
+    cv2.imshow("2. Grayscale Conversion", gray)
+    cv2.imshow("3. Modified Pixel Patch", modified_img)
+    cv2.imshow("4. Cropped Region of Interest (ROI)", cropped_roi)
+    cv2.imshow("5. Rotated 90 Degrees", rotated_90)
+
+    print("\nPress any key in image windows to close...")
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
 if __name__ == '__main__':
     main()

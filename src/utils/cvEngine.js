@@ -44,7 +44,7 @@ export function cloneImageData(imageData) {
 }
 
 // ============================================================================
-// LAB 01: IMAGE FUNDAMENTALS & OPERATIONS
+// LAB 01: INTRODUCTION TO COMPUTER VISION & BASIC IMAGE OPERATIONS
 // ============================================================================
 
 export function processLab01(imageData, options = {}) {
@@ -57,24 +57,29 @@ export function processLab01(imageData, options = {}) {
     binaryThreshold = 128,   // 0 to 255
     flipH = false,
     flipV = false,
+    rotation = 0,            // 0, 90, 180, 270
+    resizeScale = 1.0,       // 0.5, 0.75, 1.0, 1.25, 1.5
+    cropROI = false,         // whether to crop region of interest
+    roi = { x: 100, y: 100, width: 300, height: 300 },
+    modifiedPixel = null     // { x, y, color: [r, g, b], size: 10 }
   } = options;
 
   let width = imageData.width;
   let height = imageData.height;
   const src = imageData.data;
 
-  // Create target buffer
+  // 1. Initial working canvas
   const canvas = document.createElement('canvas');
   canvas.width = width;
   canvas.height = height;
   const ctx = canvas.getContext('2d');
-  const output = ctx.createImageData(width, height);
-  const dst = output.data;
+  const tempOutput = ctx.createImageData(width, height);
+  const dst = tempOutput.data;
 
-  // Contrast factor
   const contrastFactor = (259 * (contrast + 255)) / (255 * (259 - contrast));
   const gammaInv = 1 / Math.max(0.01, gamma);
 
+  // Apply pixel point operations, channels, and color space
   for (let y = 0; y < height; y++) {
     const targetY = flipV ? (height - 1 - y) : y;
     for (let x = 0; x < width; x++) {
@@ -92,14 +97,12 @@ export function processLab01(imageData, options = {}) {
       else if (channel === 'green') { r = 0; b = 0; }
       else if (channel === 'blue') { r = 0; g = 0; }
 
-      // Brightness
+      // Brightness & Contrast
       if (brightness !== 0) {
         r = Math.min(255, Math.max(0, r + brightness));
         g = Math.min(255, Math.max(0, g + brightness));
         b = Math.min(255, Math.max(0, b + brightness));
       }
-
-      // Contrast
       if (contrast !== 0) {
         r = Math.min(255, Math.max(0, contrastFactor * (r - 128) + 128));
         g = Math.min(255, Math.max(0, contrastFactor * (g - 128) + 128));
@@ -118,31 +121,11 @@ export function processLab01(imageData, options = {}) {
         const gray = 0.299 * r + 0.587 * g + 0.114 * b;
         r = gray; g = gray; b = gray;
       } else if (colorSpace === 'invert') {
-        r = 255 - r;
-        g = 255 - g;
-        b = 255 - b;
+        r = 255 - r; g = 255 - g; b = 255 - b;
       } else if (colorSpace === 'binary') {
         const gray = 0.299 * r + 0.587 * g + 0.114 * b;
         const val = gray >= binaryThreshold ? 255 : 0;
         r = val; g = val; b = val;
-      } else if (colorSpace === 'hsv') {
-        // Pseudo-HSV visual representation
-        const max = Math.max(r, g, b) / 255;
-        const min = Math.min(r, g, b) / 255;
-        const d = max - min;
-        let h = 0;
-        if (d !== 0) {
-          if (max === r / 255) h = ((g - b) / 255 / d) % 6;
-          else if (max === g / 255) h = (b - r) / 255 / d + 2;
-          else h = (r - g) / 255 / d + 4;
-          h = Math.round(h * 60);
-          if (h < 0) h += 360;
-        }
-        const s = max === 0 ? 0 : d / max;
-        const v = max;
-        r = (h / 360) * 255;
-        g = s * 255;
-        b = v * 255;
       }
 
       dst[dstIdx] = Math.round(r);
@@ -152,7 +135,58 @@ export function processLab01(imageData, options = {}) {
     }
   }
 
-  return output;
+  ctx.putImageData(tempOutput, 0, 0);
+
+  // 2. Apply Custom Modified Pixel / Brush (Step 3)
+  if (modifiedPixel && modifiedPixel.x !== undefined && modifiedPixel.y !== undefined) {
+    const pxSize = modifiedPixel.size || 16;
+    ctx.fillStyle = modifiedPixel.hex || '#00e5ff';
+    ctx.fillRect(
+      Math.max(0, modifiedPixel.x - Math.floor(pxSize / 2)),
+      Math.max(0, modifiedPixel.y - Math.floor(pxSize / 2)),
+      pxSize,
+      pxSize
+    );
+  }
+
+  // 3. Geometric Operations: Rotation by 90/180/270 and Resize / Crop ROI
+  let finalCanvas = canvas;
+
+  if (cropROI) {
+    const cropCanvas = document.createElement('canvas');
+    cropCanvas.width = roi.width;
+    cropCanvas.height = roi.height;
+    const cCtx = cropCanvas.getContext('2d');
+    cCtx.drawImage(finalCanvas, roi.x, roi.y, roi.width, roi.height, 0, 0, roi.width, roi.height);
+    finalCanvas = cropCanvas;
+  }
+
+  if (rotation !== 0 || resizeScale !== 1.0) {
+    const rotCanvas = document.createElement('canvas');
+    const rad = (rotation * Math.PI) / 180;
+    const isSideways = rotation === 90 || rotation === 270;
+    const baseW = isSideways ? finalCanvas.height : finalCanvas.width;
+    const baseH = isSideways ? finalCanvas.width : finalCanvas.height;
+    const targetW = Math.round(baseW * resizeScale);
+    const targetH = Math.round(baseH * resizeScale);
+
+    rotCanvas.width = targetW;
+    rotCanvas.height = targetH;
+    const rCtx = rotCanvas.getContext('2d');
+    rCtx.translate(targetW / 2, targetH / 2);
+    rCtx.rotate(rad);
+    rCtx.scale(resizeScale, resizeScale);
+    rCtx.drawImage(finalCanvas, -finalCanvas.width / 2, -finalCanvas.height / 2);
+    finalCanvas = rotCanvas;
+  }
+
+  const finalCtx = finalCanvas.getContext('2d');
+  return {
+    outputImageData: finalCtx.getImageData(0, 0, finalCanvas.width, finalCanvas.height),
+    canvas: finalCanvas,
+    width: finalCanvas.width,
+    height: finalCanvas.height
+  };
 }
 
 // ============================================================================
