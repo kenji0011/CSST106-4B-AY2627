@@ -1,20 +1,43 @@
 import React from 'react';
-import { Sun, Moon, Printer, Code, Sparkles, FileText, FlaskConical } from 'lucide-react';
+import { Sun, Moon, Printer, Code, Sparkles, FileText, FlaskConical, LayoutGrid, ArrowLeft } from 'lucide-react';
 import { COURSE_INFO } from '../utils/reportData';
 
-export default function Navbar({ activeLab, viewMode, setViewMode, theme, toggleTheme, onPrint }) {
+export default function Navbar({
+  activeLabId,
+  activeLab,
+  viewMode,
+  setViewMode,
+  theme,
+  toggleTheme,
+  onPrint,
+  onBackToGrid
+}) {
+  const isInsideLab = !!activeLabId;
+
   return (
     <header className="comic-nav">
       <div className="comic-nav-container">
-        {/* Left: Branding & Course Tag */}
+        {/* Left: Branding & Back Button */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-          <div className="comic-tag comic-tag-yellow" style={{ fontSize: '14px', padding: '6px 12px' }}>
-            <span>CSST 106.</span>
-          </div>
+          {isInsideLab ? (
+            <button
+              onClick={onBackToGrid}
+              className="comic-btn comic-btn-accent"
+              style={{ padding: '6px 12px', fontSize: '11px', gap: '6px' }}
+              title="Return to Laboratory Cards Overview"
+            >
+              <ArrowLeft size={14} />
+              <span>All Labs</span>
+            </button>
+          ) : (
+            <div className="comic-tag comic-tag-yellow" style={{ fontSize: '14px', padding: '6px 12px' }}>
+              <span>CSST 106.</span>
+            </div>
+          )}
 
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: '14px', letterSpacing: '0.02em' }}>
-              COMPUTER VISION LAB SUITE
+              {isInsideLab ? `EXP ${activeLab.number}: ${activeLab.title}` : 'COMPUTER VISION LAB SUITE'}
             </span>
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', opacity: 0.75, letterSpacing: '0.05em' }}>
               LSPU • BSCS 4B • AY 2026-2027
@@ -22,39 +45,45 @@ export default function Navbar({ activeLab, viewMode, setViewMode, theme, toggle
           </div>
         </div>
 
-        {/* Center: Mode Tabs */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }} className="no-print">
-          <button
-            onClick={() => setViewMode('playground')}
-            className={`comic-tab ${viewMode === 'playground' ? 'active' : ''}`}
-            title="Interactive Computer Vision Demo"
-          >
-            <FlaskConical size={14} />
-            <span>Playground</span>
-          </button>
+        {/* Center: Mode Tabs (Only visible when viewing a specific lab) */}
+        {isInsideLab ? (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }} className="no-print">
+            <button
+              onClick={() => setViewMode('playground')}
+              className={`comic-tab ${viewMode === 'playground' ? 'active' : ''}`}
+              title="Interactive Computer Vision Demo"
+            >
+              <FlaskConical size={14} />
+              <span>Playground</span>
+            </button>
 
-          <button
-            onClick={() => setViewMode('code')}
-            className={`comic-tab ${viewMode === 'code' ? 'active' : ''}`}
-            title="View Python Source Code"
-          >
-            <Code size={14} />
-            <span>Python Source</span>
-          </button>
+            <button
+              onClick={() => setViewMode('code')}
+              className={`comic-tab ${viewMode === 'code' ? 'active' : ''}`}
+              title="View Python Source Code"
+            >
+              <Code size={14} />
+              <span>Python Source</span>
+            </button>
 
-          <button
-            onClick={() => setViewMode('report')}
-            className={`comic-tab ${viewMode === 'report' ? 'active' : ''}`}
-            title="Academic Laboratory Report"
-          >
-            <FileText size={14} />
-            <span>Lab Report</span>
-          </button>
-        </div>
+            <button
+              onClick={() => setViewMode('report')}
+              className={`comic-tab ${viewMode === 'report' ? 'active' : ''}`}
+              title="Academic Laboratory Report"
+            >
+              <FileText size={14} />
+              <span>Lab Report</span>
+            </button>
+          </div>
+        ) : (
+          <div className="comic-tag comic-tag-green no-print" style={{ fontSize: '11px' }}>
+            <span>7 OF 7 ACTIVITIES READY</span>
+          </div>
+        )}
 
         {/* Right: Actions (Print, Theme, GitHub) */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }} className="no-print">
-          {viewMode === 'report' && (
+          {isInsideLab && viewMode === 'report' && (
             <button
               onClick={onPrint}
               className="comic-btn comic-btn-accent"
