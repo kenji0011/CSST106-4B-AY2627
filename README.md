@@ -1,9 +1,8 @@
 # CSST 106: Perception & Computer Vision — Laboratory Web UI Suite
 
 **Laguna State Polytechnic University (LSPU)**  
-**College of Computer Studies — Department of Computer Science**  
 **Course Code**: CSST 106 (BSCS 4B — AY 2026–2027, 1st Semester)  
-**Student**: **Kean Gabriel Salvahan**  
+**Author**: **Kean Gabriel Salvahan**  
 **Repository**: [github.com/kenji0011/CSST106-4B-AY2627](https://github.com/kenji0011/CSST106-4B-AY2627.git)
 
 ---
@@ -20,13 +19,9 @@ Designed with a **Neo-Brutalist Comic Book Aesthetic** (featuring halftone dot p
 
 | Experiment | Chapter Tag | Core Topics & Computer Vision Techniques | Interactive Web Features |
 | :--- | :--- | :--- | :--- |
-| **Lab 01** | `EXP 01 // IMAGES` | Digital image representation, 24-bit RGB, Grayscale, HSV projection, channel decomposition, contrast ($\alpha$), brightness ($\beta$), gamma ($\gamma$), geometric reflections. | Live color space switcher, channel isolation (R, G, B), brightness/contrast/gamma sliders, flip tools. |
-| **Lab 02** | `EXP 02 // EDGES` | Spatial derivatives, first-order kernels (Sobel, Prewitt, Scharr), second-order isotropic Laplacian, Canny edge detector (hysteresis thresholding & NMS). | Interactive gradient selector, Canny $T_{\text{low}}$ & $T_{\text{high}}$ threshold sliders, Gaussian blur radius, dark/light edge invert. |
-| **Lab 03** | `EXP 03 // HISTOGRAM` | Discrete frequency distribution (256 bins), Global Histogram Equalization (CDF mapping), Contrast Limited Adaptive Histogram Equalization (CLAHE), Min-Max contrast stretching. | Real-time Canvas histogram graph (R, G, B, Luminance), CDF equalization toggle, CLAHE clip limit & grid dimensions. |
-| **Lab 04** | `EXP 04 // FEATURES` | Interest point & invariant feature extraction: Harris corner auto-correlation matrix, FAST corner detector, ORB (Oriented FAST and Rotated BRIEF), SURF scale-space extrema. | Neon keypoint visualizer, scale-space neighborhood rings ($\sigma$), dominant gradient orientation vectors ($\theta$). |
-| **Lab 05** | `EXP 05 // PCA` | Principal Component Analysis, covariance matrix eigen-decomposition, Eigenfaces, low-rank dimensionality reduction, image compression & reconstruction. | $k$-components slider ($1 \dots 64$), live reconstructed preview, compression ratio calculator, explained variance percentage. |
-| **Lab 06** | `EXP 06 // YOLOV8` | Deep learning single-stage object detector: C2f backbone, decoupled head, anchor-free bounding box regression, Intersection-over-Union (IoU) Non-Maximum Suppression (NMS). | Real-time candidate box overlay, comic entity label badges, confidence threshold filter ($\tau$), detected classes tally. |
-| **Lab 07** | `EXP 07 // SEGMENTATION` | Image partitioning: Otsu's automatic binarization (maximizing inter-class variance $\sigma_B^2$), unsupervised K-Means color quantization in 3D RGB Euclidean space. | Strategy switcher (Otsu vs. K-Means), $k$-clusters slider ($2 \dots 8$), centroid color palette swatches, optimal threshold $t^*$ readout. |
+| **Lab 01** | `EXP 01 // IMAGES` | Digital image representation as 2D/3D NumPy arrays $(H, W, C)$, OpenCV BGR color ordering, Grayscale conversion (`cv2.cvtColor`), coordinate-level pixel inspection and color modification, Region of Interest (ROI) slicing, image resizing (`cv2.resize`), and $90^\circ$ clockwise rotation (`cv2.rotate`). | Dual-card comparison (Original vs. Processed), 6 operation modes (`Inspect`, `Grayscale`, `Rotate 90°`, `Resize`, `Crop ROI`, `Modify Pixel`), interactive $(X, Y)$ coordinate picker, BGR replacement color input, scale factor slider ($0.1\times - 2.0\times$), crop coordinate inputs, and live metadata cards displaying dimensions, channels, inspected pixel values, and NumPy shape. |
+
+
 
 ---
 
@@ -48,12 +43,6 @@ In addition to the interactive Web UI, standalone Python scripts corresponding t
 ```
 python_labs/
 ├── lab01_images.py           # OpenCV color spaces, channels, and transformations
-├── lab02_edge_detection.py   # Sobel, Prewitt, Laplacian, and Canny filters
-├── lab03_histogram.py        # Global HE, CLAHE, and Matplotlib distributions
-├── lab04_surf_features.py    # ORB/SURF keypoint detection and descriptor matching
-├── lab05_pca_cv.py           # SVD/PCA eigen-decomposition and reconstruction
-├── lab06_yolov8.py           # Ultralytics YOLOv8 inference and bounding boxes
-└── lab07_segmentation.py     # Otsu binarization and K-Means color clustering
 ```
 
 ---
@@ -86,13 +75,6 @@ npm run build
 
 ---
 
-## 📄 Hard-Copy Report Printing
-
-1. Open the Web UI and select any laboratory experiment.
-2. In the top navigation bar, click **"LAB REPORT"**.
-3. Review the objectives, theoretical background, procedures, and generated visual output.
-4. Customize your **Analysis, Observations & Conclusion** in the editable textarea.
-5. Click **"PRINT REPORT"** (or press `Ctrl+P`) to export a clean, formatted A4 hard copy ready for submission.
 
 ---
 
