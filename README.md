@@ -1,9 +1,8 @@
 # CSST 106: Perception & Computer Vision — Laboratory Web UI Suite
 
 **Laguna State Polytechnic University (LSPU)**  
-**College of Computer Studies — Department of Computer Science**  
 **Course Code**: CSST 106 (BSCS 4B — AY 2026–2027, 1st Semester)  
-**Student**: **Kean Gabriel Salvahan**  
+**Author**: **Kean Gabriel Salvahan**  
 **Repository**: [github.com/kenji0011/CSST106-4B-AY2627](https://github.com/kenji0011/CSST106-4B-AY2627.git)
 
 ---
@@ -48,12 +47,6 @@ In addition to the interactive Web UI, standalone Python scripts corresponding t
 ```
 python_labs/
 ├── lab01_images.py           # OpenCV color spaces, channels, and transformations
-├── lab02_edge_detection.py   # Sobel, Prewitt, Laplacian, and Canny filters
-├── lab03_histogram.py        # Global HE, CLAHE, and Matplotlib distributions
-├── lab04_surf_features.py    # ORB/SURF keypoint detection and descriptor matching
-├── lab05_pca_cv.py           # SVD/PCA eigen-decomposition and reconstruction
-├── lab06_yolov8.py           # Ultralytics YOLOv8 inference and bounding boxes
-└── lab07_segmentation.py     # Otsu binarization and K-Means color clustering
 ```
 
 ---
@@ -86,13 +79,6 @@ npm run build
 
 ---
 
-## 📄 Hard-Copy Report Printing
-
-1. Open the Web UI and select any laboratory experiment.
-2. In the top navigation bar, click **"LAB REPORT"**.
-3. Review the objectives, theoretical background, procedures, and generated visual output.
-4. Customize your **Analysis, Observations & Conclusion** in the editable textarea.
-5. Click **"PRINT REPORT"** (or press `Ctrl+P`) to export a clean, formatted A4 hard copy ready for submission.
 
 ---
 
