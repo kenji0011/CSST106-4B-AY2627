@@ -3,87 +3,103 @@
 export const PYTHON_SNIPPETS = {
   'lab-01': {
     filename: 'python_labs/lab01_images.py',
-    code: `"""
-CSST 106 - Perception and Computer Vision
-Laboratory Activity 01: Introduction to Computer Vision
-Student: Kean Gabriel Salvahan | Section: BSCS 4B | AY 2026-2027
-Laguna State Polytechnic University (LSPU)
-
-Objective:
-To familiarize students with the concept of computer vision, understand how digital
-images are represented and manipulated, and perform basic image operations using OpenCV.
-"""
-
+    code: `import base64
 import cv2
 import numpy as np
+from fastapi import APIRouter, File, Form, HTTPException, UploadFile
 
-def main():
-    print("=" * 60)
-    print("LABORATORY ACTIVITY 01: INTRODUCTION TO COMPUTER VISION")
-    print("=" * 60)
+router = APIRouter(prefix="/api/lab01", tags=["Lab 01 - Images"])
 
-    # ---------------------------------------------------------
-    # PART 1: UNDERSTANDING DIGITAL IMAGES
-    # ---------------------------------------------------------
+def encode_image_to_base64(img_ndarray: np.ndarray) -> str:
+    """Encodes an OpenCV image to base64 JPEG format."""
+    success, buffer = cv2.imencode(".jpg", img_ndarray)
+    if not success:
+        raise HTTPException(status_code=500, detail="Failed to encode image")
+    return f"data:image/jpeg;base64,{base64.b64encode(buffer).decode('utf-8')}"
 
-    # Step 2: Hands-on Exercise: Load and Explore an Image
-    image_path = 'sample.jpg'
-    img = cv2.imread(image_path)
+@router.post("/process")
+async def process_lab01(
+    file: UploadFile = File(...),
+    action: str = Form("inspect"),       # inspect, grayscale, crop, resize, rotate, modify_pixel
+    pixel_x: int = Form(0),
+    pixel_y: int = Form(0),
+    new_color: str = Form("0,255,0"),    # B,G,R format e.g. green: 0,255,0
+    crop_x1: int = Form(0),
+    crop_y1: int = Form(0),
+    crop_x2: int = Form(100),
+    crop_y2: int = Form(100),
+    resize_scale: float = Form(0.5),     # scale factor
+):
+    # 1. Read uploaded image using OpenCV
+    contents = await file.read()
+    nparr = np.frombuffer(contents, np.uint8)
+    img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+
     if img is None:
-        img = np.zeros((400, 500, 3), dtype=np.uint8)
-        img[:] = (230, 216, 173)
-        cv2.circle(img, (250, 200), 100, (60, 20, 220), -1)
+        raise HTTPException(status_code=400, detail="Invalid image file.")
 
-    # Print shape: (height, width, channels)
-    h, w, c = img.shape
-    print(f"[Step 2] Image Shape: {img.shape}")
-    print(f" - Height (Rows): {h} px, Width (Cols): {w} px")
-    print(f" - Channels: {c} (BGR Ordering: Blue, Green, Red)")
-    print(f" - Data Type: {img.dtype}")
+    height, width, channels = img.shape
+    metadata = {
+        "height": height,
+        "width": width,
+        "channels": channels,
+        "shape": f"({height}, {width}, {channels})",
+        "color_order": "BGR (OpenCV standard: Blue, Green, Red)",
+    }
 
-    # Convert to Grayscale
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    print(f" - Grayscale Shape: {gray.shape} (Single Channel 2D Array)")
+    processed_img = img.copy()
+    inspected_pixel = None
 
-    # Step 3: Explore Image Properties
-    # Examine pixel values at specific coordinates (y, x)
-    sample_y, sample_x = h // 2, w // 2
-    b, g, r = img[sample_y, sample_x]
-    print(f"[Step 3] Pixel at ({sample_y}, {sample_x}): B={b}, G={g}, R={r}")
+    # Safe coordinate clamping for pixel inspection
+    safe_x = min(max(0, pixel_x), width - 1)
+    safe_y = min(max(0, pixel_y), height - 1)
+    b, g, r = img[safe_y, safe_x].tolist()
+    inspected_pixel = {
+        "x": safe_x,
+        "y": safe_y,
+        "bgr": [b, g, r],
+        "rgb": [r, g, b],
+    }
 
-    # Change a pixel's color to a new value (Yellow in BGR: [0, 255, 255])
-    modified_img = img.copy()
-    new_color = [0, 255, 255]
-    modified_img[sample_y-10:sample_y+10, sample_x-10:sample_x+10] = new_color
+    # 2. Execute selected operations
+    if action == "grayscale":
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        processed_img = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
 
-    # ---------------------------------------------------------
-    # PART 2: BASIC IMAGE OPERATIONS
-    # ---------------------------------------------------------
+    elif action == "modify_pixel":
+        try:
+            b_val, g_val, r_val = map(int, new_color.split(","))
+            cv2.rectangle(
+                processed_img,
+                (max(0, safe_x - 7), max(0, safe_y - 7)),
+                (min(width - 1, safe_x + 7), min(height - 1, safe_y + 7)),
+                (b_val, g_val, r_val),
+                -1,
+            )
+        except Exception:
+            processed_img[safe_y, safe_x] = [0, 255, 0]
 
-    # Step 4: Image Manipulation
-    # a. Crop a region of interest (ROI)
-    roi_y1, roi_y2 = int(h * 0.2), int(h * 0.8)
-    roi_x1, roi_x2 = int(w * 0.2), int(w * 0.8)
-    cropped_roi = img[roi_y1:roi_y2, roi_x1:roi_x2]
+    elif action == "crop":
+        x1, x2 = sorted([max(0, min(crop_x1, width)), max(0, min(crop_x2, width))])
+        y1, y2 = sorted([max(0, min(crop_y1, height)), max(0, min(crop_y2, height))])
+        if x2 - x1 > 0 and y2 - y1 > 0:
+            processed_img = img[y1:y2, x1:x2]
 
-    # b. Resize the image (smaller 0.5x and larger 1.5x)
-    resized_small = cv2.resize(img, (int(w * 0.5), int(h * 0.5)))
-    resized_large = cv2.resize(img, (int(w * 1.5), int(h * 1.5)))
+    elif action == "resize":
+        new_w = max(1, int(width * resize_scale))
+        new_h = max(1, int(height * resize_scale))
+        processed_img = cv2.resize(img, (new_w, new_h), interpolation=cv2.INTER_LINEAR)
 
-    # c. Rotate the image by 90 degrees
-    rotated_90 = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
+    elif action == "rotate":
+        processed_img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
 
-    # Display outputs
-    cv2.imshow("1. Original Image (BGR)", img)
-    cv2.imshow("2. Grayscale Conversion", gray)
-    cv2.imshow("3. Modified Pixel Patch", modified_img)
-    cv2.imshow("4. Cropped Region of Interest (ROI)", cropped_roi)
-    cv2.imshow("5. Rotated 90 Degrees", rotated_90)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-
-if __name__ == '__main__':
-    main()`
+    processed_h, processed_w = processed_img.shape[:2]
+    return {
+        "metadata": metadata,
+        "inspected_pixel": inspected_pixel,
+        "processed_dimensions": f"{processed_w}x{processed_h}",
+        "processed_image_base64": encode_image_to_base64(processed_img),
+    }`
   },
 
   'lab-02': {
