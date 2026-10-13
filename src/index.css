@@ -1,0 +1,626 @@
+/* ==========================================================================
+   CSST 106 - Perception & Computer Vision Laboratory Suite
+   Neo-Brutalist Comic Design System (Matches kenji-dev.vercel.app portfolio)
+   ========================================================================== */
+
+:root {
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Outfit', var(--font-sans);
+  --font-mono: 'Space Grotesk', 'Fira Code', monospace;
+  --font-code: 'Fira Code', monospace;
+
+  /* Light Theme (Crisp comic book print) */
+  --bg-page: #fafaf9;
+  --bg-card: #ffffff;
+  --bg-surface: #f4f4f5;
+  --bg-nav: rgba(250, 250, 249, 0.94);
+  --text-primary: #09090b;
+  --text-secondary: #52525b;
+  --text-muted: #71717a;
+  --border-color: #09090b;
+  --shadow-color: #09090b;
+  --tag-bg: #09090b;
+  --tag-text: #ffffff;
+  --accent-yellow: #ffe600;
+  --accent-cyan: #00e5ff;
+  --accent-pink: #ff2a85;
+  --accent-green: #10b981;
+  --accent-blue: #3b82f6;
+  --dot-color: rgba(9, 9, 11, 0.12);
+  --grid-line: rgba(9, 9, 11, 0.08);
+}
+
+[data-theme="dark"] {
+  /* Dark Theme (High-contrast Cyberpunk / Neo-brutalist dark) */
+  --bg-page: #0c0d12;
+  --bg-card: #141722;
+  --bg-surface: #1d2130;
+  --bg-nav: rgba(12, 13, 18, 0.94);
+  --text-primary: #f4f4f5;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --border-color: #f4f4f5;
+  --shadow-color: #f4f4f5;
+  --tag-bg: #f4f4f5;
+  --tag-text: #0c0d12;
+  --accent-yellow: #ffe600;
+  --accent-cyan: #00e5ff;
+  --accent-pink: #ff2a85;
+  --accent-green: #10b981;
+  --accent-blue: #3b82f6;
+  --dot-color: rgba(244, 244, 245, 0.12);
+  --grid-line: rgba(244, 244, 245, 0.08);
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+/* Comic Halftone Dots Background */
+.comic-dots-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: radial-gradient(var(--dot-color) 1.5px, transparent 1.5px);
+  background-size: 20px 20px;
+}
+
+/* Neo-Brutalist Comic Containers */
+.comic-box {
+  border: 2.5px solid var(--border-color);
+  box-shadow: 4px 4px 0px var(--shadow-color);
+  background: var(--bg-card);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.comic-box-sm {
+  border: 2px solid var(--border-color);
+  box-shadow: 2px 2px 0px var(--shadow-color);
+  background: var(--bg-card);
+}
+
+.comic-box-lg {
+  border: 3px solid var(--border-color);
+  box-shadow: 8px 8px 0px var(--shadow-color);
+  background: var(--bg-card);
+}
+
+/* Comic Badges & Tags */
+.comic-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 2px solid var(--border-color);
+  box-shadow: 2px 2px 0px var(--shadow-color);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  line-height: 1;
+}
+
+.comic-tag-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 2px solid var(--border-color);
+  box-shadow: 2px 2px 0px var(--shadow-color);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  background: transparent;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.comic-tag-yellow {
+  background: var(--accent-yellow);
+  color: #000000;
+  border-color: #000000;
+  box-shadow: 2px 2px 0px #000000;
+}
+
+.comic-tag-cyan {
+  background: var(--accent-cyan);
+  color: #000000;
+  border-color: #000000;
+  box-shadow: 2px 2px 0px #000000;
+}
+
+.comic-tag-pink {
+  background: var(--accent-pink);
+  color: #ffffff;
+  border-color: #000000;
+  box-shadow: 2px 2px 0px #000000;
+}
+
+.comic-tag-green {
+  background: var(--accent-green);
+  color: #ffffff;
+  border-color: #000000;
+  box-shadow: 2px 2px 0px #000000;
+}
+
+/* Comic Buttons */
+.comic-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 2.5px solid var(--border-color);
+  box-shadow: 4px 4px 0px var(--shadow-color);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.15s ease;
+  user-select: none;
+}
+
+.comic-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0px var(--shadow-color);
+}
+
+.comic-btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0px var(--shadow-color);
+}
+
+.comic-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 2px 2px 0px var(--shadow-color);
+}
+
+.comic-btn-primary {
+  background: var(--text-primary);
+  color: var(--bg-page);
+}
+
+.comic-btn-secondary {
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+
+.comic-btn-accent {
+  background: var(--accent-yellow);
+  color: #000000;
+  border-color: var(--border-color);
+  box-shadow: 4px 4px 0px var(--shadow-color);
+}
+
+.comic-btn-icon {
+  padding: 8px;
+}
+
+/* App Header & Navigation */
+.comic-nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--bg-nav);
+  backdrop-filter: blur(12px);
+  border-bottom: 2.5px solid var(--border-color);
+  padding: 12px 24px;
+}
+
+.comic-nav-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* Main Layout Grid */
+.comic-app-layout {
+  position: relative;
+  z-index: 10;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 24px;
+  min-height: calc(100vh - 75px);
+}
+
+@media (max-width: 1024px) {
+  .comic-app-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Sidebar Experiment List */
+.comic-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.comic-sidebar-card {
+  padding: 18px;
+}
+
+.comic-nav-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 14px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  background: transparent;
+  text-align: left;
+  width: 100%;
+}
+
+.comic-nav-item:hover {
+  background: var(--bg-surface);
+  border-color: var(--border-color);
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px var(--shadow-color);
+}
+
+.comic-nav-item.active {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+  box-shadow: 4px 4px 0px var(--shadow-color);
+}
+
+/* Mode Switcher Tabs */
+.comic-mode-tabs {
+  display: flex;
+  gap: 8px;
+  border-bottom: 2.5px solid var(--border-color);
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.comic-tab {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 8px 16px;
+  border: 2px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  cursor: pointer;
+  box-shadow: 3px 3px 0px var(--shadow-color);
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.comic-tab:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px var(--shadow-color);
+}
+
+.comic-tab.active {
+  background: var(--text-primary);
+  color: var(--bg-page);
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px var(--shadow-color);
+}
+
+/* Interactive Image Workspace */
+.workspace-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.image-canvas-wrapper {
+  position: relative;
+  overflow: hidden;
+  border: 2.5px solid var(--border-color);
+  background: #050608;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  max-height: 580px;
+  box-shadow: 4px 4px 0px var(--shadow-color);
+}
+
+.image-canvas-wrapper canvas,
+.image-canvas-wrapper img {
+  max-width: 100%;
+  max-height: 560px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Interactive Split Comparison Slider */
+.split-compare-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 480px;
+  user-select: none;
+  cursor: col-resize;
+  background: #000000;
+}
+
+.split-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.split-layer img,
+.split-layer canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.split-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--accent-yellow);
+  cursor: col-resize;
+  z-index: 20;
+}
+
+.split-divider-handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  background: var(--accent-yellow);
+  border: 2.5px solid #000000;
+  box-shadow: 3px 3px 0px #000000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  color: #000000;
+}
+
+/* Control Panel & Sliders */
+.comic-control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.comic-control-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+}
+
+.comic-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  background: var(--bg-surface);
+  border: 2px solid var(--border-color);
+  outline: none;
+  cursor: pointer;
+}
+
+.comic-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--accent-yellow);
+  border: 2px solid var(--border-color);
+  box-shadow: 2px 2px 0px var(--shadow-color);
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.comic-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.comic-select, .comic-input {
+  width: 100%;
+  padding: 10px 12px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  border: 2px solid var(--border-color);
+  box-shadow: 3px 3px 0px var(--shadow-color);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  outline: none;
+}
+
+.comic-select:focus, .comic-input:focus {
+  border-color: var(--accent-cyan);
+}
+
+/* Histogram Canvas */
+.histogram-canvas {
+  width: 100%;
+  height: 140px;
+  background: var(--bg-surface);
+  border: 2px solid var(--border-color);
+  display: block;
+}
+
+/* Code Viewer */
+.code-viewer-container {
+  border: 2.5px solid var(--border-color);
+  box-shadow: 6px 6px 0px var(--shadow-color);
+  background: #0d0f15;
+  color: #f8fafc;
+  overflow: hidden;
+}
+
+.code-viewer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: #141724;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.code-viewer-pre {
+  padding: 20px;
+  overflow-x: auto;
+  font-family: var(--font-code);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+/* Academic Report Hard-Copy View */
+.report-sheet {
+  background: #ffffff;
+  color: #111827;
+  padding: 48px;
+  border: 2.5px solid #000000;
+  box-shadow: 8px 8px 0px var(--shadow-color);
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: 'Inter', serif;
+}
+
+.report-header {
+  text-align: center;
+  border-bottom: 3px double #000000;
+  padding-bottom: 20px;
+  margin-bottom: 24px;
+}
+
+.report-header h2 {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 4px;
+  letter-spacing: 0.05em;
+}
+
+.report-header h3 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: #374151;
+}
+
+.report-meta-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+  font-size: 12px;
+}
+
+.report-meta-table td {
+  padding: 6px 12px;
+  border: 1px solid #000000;
+}
+
+.report-section {
+  margin-bottom: 24px;
+}
+
+.report-section-title {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 900;
+  text-transform: uppercase;
+  border-bottom: 2px solid #000000;
+  padding-bottom: 4px;
+  margin-bottom: 12px;
+}
+
+.report-textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 12px;
+  border: 1.5px solid #000000;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+/* Print Stylesheet */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .comic-dots-bg,
+  .comic-nav,
+  .comic-sidebar,
+  .comic-mode-tabs,
+  .no-print {
+    display: none !important;
+  }
+
+  .comic-app-layout {
+    display: block !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .report-sheet {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+}
