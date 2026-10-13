@@ -19,7 +19,8 @@ Designed with a **Neo-Brutalist Comic Book Aesthetic** (featuring halftone dot p
 
 | Experiment | Chapter Tag | Core Topics & Computer Vision Techniques | Interactive Web Features |
 | :--- | :--- | :--- | :--- |
-| **Lab 01** | `EXP 01 // IMAGES` | Digital image representation, 24-bit RGB, Grayscale, HSV projection, channel decomposition, contrast ($\alpha$), brightness ($\beta$), gamma ($\gamma$), geometric reflections. | Live color space switcher, channel isolation (R, G, B), brightness/contrast/gamma sliders, flip tools. |
+| **Lab 01** | `EXP 01 // IMAGES` | Digital image representation as 2D/3D NumPy arrays $(H, W, C)$, OpenCV BGR color ordering, Grayscale conversion (`cv2.cvtColor`), coordinate-level pixel inspection and color modification, Region of Interest (ROI) slicing, image resizing (`cv2.resize`), and $90^\circ$ clockwise rotation (`cv2.rotate`). | Dual-card comparison (Original vs. Processed), 6 operation modes (`Inspect`, `Grayscale`, `Rotate 90°`, `Resize`, `Crop ROI`, `Modify Pixel`), interactive $(X, Y)$ coordinate picker, BGR replacement color input, scale factor slider ($0.1\times - 2.0\times$), crop coordinate inputs, and live metadata cards displaying dimensions, channels, inspected pixel values, and NumPy shape. |
+
 
 
 ---
