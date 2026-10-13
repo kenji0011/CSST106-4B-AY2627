@@ -1,18 +1,11 @@
 import React from 'react';
 import { LAB_MODULES } from '../labs/registry';
 import { COURSE_INFO } from '../utils/reportData';
-import { ArrowRight, CheckCircle2, PlusCircle, Sparkles, Layers, Terminal, BookOpen } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Clock, PlusCircle } from 'lucide-react';
 
 export default function LabCardGrid({ onSelectLab }) {
-  // Tags/keywords for each lab to show on cards
   const LAB_TAGS = {
-    'lab-01': ['RGB', 'GRAYSCALE', 'HSV', 'CHANNELS', 'CONTRAST', 'GAMMA'],
-    'lab-02': ['CANNY', 'SOBEL', 'PREWITT', 'LAPLACIAN', 'HYSTERESIS'],
-    'lab-03': ['HISTOGRAM', 'CDF', 'EQUALIZATION', 'CLAHE', 'CONTRAST'],
-    'lab-04': ['ORB', 'HARRIS', 'SURF', 'KEYPOINTS', 'ORIENTATION'],
-    'lab-05': ['PCA', 'EIGENFACES', 'COVARIANCE', 'SVD', 'COMPRESSION'],
-    'lab-06': ['YOLOV8', 'DEEP LEARNING', 'BBOX', 'IOU NMS', 'CONFIDENCE'],
-    'lab-07': ['OTSU', 'K-MEANS', 'CLUSTERING', 'BINARIZATION', 'COLOR SEGMENT']
+    'lab-01': ['RGB & BGR', 'GRAYSCALE', 'CHANNELS', 'PIXEL INSPECT', 'ROI CROP', 'RESIZE', 'ROTATE 90°']
   };
 
   return (
@@ -31,7 +24,7 @@ export default function LabCardGrid({ onSelectLab }) {
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span className="comic-tag comic-tag-green" style={{ fontSize: '11px' }}>
-              STATUS // ALL 7 LABS COMPILED
+              STATUS // LAB 01 COMPILED &amp; ACTIVE
             </span>
           </div>
         </div>
@@ -42,7 +35,7 @@ export default function LabCardGrid({ onSelectLab }) {
           </h1>
           <p style={{ fontSize: '15px', opacity: 0.85, lineHeight: 1.6, marginBottom: '20px' }}>
             Integrated web platform compiling all Computer Vision laboratory activities for Laguna State Polytechnic University.
-            Select any laboratory card below to access its interactive playground, examine the Python implementation, or generate a formal hard-copy laboratory report.
+            Select Laboratory 1 below to test the interactive OpenCV pipeline, inspect the Python backend code, or generate the official laboratory report.
           </p>
         </div>
 
@@ -61,8 +54,8 @@ export default function LabCardGrid({ onSelectLab }) {
             <strong style={{ fontSize: '14px', fontFamily: 'var(--font-mono)' }}>{COURSE_INFO.institution}</strong>
           </div>
           <div>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', opacity: 0.6, display: 'block' }}>EVALUATION</span>
-            <strong style={{ fontSize: '14px', fontFamily: 'var(--font-mono)', color: 'var(--accent-green)' }}>READY FOR CHECKING</strong>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', opacity: 0.6, display: 'block' }}>STATUS</span>
+            <strong style={{ fontSize: '14px', fontFamily: 'var(--font-mono)', color: 'var(--accent-green)' }}>ACTIVE &amp; READY FOR CHECKING</strong>
           </div>
         </div>
       </section>
@@ -74,11 +67,11 @@ export default function LabCardGrid({ onSelectLab }) {
             CHAPTER 02 // MODULES
           </div>
           <h2 style={{ fontSize: '20px', fontWeight: 900, letterSpacing: '-0.02em', margin: 0 }}>
-            SELECT LABORATORY ACTIVITY
+            LABORATORY ACTIVITIES
           </h2>
         </div>
         <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700, opacity: 0.7 }}>
-          7 MODULES AVAILABLE
+          1 COMPILED • UPCOMING MODULES PENDING
         </span>
       </div>
 
@@ -86,10 +79,11 @@ export default function LabCardGrid({ onSelectLab }) {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(360px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))',
           gap: '24px'
         }}
       >
+        {/* Lab 01 Card */}
         {LAB_MODULES.map((lab) => {
           const tags = LAB_TAGS[lab.id] || [];
           return (
@@ -98,12 +92,12 @@ export default function LabCardGrid({ onSelectLab }) {
               onClick={() => onSelectLab(lab.id)}
               className="comic-box comic-card-hover"
               style={{
-                padding: '24px',
+                padding: '26px',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 cursor: 'pointer',
-                minHeight: '280px',
+                minHeight: '300px',
                 position: 'relative'
               }}
             >
@@ -114,8 +108,8 @@ export default function LabCardGrid({ onSelectLab }) {
                     <div
                       className="comic-box-sm"
                       style={{
-                        width: '38px',
-                        height: '38px',
+                        width: '42px',
+                        height: '42px',
                         background: 'var(--accent-yellow)',
                         color: '#000000',
                         display: 'flex',
@@ -123,7 +117,7 @@ export default function LabCardGrid({ onSelectLab }) {
                         justifyContent: 'center',
                         fontWeight: 900,
                         fontFamily: 'var(--font-mono)',
-                        fontSize: '16px'
+                        fontSize: '18px'
                       }}
                     >
                       {lab.number}
@@ -134,16 +128,16 @@ export default function LabCardGrid({ onSelectLab }) {
                   </div>
 
                   <span style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '11px', fontFamily: 'var(--font-mono)', color: 'var(--accent-green)', fontWeight: 800 }}>
-                    <CheckCircle2 size={13} />
-                    <span>COMPILED</span>
+                    <CheckCircle2 size={14} />
+                    <span>COMPILED &amp; TESTED</span>
                   </span>
                 </div>
 
                 {/* Card Title & Description */}
-                <h3 style={{ fontSize: '18px', fontWeight: 900, lineHeight: 1.25, marginBottom: '8px' }}>
+                <h3 style={{ fontSize: '20px', fontWeight: 900, lineHeight: 1.25, marginBottom: '8px' }}>
                   {lab.title}
                 </h3>
-                <p style={{ fontSize: '12px', opacity: 0.75, lineHeight: 1.55, marginBottom: '16px' }}>
+                <p style={{ fontSize: '13px', opacity: 0.8, lineHeight: 1.6, marginBottom: '18px' }}>
                   {lab.description}
                 </p>
 
@@ -154,9 +148,9 @@ export default function LabCardGrid({ onSelectLab }) {
                       key={tag}
                       style={{
                         fontFamily: 'var(--font-mono)',
-                        fontSize: '9px',
+                        fontSize: '10px',
                         fontWeight: 700,
-                        padding: '2px 6px',
+                        padding: '3px 8px',
                         border: '1.5px solid var(--border-color)',
                         background: 'var(--bg-surface)'
                       }}
@@ -168,16 +162,16 @@ export default function LabCardGrid({ onSelectLab }) {
               </div>
 
               {/* Bottom Action Button */}
-              <div style={{ paddingTop: '14px', borderTop: '2px dashed var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ paddingTop: '16px', borderTop: '2px dashed var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', opacity: 0.7 }}>
                   {lab.chapter}
                 </span>
 
                 <button
                   className="comic-btn comic-btn-accent"
-                  style={{ padding: '6px 14px', fontSize: '11px', gap: '6px' }}
+                  style={{ padding: '8px 16px', fontSize: '11px', gap: '6px' }}
                 >
-                  <span>Open Lab</span>
+                  <span>Open Lab 1</span>
                   <ArrowRight size={13} />
                 </button>
               </div>
@@ -185,11 +179,11 @@ export default function LabCardGrid({ onSelectLab }) {
           );
         })}
 
-        {/* Extensible Lab n Card */}
+        {/* Placeholder Card for Labs 2 through n */}
         <div
           className="comic-box-sm"
           style={{
-            padding: '24px',
+            padding: '26px',
             borderStyle: 'dashed',
             background: 'transparent',
             display: 'flex',
@@ -197,36 +191,37 @@ export default function LabCardGrid({ onSelectLab }) {
             justifyContent: 'center',
             alignItems: 'center',
             textAlign: 'center',
-            gap: '12px',
-            minHeight: '280px',
-            opacity: 0.8
+            gap: '14px',
+            minHeight: '300px',
+            opacity: 0.85
           }}
         >
           <div
             style={{
-              width: '46px',
-              height: '46px',
+              width: '48px',
+              height: '48px',
               borderRadius: '50%',
               border: '2.5px solid var(--border-color)',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              background: 'var(--bg-surface)'
             }}
           >
-            <PlusCircle size={24} />
+            <Clock size={24} />
           </div>
 
           <div>
-            <h3 style={{ fontSize: '16px', fontWeight: 900, marginBottom: '4px' }}>
-              LAB ACTIVITY n (EXTENSIBLE)
+            <h3 style={{ fontSize: '18px', fontWeight: 900, marginBottom: '6px' }}>
+              LABORATORY ACTIVITIES 02 TO 07
             </h3>
-            <p style={{ fontSize: '12px', opacity: 0.7, maxWidth: '280px', margin: '0 auto' }}>
-              Modular architecture ready for future experiments. Easily add new laboratory components via <code>registry.js</code>.
+            <p style={{ fontSize: '12px', opacity: 0.7, maxWidth: '300px', margin: '0 auto', lineHeight: 1.5 }}>
+              Upcoming laboratory modules will be added here one by one as instructions and starter files are provided.
             </p>
           </div>
 
-          <span className="comic-tag-outline" style={{ fontSize: '10px' }}>
-            REGISTRY READY
+          <span className="comic-tag-outline" style={{ fontSize: '10px', padding: '3px 8px' }}>
+            AWAITING INSTRUCTIONS
           </span>
         </div>
       </div>
