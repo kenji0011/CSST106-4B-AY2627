@@ -24,6 +24,7 @@ async def process_lab01(
     crop_x2: int = Form(100),
     crop_y2: int = Form(100),
     resize_scale: float = Form(0.5),     # scale factor
+    block_size: int = Form(40),          # pixel modification patch size for high-res visibility
 ):
     # 1. Read uploaded image using OpenCV
     contents = await file.read()
@@ -64,16 +65,20 @@ async def process_lab01(
         processed_img = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
 
     elif action == "modify_pixel":
-        # Draw a visible 15x15 block around the coordinate so change is visible to the naked eye
+        # Draw a visible block around the coordinate so change is clearly visible on high-res photos
         try:
             b_val, g_val, r_val = map(int, new_color.split(","))
-            cv2.rectangle(
-                processed_img,
-                (max(0, safe_x - 7), max(0, safe_y - 7)),
-                (min(width - 1, safe_x + 7), min(height - 1, safe_y + 7)),
-                (b_val, g_val, r_val),
-                -1,
-            )
+            if block_size <= 1:
+                processed_img[safe_y, safe_x] = [b_val, g_val, r_val]
+            else:
+                half_size = block_size // 2
+                cv2.rectangle(
+                    processed_img,
+                    (max(0, safe_x - half_size), max(0, safe_y - half_size)),
+                    (min(width - 1, safe_x + half_size), min(height - 1, safe_y + half_size)),
+                    (b_val, g_val, r_val),
+                    -1,
+                )
         except Exception:
             processed_img[safe_y, safe_x] = [0, 255, 0]
 

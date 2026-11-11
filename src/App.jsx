@@ -2,22 +2,20 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import LabCardGrid from './components/LabCardGrid';
 import CodeViewer from './components/CodeViewer';
-import ReportGenerator from './components/ReportGenerator';
 import { LAB_MODULES, getLabById } from './labs/registry';
 import { SAMPLE_IMAGES } from './utils/sampleImages';
 import { PYTHON_SNIPPETS } from './utils/pythonCodeSnippets';
 import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
 
-// Currently Active Lab Component
+// Active Lab Component
 import Lab01_Images from './labs/Lab01_Images';
 
 export default function App() {
   // null = Home/Cards Grid view; 'lab-01' = Individual Lab page
   const [activeLabId, setActiveLabId] = useState(null);
-  const [viewMode, setViewMode] = useState('playground'); // 'playground', 'code', 'report'
+  const [viewMode, setViewMode] = useState('playground'); // 'playground', 'code'
   const [theme, setTheme] = useState(() => localStorage.getItem('csst106_theme') || 'dark');
-  const [currentImage, setCurrentImage] = useState(SAMPLE_IMAGES[0].url);
-  const [snapshots, setSnapshots] = useState({});
+  const [currentImage, setCurrentImage] = useState(null);
 
   // Sync theme attribute to HTML root
   useEffect(() => {
@@ -29,27 +27,11 @@ export default function App() {
     setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
   };
 
-  const handlePrint = () => {
-    setViewMode('report');
-    setTimeout(() => {
-      window.print();
-    }, 150);
-  };
-
-  const handleSnapshotReady = (dataUrl) => {
-    if (activeLabId) {
-      setSnapshots(prev => ({
-        ...prev,
-        [activeLabId]: dataUrl
-      }));
-    }
-  };
-
   // Open specific lab from card grid
   const handleSelectLab = (id) => {
     setActiveLabId(id);
     setViewMode('playground');
-    setCurrentImage(SAMPLE_IMAGES[0].url);
+    setCurrentImage(null);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -79,7 +61,6 @@ export default function App() {
         setViewMode={setViewMode}
         theme={theme}
         toggleTheme={toggleTheme}
-        onPrint={handlePrint}
         onBackToGrid={handleBackToGrid}
       />
 
@@ -94,7 +75,7 @@ export default function App() {
         {activeLabId && activeLab && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {/* Top Navigation Banner with Breadcrumbs & Back Button */}
-            <div className="comic-box no-print" style={{ padding: '16px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+            <div className="comic-box" style={{ padding: '16px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <button
                   onClick={handleBackToGrid}
@@ -146,22 +127,7 @@ export default function App() {
 
             {/* Experiment Title & Header Banner */}
             <div className="comic-box" style={{ padding: '20px 24px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px', flexWrap: 'wrap', gap: '8px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span className="comic-tag comic-tag-yellow" style={{ fontSize: '11px' }}>
-                    {activeLab.chapter}
-                  </span>
-                  <span className="comic-tag-outline" style={{ fontSize: '11px' }}>
-                    CATEGORY // {activeLab.category.toUpperCase()}
-                  </span>
-                </div>
-
-                <span className="comic-tag comic-tag-green" style={{ fontSize: '10px' }}>
-                  STATUS // READY FOR EVALUATION
-                </span>
-              </div>
-
-              <h1 style={{ fontSize: '26px', fontWeight: 900, lineHeight: 1.2, margin: '6px 0 4px 0' }}>
+              <h1 style={{ fontSize: '26px', fontWeight: 900, lineHeight: 1.2, margin: '0 0 6px 0' }}>
                 {activeLab.title}
               </h1>
               <p style={{ fontSize: '13px', opacity: 0.85, maxWidth: '900px' }}>
@@ -169,14 +135,13 @@ export default function App() {
               </p>
             </div>
 
-            {/* Mode Views: Playground / Code / Report */}
+            {/* Mode Views: Playground or Code */}
             {viewMode === 'playground' && (
               <div>
                 {activeLabId === 'lab-01' && (
                   <Lab01_Images
                     currentImage={currentImage}
                     onImageChange={setCurrentImage}
-                    onSnapshotReady={handleSnapshotReady}
                   />
                 )}
               </div>
@@ -186,14 +151,6 @@ export default function App() {
               <CodeViewer
                 filename={activeSnippet.filename}
                 code={activeSnippet.code}
-              />
-            )}
-
-            {viewMode === 'report' && (
-              <ReportGenerator
-                activeLabId={activeLabId}
-                snapshotUrl={snapshots[activeLabId]}
-                onPrint={handlePrint}
               />
             )}
           </div>

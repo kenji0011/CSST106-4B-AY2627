@@ -114,7 +114,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   gap: 6px;
   border: 2px solid var(--border-color);
-  box-shadow: 2px 2px 0px var(--shadow-color);
+  box-shadow: none;
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 800;
@@ -131,7 +131,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   gap: 6px;
   border: 2px solid var(--border-color);
-  box-shadow: 2px 2px 0px var(--shadow-color);
+  box-shadow: none;
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 800;
@@ -147,28 +147,28 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--accent-yellow);
   color: #000000;
   border-color: #000000;
-  box-shadow: 2px 2px 0px #000000;
+  box-shadow: none;
 }
 
 .comic-tag-cyan {
   background: var(--accent-cyan);
   color: #000000;
   border-color: #000000;
-  box-shadow: 2px 2px 0px #000000;
+  box-shadow: none;
 }
 
 .comic-tag-pink {
   background: var(--accent-pink);
   color: #ffffff;
   border-color: #000000;
-  box-shadow: 2px 2px 0px #000000;
+  box-shadow: none;
 }
 
 .comic-tag-green {
   background: var(--accent-green);
   color: #ffffff;
   border-color: #000000;
-  box-shadow: 2px 2px 0px #000000;
+  box-shadow: none;
 }
 
 /* Comic Buttons */
@@ -177,8 +177,8 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  border: 2.5px solid var(--border-color);
-  box-shadow: 4px 4px 0px var(--shadow-color);
+  border: 2px solid var(--border-color);
+  box-shadow: none !important;
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 800;
@@ -186,25 +186,26 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0.06em;
   padding: 8px 16px;
   cursor: pointer;
-  transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.15s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
   user-select: none;
 }
 
 .comic-btn:hover {
-  transform: translate(-1px, -1px);
-  box-shadow: 5px 5px 0px var(--shadow-color);
+  transform: none;
+  box-shadow: none !important;
+  opacity: 0.9;
 }
 
 .comic-btn:active {
-  transform: translate(3px, 3px);
-  box-shadow: 1px 1px 0px var(--shadow-color);
+  transform: scale(0.97);
+  box-shadow: none !important;
 }
 
 .comic-btn:disabled {
-  opacity: 0.5;
+  opacity: 0.45;
   cursor: not-allowed;
   transform: none;
-  box-shadow: 2px 2px 0px var(--shadow-color);
+  box-shadow: none !important;
 }
 
 .comic-btn-primary {
@@ -217,11 +218,19 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-primary);
 }
 
+.comic-btn-secondary:hover {
+  background: var(--bg-surface);
+}
+
 .comic-btn-accent {
   background: var(--accent-yellow);
   color: #000000;
   border-color: var(--border-color);
-  box-shadow: 4px 4px 0px var(--shadow-color);
+  box-shadow: none !important;
+}
+
+.comic-btn-accent:hover {
+  background: #fde047;
 }
 
 .comic-btn-icon {
@@ -236,12 +245,13 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--bg-nav);
   backdrop-filter: blur(12px);
   border-bottom: 2.5px solid var(--border-color);
-  padding: 12px 24px;
+  padding: 12px 0;
 }
 
 .comic-nav-container {
-  max-width: 1600px;
+  max-width: 1400px;
   margin: 0 auto;
+  padding: 0 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -297,17 +307,17 @@ h1, h2, h3, h4, h5, h6 {
 .comic-nav-item:hover {
   background: var(--bg-surface);
   border-color: var(--border-color);
-  transform: translate(-1px, -1px);
-  box-shadow: 3px 3px 0px var(--shadow-color);
+  transform: none;
+  box-shadow: none !important;
 }
 
 .comic-nav-item.active {
   background: var(--bg-card);
   border-color: var(--border-color);
-  box-shadow: 4px 4px 0px var(--shadow-color);
+  box-shadow: none !important;
 }
 
-/* Mode Switcher Tabs */
+/* Mode Switcher Tabs & Segmented Buttons */
 .comic-mode-tabs {
   display: flex;
   gap: 8px;
@@ -328,23 +338,30 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--bg-card);
   color: var(--text-primary);
   cursor: pointer;
-  box-shadow: 3px 3px 0px var(--shadow-color);
-  transition: all 0.15s ease;
+  box-shadow: none !important;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
   display: inline-flex;
   align-items: center;
   gap: 8px;
 }
 
 .comic-tab:hover {
-  transform: translate(-1px, -1px);
-  box-shadow: 4px 4px 0px var(--shadow-color);
+  background: var(--bg-surface);
+  box-shadow: none !important;
+  transform: none;
 }
 
 .comic-tab.active {
   background: var(--text-primary);
   color: var(--bg-page);
-  transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0px var(--shadow-color);
+  border-color: var(--text-primary);
+  box-shadow: none !important;
+  transform: none;
+}
+
+.comic-tab:active {
+  transform: scale(0.97);
+  box-shadow: none !important;
 }
 
 /* Interactive Image Workspace */
@@ -420,7 +437,7 @@ h1, h2, h3, h4, h5, h6 {
   height: 36px;
   background: var(--accent-yellow);
   border: 2.5px solid #000000;
-  box-shadow: 3px 3px 0px #000000;
+  box-shadow: none;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -465,7 +482,7 @@ h1, h2, h3, h4, h5, h6 {
   height: 20px;
   background: var(--accent-yellow);
   border: 2px solid var(--border-color);
-  box-shadow: 2px 2px 0px var(--shadow-color);
+  box-shadow: none;
   cursor: pointer;
   transition: transform 0.1s;
 }
@@ -481,14 +498,25 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 12px;
   font-weight: 700;
   border: 2px solid var(--border-color);
-  box-shadow: 3px 3px 0px var(--shadow-color);
+  box-shadow: none !important;
   background: var(--bg-card);
   color: var(--text-primary);
   outline: none;
+  transition: border-color 0.15s ease;
 }
 
 .comic-select:focus, .comic-input:focus {
   border-color: var(--accent-cyan);
+}
+
+/* Universal Flat Button Rule: Zero shadows on all buttons for a clean, non-cluttered UI */
+button,
+button:hover,
+button:active,
+button:focus,
+.comic-btn,
+.comic-tab {
+  box-shadow: none !important;
 }
 
 /* Histogram Canvas */
@@ -526,104 +554,4 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-code);
   font-size: 13px;
   line-height: 1.65;
-}
-
-/* Academic Report Hard-Copy View */
-.report-sheet {
-  background: #ffffff;
-  color: #111827;
-  padding: 48px;
-  border: 2.5px solid #000000;
-  box-shadow: 8px 8px 0px var(--shadow-color);
-  max-width: 900px;
-  margin: 0 auto;
-  font-family: 'Inter', serif;
-}
-
-.report-header {
-  text-align: center;
-  border-bottom: 3px double #000000;
-  padding-bottom: 20px;
-  margin-bottom: 24px;
-}
-
-.report-header h2 {
-  font-size: 18px;
-  font-weight: 800;
-  margin-bottom: 4px;
-  letter-spacing: 0.05em;
-}
-
-.report-header h3 {
-  font-size: 14px;
-  font-weight: 700;
-  margin-bottom: 4px;
-  color: #374151;
-}
-
-.report-meta-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 24px;
-  font-size: 12px;
-}
-
-.report-meta-table td {
-  padding: 6px 12px;
-  border: 1px solid #000000;
-}
-
-.report-section {
-  margin-bottom: 24px;
-}
-
-.report-section-title {
-  font-family: var(--font-mono);
-  font-size: 14px;
-  font-weight: 900;
-  text-transform: uppercase;
-  border-bottom: 2px solid #000000;
-  padding-bottom: 4px;
-  margin-bottom: 12px;
-}
-
-.report-textarea {
-  width: 100%;
-  min-height: 100px;
-  padding: 12px;
-  border: 1.5px solid #000000;
-  font-family: var(--font-sans);
-  font-size: 13px;
-  line-height: 1.6;
-  resize: vertical;
-}
-
-/* Print Stylesheet */
-@media print {
-  body {
-    background: #ffffff !important;
-    color: #000000 !important;
-  }
-
-  .comic-dots-bg,
-  .comic-nav,
-  .comic-sidebar,
-  .comic-mode-tabs,
-  .no-print {
-    display: none !important;
-  }
-
-  .comic-app-layout {
-    display: block !important;
-    padding: 0 !important;
-    max-width: 100% !important;
-  }
-
-  .report-sheet {
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    max-width: 100% !important;
-  }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { LAB_MODULES } from '../labs/registry';
-import { COURSE_INFO } from '../utils/reportData';
-import { ArrowRight, CheckCircle2, Clock, PlusCircle } from 'lucide-react';
+import { COURSE_INFO } from '../utils/courseInfo';
+import { ArrowRight, Clock } from 'lucide-react';
 
 export default function LabCardGrid({ onSelectLab }) {
   const LAB_TAGS = {
@@ -17,15 +17,6 @@ export default function LabCardGrid({ onSelectLab }) {
             <span className="comic-tag comic-tag-yellow" style={{ fontSize: '11px', padding: '4px 10px' }}>
               CHAPTER 01 // OVERVIEW
             </span>
-            <span className="comic-tag-outline" style={{ fontSize: '11px', padding: '4px 10px' }}>
-              CSST 106 • AY 2026-2027
-            </span>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span className="comic-tag comic-tag-green" style={{ fontSize: '11px' }}>
-              STATUS // LAB 01 COMPILED &amp; ACTIVE
-            </span>
           </div>
         </div>
 
@@ -34,8 +25,8 @@ export default function LabCardGrid({ onSelectLab }) {
             COMPUTER VISION LABORATORY SUITE.
           </h1>
           <p style={{ fontSize: '15px', opacity: 0.85, lineHeight: 1.6, marginBottom: '20px' }}>
-            Integrated web platform compiling all Computer Vision laboratory activities for Laguna State Polytechnic University.
-            Select Laboratory 1 below to test the interactive OpenCV pipeline, inspect the Python backend code, or generate the official laboratory report.
+            A unified interactive laboratory compilation for <strong>CSST 106: Perception and Computer Vision</strong> at Laguna State Polytechnic University.
+            Explore fundamental image processing concepts, test live OpenCV pipelines with custom uploaded images, and directly inspect the underlying Python backend implementations.
           </p>
         </div>
 
@@ -52,10 +43,6 @@ export default function LabCardGrid({ onSelectLab }) {
           <div>
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', opacity: 0.6, display: 'block' }}>INSTITUTION</span>
             <strong style={{ fontSize: '14px', fontFamily: 'var(--font-mono)' }}>{COURSE_INFO.institution}</strong>
-          </div>
-          <div>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', opacity: 0.6, display: 'block' }}>STATUS</span>
-            <strong style={{ fontSize: '14px', fontFamily: 'var(--font-mono)', color: 'var(--accent-green)' }}>ACTIVE &amp; READY FOR CHECKING</strong>
           </div>
         </div>
       </section>
@@ -102,7 +89,7 @@ export default function LabCardGrid({ onSelectLab }) {
               }}
             >
               <div>
-                {/* Card Header: Number box & Status */}
+                {/* Card Header: Number box */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <div
@@ -126,11 +113,6 @@ export default function LabCardGrid({ onSelectLab }) {
                       {lab.category.toUpperCase()}
                     </span>
                   </div>
-
-                  <span style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '11px', fontFamily: 'var(--font-mono)', color: 'var(--accent-green)', fontWeight: 800 }}>
-                    <CheckCircle2 size={14} />
-                    <span>COMPILED &amp; TESTED</span>
-                  </span>
                 </div>
 
                 {/* Card Title & Description */}
@@ -213,16 +195,12 @@ export default function LabCardGrid({ onSelectLab }) {
 
           <div>
             <h3 style={{ fontSize: '18px', fontWeight: 900, marginBottom: '6px' }}>
-              LABORATORY ACTIVITIES 02 TO 07
+              LABORATORY ACTIVITIES
             </h3>
             <p style={{ fontSize: '12px', opacity: 0.7, maxWidth: '300px', margin: '0 auto', lineHeight: 1.5 }}>
               Upcoming laboratory modules will be added here one by one as instructions and starter files are provided.
             </p>
           </div>
-
-          <span className="comic-tag-outline" style={{ fontSize: '10px', padding: '3px 8px' }}>
-            AWAITING INSTRUCTIONS
-          </span>
         </div>
       </div>
     </div>

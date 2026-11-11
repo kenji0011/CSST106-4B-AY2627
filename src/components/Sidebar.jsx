@@ -1,7 +1,7 @@
 import React from 'react';
 import { LAB_MODULES } from '../labs/registry';
 import { CheckCircle2, PlusCircle, User, Award, BookOpen } from 'lucide-react';
-import { COURSE_INFO } from '../utils/reportData';
+import { COURSE_INFO } from '../utils/courseInfo';
 
 export default function Sidebar({ activeLabId, onSelectLab }) {
   return (
