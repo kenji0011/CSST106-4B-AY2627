@@ -15,7 +15,7 @@ export default function CodeViewer({ filename, code }) {
       {/* Header Bar */}
       <div className="code-viewer-header">
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Terminal size={14} color="var(--accent-yellow)" />
+          <Terminal size={14} />
           <strong style={{ letterSpacing: '0.04em' }}>{filename}</strong>
           <span className="comic-tag" style={{ fontSize: '9px', padding: '1px 6px', background: '#222' }}>
             PYTHON 3 • OPENCV

@@ -155,5 +155,63 @@ def edge_detection(image_path):
 if __name__ == "__main__":
     # Replace 'input.jpg' with the path to your image file
     edge_detection('input.jpg')`
+  },
+  'lab-03': {
+    filename: 'python_labs/lab03_histogram.py',
+    code: `"""
+CSST 106 - Perception and Computer Vision
+Laboratory Exercise No. 3: Histogram Equalization and Contrast Adjustment
+Laguna State Polytechnic University (LSPU) - AY 2026-2027
+"""
+
+import cv2
+import matplotlib.pyplot as plt
+import numpy as np
+
+def histogram_equalization_lab(image_path):
+    # 1. Load image in grayscale
+    img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+    if img is None:
+        print(f"Error: Image not found at path '{image_path}'")
+        return
+
+    # 2. Linear Contrast Stretching (Min-Max Normalization)
+    img_stretched = cv2.normalize(img, None, 0, 255, cv2.NORM_MINMAX)
+
+    # 3. Global Histogram Equalization
+    img_equalized = cv2.equalizeHist(img)
+
+    # 4. Adaptive Histogram Equalization (CLAHE)
+    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+    img_clahe = clahe.apply(img)
+
+    # 5. Display 4 Versions & Their Histograms Side by Side
+    fig, axes = plt.subplots(2, 4, figsize=(16, 8))
+
+    titles = [
+        "Original Image",
+        "Linear Contrast Stretched",
+        "Global Equalization (HE)",
+        "Adaptive Equalization (CLAHE)"
+    ]
+    images = [img, img_stretched, img_equalized, img_clahe]
+
+    for i in range(4):
+        # Top Row: Images
+        axes[0, i].imshow(images[i], cmap="gray")
+        axes[0, i].set_title(titles[i], fontsize=11, fontweight="bold")
+        axes[0, i].axis("off")
+
+        # Bottom Row: Histograms
+        axes[1, i].hist(images[i].ravel(), 256, [0, 256], color="#2563eb", alpha=0.75)
+        axes[1, i].set_xlim([0, 256])
+        axes[1, i].set_title(f"Histogram ({titles[i]})", fontsize=10)
+        axes[1, i].grid(True, linestyle="--", alpha=0.5)
+
+    plt.tight_layout()
+    plt.show()
+
+if __name__ == "__main__":
+    histogram_equalization_lab("input.jpg")`
   }
 };

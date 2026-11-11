@@ -17,28 +17,28 @@ export default function Sidebar({ activeLabId, onSelectLab }) {
           </span>
         </div>
 
-        <h3 style={{ fontSize: '16px', fontWeight: 900, marginBottom: '2px' }}>
+        <h3 style={{ fontSize: '16px', fontWeight: 900, marginBottom: '2px', color: 'var(--text-primary)' }}>
           {COURSE_INFO.studentName}
         </h3>
-        <p style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', opacity: 0.8, marginBottom: '12px' }}>
+        <p style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '12px' }}>
           {COURSE_INFO.section} • {COURSE_INFO.courseCode}
         </p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', paddingTop: '10px', borderTop: '2px dashed var(--border-color)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', paddingTop: '10px', borderTop: '2.5px dashed var(--border-color)' }}>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px' }}>
-            <span style={{ opacity: 0.6, display: 'block' }}>MODULES</span>
-            <strong>7 LABS READY</strong>
+            <span style={{ color: 'var(--text-secondary)', fontWeight: 700, display: 'block' }}>MODULES</span>
+            <strong style={{ color: 'var(--text-primary)' }}>7 LABS READY</strong>
           </div>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px' }}>
-            <span style={{ opacity: 0.6, display: 'block' }}>EVALUATION</span>
-            <strong style={{ color: 'var(--accent-green)' }}>READY FOR CHECK</strong>
+            <span style={{ color: 'var(--text-secondary)', fontWeight: 700, display: 'block' }}>EVALUATION</span>
+            <strong style={{ color: 'var(--text-primary)' }}>READY FOR CHECK</strong>
           </div>
         </div>
       </div>
 
       {/* Lab Module Navigation Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 4px' }}>
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 800, letterSpacing: '0.08em', opacity: 0.7 }}>
+        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 800, letterSpacing: '0.08em', color: 'var(--text-secondary)' }}>
           LABORATORY MODULES
         </span>
         <span className="comic-tag-outline" style={{ fontSize: '9px', padding: '1px 6px' }}>
@@ -60,17 +60,17 @@ export default function Sidebar({ activeLabId, onSelectLab }) {
                 <span className={isActive ? 'comic-tag comic-tag-yellow' : 'comic-tag-outline'} style={{ fontSize: '9px', padding: '2px 6px' }}>
                   EXP {lab.number}
                 </span>
-                <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '10px', fontFamily: 'var(--font-mono)', color: 'var(--accent-green)', fontWeight: 700 }}>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '10px', fontFamily: 'var(--font-mono)', color: 'var(--text-primary)', fontWeight: 700 }}>
                   <CheckCircle2 size={12} />
                   <span>COMPILED</span>
                 </span>
               </div>
 
               <div style={{ textAlign: 'left', width: '100%', marginTop: '2px' }}>
-                <strong style={{ display: 'block', fontSize: '13px', lineHeight: 1.25 }}>
+                <strong style={{ display: 'block', fontSize: '13px', lineHeight: 1.25, color: 'var(--text-primary)' }}>
                   {lab.title}
                 </strong>
-                <span style={{ fontSize: '11px', opacity: 0.75, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', marginTop: '2px' }}>
+                <span style={{ fontSize: '11px', color: 'var(--text-secondary)', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', marginTop: '2px' }}>
                   {lab.description}
                 </span>
               </div>
@@ -93,11 +93,11 @@ export default function Sidebar({ activeLabId, onSelectLab }) {
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
           <PlusCircle size={14} />
-          <strong style={{ fontFamily: 'var(--font-mono)', fontSize: '11px' }}>
+          <strong style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-primary)' }}>
             LAB ACTIVITY n (EXTENSIBLE)
           </strong>
         </div>
-        <p style={{ fontSize: '10px', opacity: 0.7 }}>
+        <p style={{ fontSize: '10px', color: 'var(--text-secondary)', margin: 0 }}>
           Easily register subsequent activities into <code>src/labs/registry.js</code> to expand the web UI.
         </p>
       </div>

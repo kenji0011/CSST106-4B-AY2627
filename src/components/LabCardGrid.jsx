@@ -6,7 +6,8 @@ import { ArrowRight, Clock } from 'lucide-react';
 export default function LabCardGrid({ onSelectLab }) {
   const LAB_TAGS = {
     'lab-01': ['RGB & BGR', 'GRAYSCALE', 'CHANNELS', 'PIXEL INSPECT', 'ROI CROP', 'RESIZE', 'ROTATE 90°'],
-    'lab-02': ['SOBEL OPERATOR', 'CANNY DETECTOR', 'GAUSSIAN BLUR', 'GRADIENTS GX/GY', 'HYSTERESIS', '3-WAY COMPARISON']
+    'lab-02': ['SOBEL OPERATOR', 'CANNY DETECTOR', 'GAUSSIAN BLUR', 'GRADIENTS GX/GY', 'HYSTERESIS', '3-WAY COMPARISON'],
+    'lab-03': ['HISTOGRAM', 'EQUALIZEHIST', 'CLAHE', 'CONTRAST STRETCH', 'YUV LUMINANCE', 'CDF MAPPING']
   };
 
   return (
@@ -25,7 +26,7 @@ export default function LabCardGrid({ onSelectLab }) {
           <h1 style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 900, lineHeight: 1.1, marginBottom: '12px' }}>
             COMPUTER VISION LABORATORY SUITE.
           </h1>
-          <p style={{ fontSize: '15px', opacity: 0.85, lineHeight: 1.6, marginBottom: '20px' }}>
+          <p style={{ fontSize: '15px', color: 'var(--text-secondary)', fontWeight: 500, lineHeight: 1.6, marginBottom: '20px' }}>
             A unified interactive laboratory compilation for <strong>CSST 106: Perception and Computer Vision</strong> at Laguna State Polytechnic University.
             Explore fundamental image processing concepts, test live OpenCV pipelines with custom uploaded images, and directly inspect the underlying Python backend implementations.
           </p>
@@ -34,16 +35,16 @@ export default function LabCardGrid({ onSelectLab }) {
         {/* Student & Course Metadata Strip */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', paddingTop: '18px', borderTop: '2.5px dashed var(--border-color)' }}>
           <div>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', opacity: 0.6, display: 'block' }}>STUDENT</span>
-            <strong style={{ fontSize: '14px', fontFamily: 'var(--font-mono)' }}>{COURSE_INFO.studentName}</strong>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 700, display: 'block' }}>STUDENT</span>
+            <strong style={{ fontSize: '14px', fontFamily: 'var(--font-mono)', color: 'var(--text-primary)' }}>{COURSE_INFO.studentName}</strong>
           </div>
           <div>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', opacity: 0.6, display: 'block' }}>SECTION</span>
-            <strong style={{ fontSize: '14px', fontFamily: 'var(--font-mono)' }}>{COURSE_INFO.section}</strong>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 700, display: 'block' }}>SECTION</span>
+            <strong style={{ fontSize: '14px', fontFamily: 'var(--font-mono)', color: 'var(--text-primary)' }}>{COURSE_INFO.section}</strong>
           </div>
           <div>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', opacity: 0.6, display: 'block' }}>INSTITUTION</span>
-            <strong style={{ fontSize: '14px', fontFamily: 'var(--font-mono)' }}>{COURSE_INFO.institution}</strong>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 700, display: 'block' }}>INSTITUTION</span>
+            <strong style={{ fontSize: '14px', fontFamily: 'var(--font-mono)', color: 'var(--text-primary)' }}>{COURSE_INFO.institution}</strong>
           </div>
         </div>
       </section>
@@ -54,11 +55,11 @@ export default function LabCardGrid({ onSelectLab }) {
           <div className="comic-tag" style={{ fontSize: '12px', padding: '4px 10px' }}>
             CHAPTER 02 
           </div>
-          <h2 style={{ fontSize: '20px', fontWeight: 900, letterSpacing: '-0.02em', margin: 0 }}>
+          <h2 style={{ fontSize: '20px', fontWeight: 900, letterSpacing: '-0.02em', margin: 0, color: 'var(--text-primary)' }}>
             LABORATORY ACTIVITIES
           </h2>
         </div>
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700, opacity: 0.7 }}>
+        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700, color: 'var(--text-secondary)' }}>
           {LAB_MODULES.length} COMPILED • UPCOMING MODULES PENDING
         </span>
       </div>
@@ -117,10 +118,10 @@ export default function LabCardGrid({ onSelectLab }) {
                 </div>
 
                 {/* Card Title & Description */}
-                <h3 style={{ fontSize: '20px', fontWeight: 900, lineHeight: 1.25, marginBottom: '8px' }}>
+                <h3 style={{ fontSize: '20px', fontWeight: 900, lineHeight: 1.25, marginBottom: '8px', color: 'var(--text-primary)' }}>
                   {lab.title}
                 </h3>
-                <p style={{ fontSize: '13px', opacity: 0.8, lineHeight: 1.6, marginBottom: '18px' }}>
+                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', fontWeight: 500, lineHeight: 1.6, marginBottom: '18px' }}>
                   {lab.description}
                 </p>
 
@@ -135,7 +136,8 @@ export default function LabCardGrid({ onSelectLab }) {
                         fontWeight: 700,
                         padding: '3px 8px',
                         border: '1.5px solid var(--border-color)',
-                        background: 'var(--bg-surface)'
+                        background: 'var(--bg-surface)',
+                        color: 'var(--text-primary)'
                       }}
                     >
                       {tag}
@@ -146,7 +148,7 @@ export default function LabCardGrid({ onSelectLab }) {
 
               {/* Bottom Action Button */}
               <div style={{ paddingTop: '16px', borderTop: '2px dashed var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', opacity: 0.7 }}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-secondary)', fontWeight: 700 }}>
                   {lab.chapter}
                 </span>
 
@@ -175,8 +177,7 @@ export default function LabCardGrid({ onSelectLab }) {
             alignItems: 'center',
             textAlign: 'center',
             gap: '14px',
-            minHeight: '300px',
-            opacity: 0.85
+            minHeight: '300px'
           }}
         >
           <div
@@ -188,17 +189,18 @@ export default function LabCardGrid({ onSelectLab }) {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              background: 'var(--bg-surface)'
+              background: 'var(--bg-surface)',
+              color: 'var(--text-primary)'
             }}
           >
             <Clock size={24} />
           </div>
 
           <div>
-            <h3 style={{ fontSize: '18px', fontWeight: 900, marginBottom: '6px' }}>
+            <h3 style={{ fontSize: '18px', fontWeight: 900, marginBottom: '6px', color: 'var(--text-primary)' }}>
               LABORATORY ACTIVITIES
             </h3>
-            <p style={{ fontSize: '12px', opacity: 0.7, maxWidth: '300px', margin: '0 auto', lineHeight: 1.5 }}>
+            <p style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: 500, maxWidth: '300px', margin: '0 auto', lineHeight: 1.5 }}>
               Upcoming laboratory modules will be added here one by one as instructions and starter files are provided.
             </p>
           </div>

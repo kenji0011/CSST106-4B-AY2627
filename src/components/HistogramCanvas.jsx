@@ -80,7 +80,7 @@ export default function HistogramCanvas({ imageData, activeChannel = 'all' }) {
         <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 800 }}>
           HISTOGRAM FREQUENCY DISTRIBUTION (256 BINS)
         </span>
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', opacity: 0.7 }}>
+        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 600 }}>
           [0 ── 128 ── 255]
         </span>
       </div>

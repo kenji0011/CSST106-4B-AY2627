@@ -9,6 +9,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 // Active Lab Components
 import Lab01_Images from './labs/Lab01_Images';
 import Lab02_EdgeDetection from './labs/Lab02_EdgeDetection';
+import Lab03_Histogram from './labs/Lab03_Histogram';
 
 export default function App() {
   // null = Home/Cards Grid view; 'lab-01' = Individual Lab page
@@ -88,7 +89,7 @@ export default function App() {
                 <h1 style={{ fontSize: '26px', fontWeight: 900, lineHeight: 1.2, margin: '0 0 4px 0' }}>
                   {activeLab.title}
                 </h1>
-                <p style={{ fontSize: '13px', opacity: 0.85, maxWidth: '800px', margin: 0 }}>
+                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', fontWeight: 500, maxWidth: '800px', margin: 0 }}>
                   {activeLab.description}
                 </p>
               </div>
@@ -134,6 +135,12 @@ export default function App() {
                 )}
                 {activeLabId === 'lab-02' && (
                   <Lab02_EdgeDetection
+                    currentImage={currentImage}
+                    onImageChange={setCurrentImage}
+                  />
+                )}
+                {activeLabId === 'lab-03' && (
+                  <Lab03_Histogram
                     currentImage={currentImage}
                     onImageChange={setCurrentImage}
                   />

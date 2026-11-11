@@ -27,6 +27,18 @@ export const LAB_MODULES = [
     statusColor: 'green',
     category: 'Feature Extraction',
     icon: 'Activity'
+  },
+  {
+    id: 'lab-03',
+    number: '03',
+    chapter: 'CHAPTER 03 // CONTRAST ENHANCEMENT',
+    shortTag: 'EXP 03 // HISTOGRAM EQUALIZATION',
+    title: 'Histogram Equalization & Contrast Adjustment',
+    description: 'Global histogram equalization, adaptive CLAHE, and linear contrast stretching across grayscale and YUV color spaces.',
+    status: 'COMPLETE',
+    statusColor: 'green',
+    category: 'Image Enhancement',
+    icon: 'BarChart2'
   }
 ];
 

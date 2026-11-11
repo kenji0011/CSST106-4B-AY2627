@@ -275,16 +275,16 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
             />
 
             {!previewUrl ? (
-              <div style={{ padding: '8px 10px', background: 'var(--bg-surface)', border: '1.5px dashed var(--border-color)', fontSize: '10px', fontFamily: 'var(--font-mono)', textAlign: 'center', opacity: 0.8 }}>
+              <div style={{ padding: '8px 10px', background: 'var(--bg-surface)', border: '1.5px dashed var(--border-color)', fontSize: '11px', fontFamily: 'var(--font-mono)', textAlign: 'center', color: 'var(--text-primary)', fontWeight: 600 }}>
                 Upload an image on the right workspace to unlock operations
               </div>
             ) : (
               <>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '6px 8px', background: 'var(--bg-surface)', border: '1.5px solid var(--border-color)', fontSize: '10px', fontFamily: 'var(--font-mono)' }}>
-                  <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '180px', fontWeight: 700 }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '6px 8px', background: 'var(--bg-surface)', border: '1.5px solid var(--border-color)', fontSize: '11px', fontFamily: 'var(--font-mono)' }}>
+                  <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '180px', fontWeight: 800, color: 'var(--text-primary)' }}>
                     {selectedFile?.name || 'custom_image.jpg'}
                   </span>
-                  <span style={{ opacity: 0.6 }}>
+                  <span style={{ color: 'var(--text-secondary)', fontWeight: 700 }}>
                     {selectedFile ? `${Math.round(selectedFile.size / 1024)} KB` : ''}
                   </span>
                 </div>
@@ -377,7 +377,7 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
               <div className="comic-box-sm" style={{ padding: '12px', background: 'var(--bg-surface)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 <div className="comic-control-label">
                   <span>Scale Factor</span>
-                  <strong style={{ color: 'var(--accent-yellow)' }}>{resizeScale}×</strong>
+                  <strong style={{ color: 'var(--text-primary)' }}>{resizeScale}×</strong>
                 </div>
                 <input
                   type="range"
@@ -400,12 +400,12 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
 
             {action === 'crop' && (
               <div className="comic-box-sm" style={{ padding: '12px', background: 'var(--bg-surface)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 800 }}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 800, color: 'var(--text-primary)' }}>
                   CROP REGION: (x1, y1) TO (x2, y2)
                 </span>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
                   <div>
-                    <label style={{ fontSize: '9px', fontFamily: 'var(--font-mono)', opacity: 0.6 }}>x1 (col min)</label>
+                    <label style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--text-secondary)' }}>x1 (col min)</label>
                     <input
                       type="number"
                       value={cropCoords.x1}
@@ -415,7 +415,7 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
                     />
                   </div>
                   <div>
-                    <label style={{ fontSize: '9px', fontFamily: 'var(--font-mono)', opacity: 0.6 }}>y1 (row min)</label>
+                    <label style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--text-secondary)' }}>y1 (row min)</label>
                     <input
                       type="number"
                       value={cropCoords.y1}
@@ -425,7 +425,7 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
                     />
                   </div>
                   <div>
-                    <label style={{ fontSize: '9px', fontFamily: 'var(--font-mono)', opacity: 0.6 }}>x2 (col max)</label>
+                    <label style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--text-secondary)' }}>x2 (col max)</label>
                     <input
                       type="number"
                       value={cropCoords.x2}
@@ -435,7 +435,7 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
                     />
                   </div>
                   <div>
-                    <label style={{ fontSize: '9px', fontFamily: 'var(--font-mono)', opacity: 0.6 }}>y2 (row max)</label>
+                    <label style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--text-secondary)' }}>y2 (row max)</label>
                     <input
                       type="number"
                       value={cropCoords.y2}
@@ -458,22 +458,22 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
             {(action === 'inspect' || action === 'modify_pixel') && (
               <div className="comic-box-sm" style={{ padding: '12px', background: 'var(--bg-surface)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 800 }}>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 800, color: 'var(--text-primary)' }}>
                     PIXEL COORDINATES (X, Y)
                   </span>
-                  <span style={{ fontSize: '9px', fontFamily: 'var(--font-mono)', color: 'var(--accent-yellow)' }}>
+                  <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', fontWeight: 800, color: 'var(--text-primary)' }}>
                     TARGET: ({pixelCoord.x}, {pixelCoord.y})
                   </span>
                 </div>
 
-                <div style={{ fontSize: '9px', fontFamily: 'var(--font-mono)', opacity: 0.85, padding: '5px 8px', background: 'var(--bg-card)', border: '1.5px dashed var(--border-color)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <div style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: 'var(--text-primary)', padding: '6px 8px', background: 'var(--bg-card)', border: '1.5px dashed var(--border-color)', display: 'flex', alignItems: 'center', gap: '6px' }}>
                   <span>🎯</span>
                   <span><strong>Tip:</strong> Click anywhere on the original photo to pick coordinates!</span>
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
                   <div>
-                    <label style={{ fontSize: '9px', fontFamily: 'var(--font-mono)', opacity: 0.6 }}>X (Column)</label>
+                    <label style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--text-secondary)' }}>X (Column)</label>
                     <input
                       type="number"
                       value={pixelCoord.x}
@@ -483,7 +483,7 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
                     />
                   </div>
                   <div>
-                    <label style={{ fontSize: '9px', fontFamily: 'var(--font-mono)', opacity: 0.6 }}>Y (Row)</label>
+                    <label style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--text-secondary)' }}>Y (Row)</label>
                     <input
                       type="number"
                       value={pixelCoord.y}
@@ -497,7 +497,7 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
                 {action === 'modify_pixel' && (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                     <div>
-                      <label style={{ fontSize: '9px', fontFamily: 'var(--font-mono)', opacity: 0.7, display: 'block', marginBottom: '3px' }}>
+                      <label style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--text-primary)', display: 'block', marginBottom: '3px' }}>
                         Patch Size (Higher is easier to spot on high-res photos):
                       </label>
                       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '4px' }}>
@@ -521,7 +521,7 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
                     </div>
 
                     <div>
-                      <label style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', opacity: 0.8, display: 'block', marginBottom: '4px' }}>
+                      <label style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--text-primary)', display: 'block', marginBottom: '4px' }}>
                         Replacement BGR Color:
                       </label>
                       <input
@@ -575,8 +575,8 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
         )}
 
         {/* Engine status indicator */}
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', opacity: 0.6, borderTop: '2px dashed var(--border-color)', paddingTop: '10px' }}>
-          ENGINE: <strong>{backendMode}</strong>
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', borderTop: '2px dashed var(--border-color)', paddingTop: '10px' }}>
+          ENGINE: <strong style={{ color: 'var(--text-primary)' }}>{backendMode}</strong>
         </div>
       </div>
 
@@ -627,7 +627,7 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
               <h2 style={{ fontSize: '24px', fontWeight: 900, marginBottom: '8px' }}>
                 PLEASE UPLOAD AN IMAGE TO PROCEED
               </h2>
-              <p style={{ fontSize: '13px', opacity: 0.8, lineHeight: 1.6 }}>
+              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', fontWeight: 500, lineHeight: 1.6 }}>
                 Upload an image to start experimenting with OpenCV image operations, pixel coordinates inspection, BGR color channels, cropping, resizing, and rotation.
               </p>
             </div>
@@ -641,7 +641,7 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
               <span>Upload Image</span>
             </button>
 
-            <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', opacity: 0.6 }}>
+            <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)' }}>
               Drag &amp; drop file here, or click to browse (PNG, JPG, JPEG, WEBP)
             </span>
           </div>
@@ -655,7 +655,7 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
                   <span className="comic-tag" style={{ fontSize: '10px' }}>
                     ORIGINAL INPUT
                   </span>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', opacity: 0.6 }}>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 700 }}>
                     BGR COLOR
                   </span>
                 </div>
@@ -671,7 +671,7 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
                   <span className="comic-tag comic-tag-yellow" style={{ fontSize: '10px' }}>
                     PROCESSED OUTPUT ({action.toUpperCase()})
                   </span>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--accent-green)', fontWeight: 700 }}>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--accent-green)', fontWeight: 800 }}>
                     {loading ? 'PROCESSING...' : 'RESULT READY'}
                   </span>
                 </div>
@@ -684,7 +684,7 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
                   ) : processedImageUrl ? (
                     <img src={processedImageUrl} alt="Processed Output" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
                   ) : (
-                    <span style={{ fontSize: '11px', opacity: 0.5, fontFamily: 'var(--font-mono)' }}>Run an operation to see output</span>
+                    <span style={{ fontSize: '11px', color: '#ffffff', fontFamily: 'var(--font-mono)' }}>Run an operation to see output</span>
                   )}
                 </div>
               </div>
@@ -694,7 +694,7 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
             {metadata && (
               <div className="comic-box" style={{ padding: '18px' }}>
                 <div style={{ marginBottom: '14px' }}>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 900 }}>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 900, color: 'var(--text-primary)' }}>
                     OPENCV METADATA &amp; MATRIX PROPERTIES
                   </span>
                 </div>
@@ -702,40 +702,40 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px', textAlign: 'center' }}>
                   {/* Dimensions */}
                   <div className="comic-box-sm" style={{ padding: '10px', background: 'var(--bg-surface)' }}>
-                    <span style={{ display: 'block', fontSize: '9px', fontFamily: 'var(--font-mono)', opacity: 0.6, marginBottom: '2px' }}>
+                    <span style={{ display: 'block', fontSize: '10px', fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)', fontWeight: 700, marginBottom: '2px' }}>
                       DIMENSIONS (H × W)
                     </span>
-                    <strong style={{ fontSize: '15px' }}>
+                    <strong style={{ fontSize: '15px', color: 'var(--text-primary)' }}>
                       {metadata.height} × {metadata.width}
                     </strong>
                   </div>
 
                   {/* Channels */}
                   <div className="comic-box-sm" style={{ padding: '10px', background: 'var(--bg-surface)' }}>
-                    <span style={{ display: 'block', fontSize: '9px', fontFamily: 'var(--font-mono)', opacity: 0.6, marginBottom: '2px' }}>
+                    <span style={{ display: 'block', fontSize: '10px', fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)', fontWeight: 700, marginBottom: '2px' }}>
                       CHANNELS
                     </span>
-                    <strong style={{ fontSize: '15px', color: 'var(--accent-cyan)' }}>
+                    <strong style={{ fontSize: '15px', color: 'var(--text-primary)' }}>
                       {metadata.channels} ({metadata.color_order.split(' ')[0]})
                     </strong>
                   </div>
 
                   {/* Inspected Pixel */}
                   <div className="comic-box-sm" style={{ padding: '10px', background: 'var(--bg-surface)' }}>
-                    <span style={{ display: 'block', fontSize: '9px', fontFamily: 'var(--font-mono)', opacity: 0.6, marginBottom: '2px' }}>
+                    <span style={{ display: 'block', fontSize: '10px', fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)', fontWeight: 700, marginBottom: '2px' }}>
                       INSPECTED PIXEL ({inspectedPixel?.x}, {inspectedPixel?.y})
                     </span>
-                    <strong style={{ fontSize: '12px', fontFamily: 'var(--font-mono)', color: 'var(--accent-yellow)' }}>
+                    <strong style={{ fontSize: '12px', fontFamily: 'var(--font-mono)', color: 'var(--text-primary)' }}>
                       BGR: [{inspectedPixel?.bgr?.join(', ')}]
                     </strong>
                   </div>
 
                   {/* Numpy Shape */}
                   <div className="comic-box-sm" style={{ padding: '10px', background: 'var(--bg-surface)' }}>
-                    <span style={{ display: 'block', fontSize: '9px', fontFamily: 'var(--font-mono)', opacity: 0.6, marginBottom: '2px' }}>
+                    <span style={{ display: 'block', fontSize: '10px', fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)', fontWeight: 700, marginBottom: '2px' }}>
                       NUMPY ARRAY SHAPE
                     </span>
-                    <strong style={{ fontSize: '14px', fontFamily: 'var(--font-mono)', color: 'var(--accent-green)' }}>
+                    <strong style={{ fontSize: '14px', fontFamily: 'var(--font-mono)', color: 'var(--text-primary)' }}>
                       {metadata.shape}
                     </strong>
                   </div>

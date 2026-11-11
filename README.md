@@ -21,6 +21,7 @@ Designed with a **Neo-Brutalist Comic Book Aesthetic** (featuring halftone dot p
 | :--- | :--- | :--- | :--- |
 | **Lab 01** | `EXP 01 // IMAGES` | Digital image representation as 2D/3D NumPy arrays $(H, W, C)$, OpenCV BGR color ordering, Grayscale conversion (`cv2.cvtColor`), coordinate-level pixel inspection and color modification, Region of Interest (ROI) slicing, image resizing (`cv2.resize`), and $90^\circ$ clockwise rotation (`cv2.rotate`). | Dual-card comparison (Original vs. Processed), 6 operation modes (`Inspect`, `Grayscale`, `Rotate 90°`, `Resize`, `Crop ROI`, `Modify Pixel`), interactive $(X, Y)$ coordinate picker, BGR replacement color input, scale factor slider ($0.1\times - 2.0\times$), crop coordinate inputs, and live metadata cards displaying dimensions, channels, inspected pixel values, and NumPy shape. |
 | **Lab 02** | `EXP 02 // EDGE DETECTION` | Noise reduction using Gaussian Blur (`cv2.GaussianBlur`), 1st-order Sobel gradient estimation along $X$ and $Y$ (`cv2.Sobel`), combined gradient magnitude calculation (`cv2.magnitude`), and multi-stage Canny edge detection (`cv2.Canny`) featuring Non-Maximum Suppression (1-pixel thin edges) and double-threshold hysteresis. | Triple-column side-by-side comparison suite (`Original Grayscale` vs. `Sobel Edge Map` vs. `Canny Edge Map`) directly matching `plt.subplot(1, 3, 1..3)`, Gaussian kernel size switcher ($3\times3$, $5\times5$, $7\times7$), directional gradient mode ($G_x$, $G_y$, Combined Magnitude), Sobel aperture slider ($k=1,3,5,7$), interactive Canny lower ($T_{low}$) and upper ($T_{high}$) threshold sliders, edge sketch inversion toggle, edge density metric counters, and dedicated interactive academic Q&A answering Question 1 and Lab Conclusion. |
+| **Lab 03** | `EXP 03 // HISTOGRAM EQUALIZATION` | Image contrast enhancement, probability density function (PDF) and cumulative distribution function (CDF) intensity mapping, global histogram equalization (`cv2.equalizeHist`), Contrast Limited Adaptive Histogram Equalization (`cv2.createCLAHE`), and linear contrast stretching (min-max normalization) across grayscale and YUV luminance channels. | 4-way side-by-side comparison grid (`Original` vs. `Contrast Stretched` vs. `Global Equalization` vs. `Adaptive CLAHE`) with inline interactive 256-bin histogram frequency charts for each version, color space toggle (Grayscale vs. YUV Luminance channel), interactive CLAHE clip limit slider ($1.0 - 5.0$) and tile grid size selector ($4\times4, 8\times8, 16\times16$), standard deviation ($\sigma$) contrast spread metrics, and interactive Q&A answering all 5 lab evaluation questions. |
 
 
 
@@ -44,6 +45,7 @@ In addition to the interactive Web UI, standalone Python scripts corresponding t
 python_labs/
 ├── lab01_images.py           # OpenCV color spaces, channels, and transformations
 ├── lab02_edge_detection.py   # Sobel & Canny edge detection with matplotlib side-by-side
+├── lab03_histogram.py        # Global HE, CLAHE, and Contrast Stretching with histograms
 ```
 
 ### Running Standalone Python Labs
@@ -56,6 +58,9 @@ python python_labs/lab01_images.py
 
 # Run Lab 02 (Sobel & Canny Edge Detection with Matplotlib 3-subplot window)
 python python_labs/lab02_edge_detection.py <optional_path_to_image>
+
+# Run Lab 03 (Histogram Equalization & CLAHE with Matplotlib 2x4 grid)
+python python_labs/lab03_histogram.py <optional_path_to_image>
 ```
 
 ---

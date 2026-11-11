@@ -270,19 +270,19 @@ export default function ImageWorkspace({
             <span>LATENCY:</span> <strong>{metrics.latency || '8ms'}</strong>
           </span>
 
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', opacity: 0.8 }}>
-            RESOLUTION: <strong>{metrics.resolution || '600 × 600'}</strong>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-secondary)' }}>
+            RESOLUTION: <strong style={{ color: 'var(--text-primary)' }}>{metrics.resolution || '600 × 600'}</strong>
           </span>
 
           {metrics.extra && (
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--accent-green)' }}>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-primary)', fontWeight: 700 }}>
               {metrics.extra}
             </span>
           )}
         </div>
 
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', opacity: 0.7 }}>
-          ENGINE: <strong>CLIENT-SIDE CANVAS &amp; TYPEDARRAY CV</strong>
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)' }}>
+          ENGINE: <strong style={{ color: 'var(--text-primary)' }}>CLIENT-SIDE CANVAS &amp; TYPEDARRAY CV</strong>
         </div>
       </div>
     </div>
