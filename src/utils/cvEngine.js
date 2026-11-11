@@ -193,6 +193,8 @@ export function processLab01(imageData, options = {}) {
 // LAB 02: EDGE DETECTION (SOBEL, PREWITT, LAPLACIAN, CANNY)
 // ============================================================================
 
+export const processEdgeDetection = processLab02;
+
 export function processLab02(imageData, options = {}) {
   const {
     algorithm = 'canny',      // 'sobel', 'prewitt', 'laplacian', 'canny', 'scharr'
@@ -385,7 +387,7 @@ export function processLab02(imageData, options = {}) {
   return output;
 }
 
-function gaussianBlur1D(src, width, height, radius = 1) {
+function gaussianBlur1D(src, width, height, _radius = 1) {
   const dst = new Float32Array(width * height);
   const kernel = [0.06136, 0.24477, 0.38774, 0.24477, 0.06136]; // 5-tap Gaussian
   const temp = new Float32Array(width * height);

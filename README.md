@@ -20,6 +20,7 @@ Designed with a **Neo-Brutalist Comic Book Aesthetic** (featuring halftone dot p
 | Experiment | Chapter Tag | Core Topics & Computer Vision Techniques | Interactive Web Features |
 | :--- | :--- | :--- | :--- |
 | **Lab 01** | `EXP 01 // IMAGES` | Digital image representation as 2D/3D NumPy arrays $(H, W, C)$, OpenCV BGR color ordering, Grayscale conversion (`cv2.cvtColor`), coordinate-level pixel inspection and color modification, Region of Interest (ROI) slicing, image resizing (`cv2.resize`), and $90^\circ$ clockwise rotation (`cv2.rotate`). | Dual-card comparison (Original vs. Processed), 6 operation modes (`Inspect`, `Grayscale`, `Rotate 90°`, `Resize`, `Crop ROI`, `Modify Pixel`), interactive $(X, Y)$ coordinate picker, BGR replacement color input, scale factor slider ($0.1\times - 2.0\times$), crop coordinate inputs, and live metadata cards displaying dimensions, channels, inspected pixel values, and NumPy shape. |
+| **Lab 02** | `EXP 02 // EDGE DETECTION` | Noise reduction using Gaussian Blur (`cv2.GaussianBlur`), 1st-order Sobel gradient estimation along $X$ and $Y$ (`cv2.Sobel`), combined gradient magnitude calculation (`cv2.magnitude`), and multi-stage Canny edge detection (`cv2.Canny`) featuring Non-Maximum Suppression (1-pixel thin edges) and double-threshold hysteresis. | Triple-column side-by-side comparison suite (`Original Grayscale` vs. `Sobel Edge Map` vs. `Canny Edge Map`) directly matching `plt.subplot(1, 3, 1..3)`, Gaussian kernel size switcher ($3\times3$, $5\times5$, $7\times7$), directional gradient mode ($G_x$, $G_y$, Combined Magnitude), Sobel aperture slider ($k=1,3,5,7$), interactive Canny lower ($T_{low}$) and upper ($T_{high}$) threshold sliders, edge sketch inversion toggle, edge density metric counters, and dedicated interactive academic Q&A answering Question 1 and Lab Conclusion. |
 
 
 
@@ -42,6 +43,19 @@ In addition to the interactive Web UI, standalone Python scripts corresponding t
 ```
 python_labs/
 ├── lab01_images.py           # OpenCV color spaces, channels, and transformations
+├── lab02_edge_detection.py   # Sobel & Canny edge detection with matplotlib side-by-side
+```
+
+### Running Standalone Python Labs
+
+Each laboratory experiment can be run independently using Python:
+
+```bash
+# Run Lab 01 (OpenCV Basic Transformations)
+python python_labs/lab01_images.py
+
+# Run Lab 02 (Sobel & Canny Edge Detection with Matplotlib 3-subplot window)
+python python_labs/lab02_edge_detection.py <optional_path_to_image>
 ```
 
 ---
@@ -50,21 +64,21 @@ python_labs/
 
 ### Prerequisites
 - Node.js (v18 or higher)
-- npm or yarn
+- Python 3.10+ with `opencv-python`, `fastapi`, `uvicorn`, `numpy`, and `matplotlib`
 
 ### Installation & Local Run
+
+#### 1. Start the FastAPI Backend Server
 ```bash
-# 1. Clone the repository
-git clone https://github.com/kenji0011/CSST106-4B-AY2627.git
+python server.py
+# Backend API runs at http://localhost:8000 (Swagger docs at /docs)
+```
 
-# 2. Navigate to project root
-cd CSST106-4B-AY2627
-
-# 3. Install dependencies
+#### 2. Start the Vite React Frontend
+```bash
 npm install
-
-# 4. Start the development server
 npm run dev
+# Frontend runs at http://localhost:5173
 ```
 
 ### Production Build

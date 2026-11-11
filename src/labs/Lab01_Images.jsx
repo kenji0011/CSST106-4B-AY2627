@@ -274,24 +274,30 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
               style={{ display: 'none' }}
             />
 
-            <button
-              onClick={() => fileInputRef.current?.click()}
-              className={`comic-btn ${previewUrl ? 'comic-btn-secondary' : 'comic-btn-accent'}`}
-              style={{ padding: '9px 12px', fontSize: '11px', width: '100%', gap: '6px' }}
-            >
-              <Upload size={14} />
-              <span>{previewUrl ? 'Upload Different Image' : 'Upload Image'}</span>
-            </button>
-
-            {previewUrl && (
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '6px 8px', background: 'var(--bg-surface)', border: '1.5px solid var(--border-color)', fontSize: '10px', fontFamily: 'var(--font-mono)' }}>
-                <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '200px', fontWeight: 700 }}>
-                  {selectedFile?.name || 'custom_image.jpg'}
-                </span>
-                <span style={{ opacity: 0.6 }}>
-                  {selectedFile ? `${Math.round(selectedFile.size / 1024)} KB` : ''}
-                </span>
+            {!previewUrl ? (
+              <div style={{ padding: '8px 10px', background: 'var(--bg-surface)', border: '1.5px dashed var(--border-color)', fontSize: '10px', fontFamily: 'var(--font-mono)', textAlign: 'center', opacity: 0.8 }}>
+                Upload an image on the right workspace to unlock operations
               </div>
+            ) : (
+              <>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '6px 8px', background: 'var(--bg-surface)', border: '1.5px solid var(--border-color)', fontSize: '10px', fontFamily: 'var(--font-mono)' }}>
+                  <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '180px', fontWeight: 700 }}>
+                    {selectedFile?.name || 'custom_image.jpg'}
+                  </span>
+                  <span style={{ opacity: 0.6 }}>
+                    {selectedFile ? `${Math.round(selectedFile.size / 1024)} KB` : ''}
+                  </span>
+                </div>
+
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  className="comic-btn comic-btn-secondary"
+                  style={{ padding: '8px 12px', fontSize: '11px', width: '100%', gap: '6px' }}
+                >
+                  <Upload size={14} />
+                  <span>Change Image</span>
+                </button>
+              </>
             )}
           </div>
         </div>
@@ -306,12 +312,6 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
               6 MODES
             </span>
           </div>
-
-          {!previewUrl && (
-            <div style={{ padding: '8px 10px', background: 'var(--bg-surface)', border: '1.5px dashed var(--border-color)', marginBottom: '10px', fontSize: '10px', fontFamily: 'var(--font-mono)', textAlign: 'center', opacity: 0.8 }}>
-              Upload an image first to unlock operations
-            </div>
-          )}
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', opacity: previewUrl ? 1 : 0.45, pointerEvents: previewUrl ? 'auto' : 'none' }}>
             <button

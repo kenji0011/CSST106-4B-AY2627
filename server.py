@@ -7,6 +7,7 @@ Laguna State Polytechnic University (LSPU)
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from python_labs.lab01_images import router as lab01_router
+from python_labs.lab02_edge_detection import router as lab02_router
 
 app = FastAPI(
     title="CSST 106 - Computer Vision API",
@@ -25,6 +26,7 @@ app.add_middleware(
 
 # Mount Laboratory Routers
 app.include_router(lab01_router)
+app.include_router(lab02_router)
 
 @app.get("/")
 def root():

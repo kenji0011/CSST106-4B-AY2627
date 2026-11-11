@@ -100,5 +100,60 @@ async def process_lab01(
         "processed_dimensions": f"{processed_w}x{processed_h}",
         "processed_image_base64": encode_image_to_base64(processed_img),
     }`
+  },
+  'lab-02': {
+    filename: 'python_labs/lab02_edge_detection.py',
+    code: `"""
+CSST 106 - Perception and Computer Vision
+Laboratory Exercise No. 2: Edge Detection Technique (Sobel & Canny)
+Laguna State Polytechnic University (LSPU) - AY 2026-2027
+"""
+
+import cv2
+import matplotlib.pyplot as plt
+import numpy as np
+
+def edge_detection(image_path):
+    # 1. Load the image in grayscale
+    img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+    if img is None:
+        print("Error: Image not found or path is incorrect.")
+        return
+
+    # 2. Apply Gaussian blur to reduce noise
+    img_blur = cv2.GaussianBlur(img, (3, 3), 0)
+
+    # 3. Sobel edge detection (detects edges along x and y gradient directions)
+    sobelx = cv2.Sobel(img_blur, cv2.CV_64F, 1, 0, ksize=3)
+    sobely = cv2.Sobel(img_blur, cv2.CV_64F, 0, 1, ksize=3)
+    sobel_combined = cv2.magnitude(sobelx, sobely)
+
+    # 4. Canny edge detection (detects strong edges using gradient and thresholding)
+    edges_canny = cv2.Canny(img_blur, 100, 200)
+
+    # 5. Display results side by side using matplotlib
+    plt.figure(figsize=(12, 6))
+
+    plt.subplot(1, 3, 1)
+    plt.imshow(img, cmap='gray')
+    plt.title('Original Image')
+    plt.axis('off')
+
+    plt.subplot(1, 3, 2)
+    plt.imshow(sobel_combined, cmap='gray')
+    plt.title('Sobel Edge Detection')
+    plt.axis('off')
+
+    plt.subplot(1, 3, 3)
+    plt.imshow(edges_canny, cmap='gray')
+    plt.title('Canny Edge Detection')
+    plt.axis('off')
+
+    plt.tight_layout()
+    plt.show()
+
+if __name__ == "__main__":
+    # Replace 'input.jpg' with the path to your image file
+    edge_detection('input.jpg')`
   }
 };

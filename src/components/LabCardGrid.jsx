@@ -5,7 +5,8 @@ import { ArrowRight, Clock } from 'lucide-react';
 
 export default function LabCardGrid({ onSelectLab }) {
   const LAB_TAGS = {
-    'lab-01': ['RGB & BGR', 'GRAYSCALE', 'CHANNELS', 'PIXEL INSPECT', 'ROI CROP', 'RESIZE', 'ROTATE 90°']
+    'lab-01': ['RGB & BGR', 'GRAYSCALE', 'CHANNELS', 'PIXEL INSPECT', 'ROI CROP', 'RESIZE', 'ROTATE 90°'],
+    'lab-02': ['SOBEL OPERATOR', 'CANNY DETECTOR', 'GAUSSIAN BLUR', 'GRADIENTS GX/GY', 'HYSTERESIS', '3-WAY COMPARISON']
   };
 
   return (
@@ -15,7 +16,7 @@ export default function LabCardGrid({ onSelectLab }) {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px', marginBottom: '16px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <span className="comic-tag comic-tag-yellow" style={{ fontSize: '11px', padding: '4px 10px' }}>
-              CHAPTER 01 // OVERVIEW
+              CHAPTER 01
             </span>
           </div>
         </div>
@@ -51,14 +52,14 @@ export default function LabCardGrid({ onSelectLab }) {
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 4px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div className="comic-tag" style={{ fontSize: '12px', padding: '4px 10px' }}>
-            CHAPTER 02 // MODULES
+            CHAPTER 02 
           </div>
           <h2 style={{ fontSize: '20px', fontWeight: 900, letterSpacing: '-0.02em', margin: 0 }}>
             LABORATORY ACTIVITIES
           </h2>
         </div>
         <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700, opacity: 0.7 }}>
-          1 COMPILED • UPCOMING MODULES PENDING
+          {LAB_MODULES.length} COMPILED • UPCOMING MODULES PENDING
         </span>
       </div>
 
@@ -153,7 +154,7 @@ export default function LabCardGrid({ onSelectLab }) {
                   className="comic-btn comic-btn-accent"
                   style={{ padding: '8px 16px', fontSize: '11px', gap: '6px' }}
                 >
-                  <span>Open Lab 1</span>
+                  <span>Open Lab {lab.number}</span>
                   <ArrowRight size={13} />
                 </button>
               </div>

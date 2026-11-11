@@ -17,25 +17,25 @@ export default function Navbar({
       <div className="comic-nav-container">
         {/* Left: Branding & Back Button */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-          {isInsideLab ? (
-            <button
-              onClick={onBackToGrid}
-              className="comic-btn comic-btn-accent"
-              style={{ padding: '6px 12px', fontSize: '11px', gap: '6px' }}
-              title="Return to Laboratory Cards Overview"
-            >
-              <ArrowLeft size={14} />
-              <span>All Labs</span>
-            </button>
-          ) : (
-            <div className="comic-tag comic-tag-yellow" style={{ fontSize: '14px', padding: '6px 12px' }}>
-              <span>CSST 106.</span>
-            </div>
-          )}
+          <div className="comic-tag comic-tag-yellow" style={{ fontSize: '14px', padding: '6px 12px' }}>
+            <span>CSST 106.</span>
+          </div>
 
           <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: '14px', letterSpacing: '0.02em' }}>
-            {isInsideLab ? `EXP ${activeLab.number}: ${activeLab.title}` : 'COMPUTER VISION LAB SUITE'}
+            COMPUTER VISION LAB SUITE
           </span>
+
+          {isInsideLab && (
+            <button
+              onClick={onBackToGrid}
+              className="comic-btn comic-btn-secondary"
+              style={{ padding: '5px 12px', fontSize: '11px', gap: '6px', marginLeft: '6px' }}
+              title="Return to Laboratory Cards Overview"
+            >
+              <ArrowLeft size={13} />
+              <span>All Labs</span>
+            </button>
+          )}
         </div>
 
         {/* Center: Mode Tabs (Playground & Python Source only when inside a lab) */}

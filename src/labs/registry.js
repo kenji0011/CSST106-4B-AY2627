@@ -15,6 +15,18 @@ export const LAB_MODULES = [
     statusColor: 'green',
     category: 'Fundamentals',
     icon: 'ImageIcon'
+  },
+  {
+    id: 'lab-02',
+    number: '02',
+    chapter: 'CHAPTER 02 // FEATURE EXTRACTION',
+    shortTag: 'EXP 02 // EDGE DETECTION',
+    title: 'Edge Detection Technique',
+    description: 'Implementation and comparative analysis of Sobel and Canny edge detectors with Gaussian smoothing and directional gradients.',
+    status: 'COMPLETE',
+    statusColor: 'green',
+    category: 'Feature Extraction',
+    icon: 'Activity'
   }
 ];
 
