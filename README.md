@@ -7,7 +7,7 @@
 
 ---
 
-## 📌 Project Overview
+##  Project Overview
 
 This web application serves as the **centralized compilation and interactive evaluation platform** for all Computer Vision laboratory activities (Lab 1 through Lab 7, plus extensible modules for Lab $n$). 
 
@@ -15,7 +15,7 @@ Designed with a **Neo-Brutalist Comic Book Aesthetic** (featuring halftone dot p
 
 ---
 
-## 🧪 Compiled Laboratory Modules
+##  Compiled Laboratory Modules
 
 | Experiment | Chapter Tag | Core Topics & Computer Vision Techniques | Interactive Web Features |
 | :--- | :--- | :--- | :--- |
@@ -29,19 +29,8 @@ Designed with a **Neo-Brutalist Comic Book Aesthetic** (featuring halftone dot p
 
 
 
----
 
-## 🎨 Design System & Highlights
-
-- **Comic & Neo-Brutalist Theme**: Bold `2.5px` solid borders, sharp `4px`/`8px` hard offset shadows (no soft blur), and tactile button click physics.
-- **Halftone Dot Pattern**: Halftone comic grid background adapting smoothly across both themes.
-- **Full Light & Dark Mode**: One-click Sun/Moon toggle in the navigation bar.
-- **Interactive Split Comparison Slider**: Draggable handle dividing the raw input image and the processed output in real time, plus Dual Side-by-Side mode.
-- **Python Source Code Viewer**: Integrated syntax-highlighted viewer to inspect the exact FastAPI and OpenCV Python implementations directly within the web app.
-
----
-
-## 💻 Standalone Python Scripts
+##  Standalone Python Scripts
 
 In addition to the interactive Web UI, standalone Python scripts corresponding to each laboratory experiment are provided in the [`python_labs/`](./python_labs/) directory:
 
@@ -85,7 +74,7 @@ python python_labs/lab07_segmentation.py <optional_path_to_image>
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 - **Node.js** (v18 or higher) and `npm`
@@ -139,7 +128,14 @@ npm run preview
 
 ---
 
+<<<<<<< HEAD
 ## 👨‍💻 Author
+=======
+
+---
+
+##  Author
+>>>>>>> ef7027774e5e53145ed19960d6ad135a576d7c08
 
 **Kean Gabriel Salvahan**  
 BS Computer Science — Laguna State Polytechnic University  
