@@ -1,18 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {
-  Upload,
-  Eye,
-  RotateCw,
-  Crop,
-  Maximize2,
-  Paintbrush,
-  Sparkles,
-  CheckCircle2,
-  Cpu,
-  Layers,
-  ArrowRight,
-  Info
-} from 'lucide-react';
+import { Upload, Image as ImageIcon } from 'lucide-react';
+import { SAMPLE_IMAGES } from '../utils/sampleImages';
 
 export default function Lab01_Images({ currentImage, onImageChange, onSnapshotReady }) {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -75,8 +63,28 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
     }
   };
 
+  const getActiveFile = async () => {
+    if (selectedFile) return selectedFile;
+    if (!previewUrl) return null;
+    const res = await fetch(previewUrl);
+    const blob = await res.blob();
+    return new File([blob], 'sample_image.jpg', { type: blob.type || 'image/jpeg' });
+  };
+
+  const handleLoadSample = async () => {
+    const sampleUrl = SAMPLE_IMAGES[0]?.url;
+    if (!sampleUrl) return;
+    const res = await fetch(sampleUrl);
+    const blob = await res.blob();
+    const file = new File([blob], 'sample_portrait.jpg', { type: 'image/jpeg' });
+    setSelectedFile(file);
+    setPreviewUrl(sampleUrl);
+    onImageChange?.(sampleUrl);
+    runOperationWithFile(file, action);
+  };
+
   // Click on image to pick exact coordinates
-  const handleImageClick = (e) => {
+  const handleImageClick = async (e) => {
     if (!metadata || (action !== 'inspect' && action !== 'modify_pixel')) return;
     const imgEl = e.currentTarget;
     const rect = imgEl.getBoundingClientRect();
@@ -91,18 +99,20 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
 
     const nextCoord = { x: safeX, y: safeY };
     setPixelCoord(nextCoord);
-    if (selectedFile) {
-      runOperationWithFile(selectedFile, action, nextCoord);
+    const file = await getActiveFile();
+    if (file) {
+      runOperationWithFile(file, action, nextCoord);
     }
   };
 
   // Run operation against FastAPI backend, with client-side canvas fallback
   const runOperation = async (overrideAction = null) => {
-    if (!selectedFile) {
+    const file = await getActiveFile();
+    if (!file) {
       fileInputRef.current?.click();
       return;
     }
-    await runOperationWithFile(selectedFile, overrideAction || action);
+    await runOperationWithFile(file, overrideAction || action);
   };
 
   const runOperationWithFile = async (file, currentAction, overrideCoord = null) => {
@@ -632,14 +642,25 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
               </p>
             </div>
 
-            <button
-              onClick={(e) => { e.stopPropagation(); fileInputRef.current?.click(); }}
-              className="comic-btn comic-btn-accent"
-              style={{ padding: '10px 24px', fontSize: '13px', gap: '8px', marginTop: '4px' }}
-            >
-              <Upload size={16} />
-              <span>Upload Image</span>
-            </button>
+            <div style={{ display: 'flex', gap: '12px', marginTop: '4px' }}>
+              <button
+                onClick={(e) => { e.stopPropagation(); fileInputRef.current?.click(); }}
+                className="comic-btn comic-btn-accent"
+                style={{ padding: '10px 22px', fontSize: '13px', gap: '8px' }}
+              >
+                <Upload size={16} />
+                <span>Upload Image</span>
+              </button>
+
+              <button
+                onClick={(e) => { e.stopPropagation(); handleLoadSample(); }}
+                className="comic-btn comic-btn-secondary"
+                style={{ padding: '10px 22px', fontSize: '13px', gap: '8px' }}
+              >
+                <ImageIcon size={16} />
+                <span>Load Sample Image</span>
+              </button>
+            </div>
 
             <span style={{ fontSize: '12px', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>
               Drag &amp; drop file here, or click to browse (PNG, JPG, JPEG, WEBP)
@@ -661,7 +682,17 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
                 </div>
 
                 <div style={{ width: '100%', height: '360px', background: '#09090b', border: '1px solid var(--border-color)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-                  <img src={previewUrl} alt="Original Input" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+                  <img
+                    src={previewUrl}
+                    alt="Original Input"
+                    onClick={handleImageClick}
+                    style={{
+                      maxWidth: '100%',
+                      maxHeight: '100%',
+                      objectFit: 'contain',
+                      cursor: (action === 'inspect' || action === 'modify_pixel') ? 'crosshair' : 'default'
+                    }}
+                  />
                 </div>
               </div>
 

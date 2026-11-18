@@ -39,6 +39,18 @@ export const LAB_MODULES = [
     statusColor: 'green',
     category: 'Image Enhancement',
     icon: 'BarChart2'
+  },
+  {
+    id: 'lab-04',
+    number: '04',
+    chapter: 'CHAPTER 04 // LOCAL FEATURES',
+    shortTag: 'EXP 04 // SURF FEATURES',
+    title: 'SURF Feature Detection & Matching',
+    description: 'SURF and U-SURF keypoint detection with Hessian threshold tuning, two-image descriptor matching, and comparison against SIFT and ORB.',
+    status: 'COMPLETE',
+    statusColor: 'green',
+    category: 'Feature Detection',
+    icon: 'Crosshair'
   }
 ];
 

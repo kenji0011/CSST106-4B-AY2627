@@ -213,5 +213,53 @@ def histogram_equalization_lab(image_path):
 
 if __name__ == "__main__":
     histogram_equalization_lab("input.jpg")`
+  },
+  'lab-04': {
+    filename: 'python_labs/lab04_features.py',
+    code: `"""
+CSST 106 - Perception and Computer Vision
+Laboratory Exercise No. 4: SURF Feature Detection in Python using OpenCV
+Laguna State Polytechnic University (LSPU) - AY 2026-2027
+"""
+
+import cv2
+import numpy as np
+
+# 1. Load an image in grayscale mode
+img = cv2.imread('sample_image.jpg', cv2.IMREAD_GRAYSCALE)
+if img is None:
+    print('Error loading image')
+
+# 2. Create SURF object with a Hessian threshold (higher threshold = fewer keypoints)
+hessian_threshold = 400
+upright_mode = False  # Set True for U-SURF (faster, no rotation invariance)
+
+try:
+    surf = cv2.xfeatures2d.SURF_create(
+        hessianThreshold=hessian_threshold,
+        upright=upright_mode
+    )
+    keypoints, descriptors = surf.detectAndCompute(img, None)
+    print(f"SURF Keypoints detected: {len(keypoints)}")
+except cv2.error:
+    # OpenCV 4+/5 excludes patented SURF unless built with OPENCV_ENABLE_NONFREE
+    # Free alternative: ORB / SIFT
+    orb = cv2.ORB_create(nfeatures=500)
+    keypoints, descriptors = orb.detectAndCompute(img, None)
+    print(f"ORB fallback Keypoints detected: {len(keypoints)}")
+
+# 3. Draw keypoints on the image with size and orientation information
+img_keypoints = cv2.drawKeypoints(
+    img, keypoints, None, (255, 0, 0),
+    cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS
+)
+
+# 4. Feature matching between two images using BFMatcher
+# bf = cv2.BFMatcher(cv2.NORM_L2)  # or NORM_HAMMING for ORB
+# matches = bf.knnMatch(des1, des2, k=2)
+
+cv2.imshow('SURF Keypoints', img_keypoints)
+cv2.waitKey(0)
+cv2.destroyAllWindows()`
   }
 };

@@ -7,7 +7,8 @@ export default function LabCardGrid({ onSelectLab }) {
   const LAB_TAGS = {
     'lab-01': ['RGB & BGR', 'Grayscale', 'Channels', 'Pixel Inspect', 'ROI Crop', 'Resize', 'Rotate 90°'],
     'lab-02': ['Sobel Operator', 'Canny Detector', 'Gaussian Blur', 'Gradients Gx/Gy', 'Hysteresis', '3-Way Comparison'],
-    'lab-03': ['Histogram', 'equalizeHist', 'CLAHE', 'Contrast Stretch', 'YUV Luminance', 'CDF Mapping']
+    'lab-03': ['Histogram', 'equalizeHist', 'CLAHE', 'Contrast Stretch', 'YUV Luminance', 'CDF Mapping'],
+    'lab-04': ['SURF', 'Hessian Threshold', 'U-SURF', 'SIFT', 'ORB', 'Feature Matching']
   };
 
   return (
