@@ -29,17 +29,6 @@ Designed with a **Neo-Brutalist Comic Book Aesthetic** (featuring halftone dot p
 
 
 
----
-
-## 🎨 Design System & Highlights
-
-- **Comic & Neo-Brutalist Theme**: Bold `2.5px` solid borders, sharp `4px`/`8px` hard offset shadows (no soft blur), and tactile button click physics.
-- **Halftone Dot Pattern**: Halftone comic grid background adapting smoothly across both themes.
-- **Full Light & Dark Mode**: One-click Sun/Moon toggle in the navigation bar.
-- **Interactive Split Comparison Slider**: Draggable handle dividing the raw input image and the processed output in real time, plus Dual Side-by-Side mode.
-- **Python Source Code Viewer**: Integrated syntax-highlighted viewer to inspect the exact FastAPI and OpenCV Python implementations directly within the web app.
-
----
 
 ## 💻 Standalone Python Scripts
 
