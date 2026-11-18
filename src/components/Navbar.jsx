@@ -1,9 +1,9 @@
 import React from 'react';
-import { Sun, Moon, Code, FlaskConical, ArrowLeft } from 'lucide-react';
+import { Sun, Moon, Code, FlaskConical } from 'lucide-react';
 
 export default function Navbar({
   activeLabId,
-  activeLab,
+  showNavTitle,
   viewMode,
   setViewMode,
   theme,
@@ -15,28 +15,26 @@ export default function Navbar({
   return (
     <header className="comic-nav">
       <div className="comic-nav-container">
-        {/* Left: Branding & Back Button */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div className="comic-tag" style={{ fontSize: '13px', padding: '6px 12px' }}>
+        {/* Left: Clickable Branding (returns to Home) */}
+        <button
+          type="button"
+          onClick={onBackToGrid}
+          className="nav-brand-btn"
+          title="Go to Home Page"
+          aria-label="Go to Home Page"
+        >
+          <div className="comic-tag nav-brand-badge" style={{ fontSize: '13px', padding: '6px 12px' }}>
             <span>CSST 106</span>
           </div>
 
-          <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '15px', letterSpacing: '-0.01em', color: 'var(--text-primary)' }}>
+          <span
+            className={`nav-brand-title ${showNavTitle ? 'visible' : ''}`}
+            aria-hidden={!showNavTitle}
+            style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '15px', letterSpacing: '-0.01em', color: 'var(--text-primary)' }}
+          >
             Computer Vision Lab Suite
           </span>
-
-          {isInsideLab && (
-            <button
-              onClick={onBackToGrid}
-              className="comic-btn comic-btn-secondary"
-              style={{ padding: '6px 12px', fontSize: '12px', gap: '6px', marginLeft: '6px' }}
-              title="Return to Laboratory Cards Overview"
-            >
-              <ArrowLeft size={14} />
-              <span>All Labs</span>
-            </button>
-          )}
-        </div>
+        </button>
 
         {/* Center: Mode Tabs (Playground & Python Source only when inside a lab) */}
         {isInsideLab && (
@@ -79,7 +77,7 @@ export default function Navbar({
 
           <button
             onClick={toggleTheme}
-            className="comic-btn comic-btn-secondary comic-btn-icon"
+            className="comic-btn comic-btn-secondary comic-btn-icon theme-toggle-btn"
             title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
             aria-label="Toggle theme"
           >

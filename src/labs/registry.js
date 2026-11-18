@@ -14,7 +14,9 @@ export const LAB_MODULES = [
     status: 'COMPLETE',
     statusColor: 'green',
     category: 'Fundamentals',
-    icon: 'ImageIcon'
+    icon: 'ImageIcon',
+    docxFilename: 'lab01_report.docx',
+    docxPath: '/docs/lab01_report.docx'
   },
   {
     id: 'lab-02',
@@ -26,7 +28,9 @@ export const LAB_MODULES = [
     status: 'COMPLETE',
     statusColor: 'green',
     category: 'Feature Extraction',
-    icon: 'Activity'
+    icon: 'Activity',
+    docxFilename: 'lab02_report.docx',
+    docxPath: '/docs/lab02_report.docx'
   },
   {
     id: 'lab-03',
@@ -38,7 +42,9 @@ export const LAB_MODULES = [
     status: 'COMPLETE',
     statusColor: 'green',
     category: 'Image Enhancement',
-    icon: 'BarChart2'
+    icon: 'BarChart2',
+    docxFilename: 'lab03_report.docx',
+    docxPath: '/docs/lab03_report.docx'
   },
   {
     id: 'lab-04',
@@ -50,7 +56,51 @@ export const LAB_MODULES = [
     status: 'COMPLETE',
     statusColor: 'green',
     category: 'Feature Detection',
-    icon: 'Crosshair'
+    icon: 'Crosshair',
+    docxFilename: 'lab04_report.docx',
+    docxPath: '/docs/lab04_report.docx'
+  },
+  {
+    id: 'lab-05',
+    number: '05',
+    chapter: 'CHAPTER 05 // DIMENSIONALITY REDUCTION',
+    shortTag: 'EXP 05 // PCA EIGENFACES',
+    title: 'Facial Recognition using PCA (Eigenfaces)',
+    description: 'LFW dataset acquisition, Eigenfaces extraction, cumulative explained variance analysis, whitening impact, and RBF SVM face recognition.',
+    status: 'COMPLETE',
+    statusColor: 'green',
+    category: 'Machine Learning',
+    icon: 'Users',
+    docxFilename: 'lab05_report.docx',
+    docxPath: '/docs/lab05_report.docx'
+  },
+  {
+    id: 'lab-06',
+    number: '06',
+    chapter: 'CHAPTER 06 // OBJECT DETECTION',
+    shortTag: 'EXP 06 // YOLOV11',
+    title: 'Object Detection with YOLOv11',
+    description: 'Real-time YOLOv11 inference, custom YOLO .txt annotation format, data.yaml setup, model training, and evaluation.',
+    status: 'COMPLETE',
+    statusColor: 'green',
+    category: 'Deep Learning',
+    icon: 'Box',
+    docxFilename: 'lab06_report.docx',
+    docxPath: '/docs/lab06_report.docx'
+  },
+  {
+    id: 'lab-07',
+    number: '07',
+    chapter: 'CHAPTER 07 // IMAGE SEGMENTATION',
+    shortTag: 'EXP 07 // SEGMENTATION',
+    title: 'Image Segmentation Techniques',
+    description: 'Comparative analysis of Otsu/Adaptive thresholding, seeded region growing, Watershed, Canny contours, and DeepLab/LRASPP semantic segmentation.',
+    status: 'COMPLETE',
+    statusColor: 'green',
+    category: 'Segmentation',
+    icon: 'Layers',
+    docxFilename: 'lab07_report.docx',
+    docxPath: '/docs/lab07_report.docx'
   }
 ];
 

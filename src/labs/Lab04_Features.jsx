@@ -2,6 +2,30 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Upload, RotateCcw, Image as ImageIcon } from 'lucide-react';
 import { SAMPLE_IMAGES } from '../utils/sampleImages';
 import { detectFeatures } from '../utils/cvEngine';
+import LabQASection from '../components/LabQASection';
+
+const LAB04_QA = [
+  {
+    question: '1. What effect does changing the Hessian threshold have on the number of detected keypoints?',
+    answer:
+      'Increasing the Hessian threshold filters out weak, low-contrast corner and blob responses, producing fewer, stronger keypoints. Lowering the threshold retains more keypoints, including finer texture details and background noise.'
+  },
+  {
+    question: '2. What are the descriptors in SURF used for, and why are they important?',
+    answer:
+      'SURF descriptors encode the local intensity distribution (summed Haar wavelet responses) around each keypoint into a compact 64-D or 128-D feature vector. They are crucial for matching corresponding points across different viewpoints, scales, rotations, and lighting conditions in tasks like object recognition, image stitching, and camera tracking.'
+  },
+  {
+    question: '3. How does SURF compare to SIFT and ORB in feature detection and speed?',
+    answer:
+      'SIFT offers high accuracy across scale and rotation using Difference-of-Gaussians and 128-D descriptors, but is computationally slower. SURF speeds up SIFT significantly by approximating Gaussian filters with box filters over integral images and Haar wavelets. ORB (FAST keypoints + rotated BRIEF binary descriptors) is the fastest and completely patent-free, making it ideal for real-time applications, though slightly less invariant to large scale changes than SIFT or SURF.'
+  },
+  {
+    question: 'OpenCV Version & Patent Note',
+    answer:
+      'SURF is patented and excluded from standard prebuilt OpenCV 4+/5 pip wheels unless compiled with OPENCV_ENABLE_NONFREE. When native SURF_create is disabled, this lab uses a Determinant-of-Hessian blob detector alongside native OpenCV SIFT and ORB (recommended free alternative).'
+  }
+];
 
 export default function Lab04_Features({ currentImage, onImageChange }) {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -658,54 +682,10 @@ export default function Lab04_Features({ currentImage, onImageChange }) {
               </div>
             )}
 
-            {/* 4. Academic Questions & Answers (All 3 PDF Questions + OpenCV Patent Note) */}
-            <div className="comic-box" style={{ padding: '20px' }}>
-              <div style={{ marginBottom: '14px' }}>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700, color: 'var(--text-primary)' }}>
-                  Lab Activity 4: Questions for Students &amp; Notes
-                </span>
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                <div className="comic-box-sm" style={{ padding: '14px', background: 'var(--bg-surface)' }}>
-                  <strong style={{ fontSize: '13px', display: 'block', color: 'var(--text-primary)', fontWeight: 700, marginBottom: '4px' }}>
-                    1. What effect does changing the Hessian threshold have on the number of detected keypoints?
-                  </strong>
-                  <p style={{ fontSize: '12.5px', lineHeight: 1.55, color: 'var(--text-secondary)', margin: 0 }}>
-                    Increasing the Hessian threshold filters out weak, low-contrast corner/blob responses and produces fewer, more prominent keypoints. Lowering the threshold retains more keypoints, including smaller texture details and background noise.
-                  </p>
-                </div>
-
-                <div className="comic-box-sm" style={{ padding: '14px', background: 'var(--bg-surface)' }}>
-                  <strong style={{ fontSize: '13px', display: 'block', color: 'var(--text-primary)', fontWeight: 700, marginBottom: '4px' }}>
-                    2. What are the descriptors in SURF used for, and why are they important?
-                  </strong>
-                  <p style={{ fontSize: '12.5px', lineHeight: 1.55, color: 'var(--text-secondary)', margin: 0 }}>
-                    SURF descriptors encode the local intensity distribution (summed Haar wavelet responses) around each keypoint into a compact 64-D or 128-D feature vector. They are crucial for reliably matching corresponding keypoints across different views, scales, rotations, and lighting conditions in tasks like object recognition, image stitching, and camera tracking.
-                  </p>
-                </div>
-
-                <div className="comic-box-sm" style={{ padding: '14px', background: 'var(--bg-surface)' }}>
-                  <strong style={{ fontSize: '13px', display: 'block', color: 'var(--text-primary)', fontWeight: 700, marginBottom: '4px' }}>
-                    3. How does SURF compare to SIFT and ORB in feature detection and speed?
-                  </strong>
-                  <p style={{ fontSize: '12.5px', lineHeight: 1.55, color: 'var(--text-secondary)', margin: 0 }}>
-                    SIFT offers high accuracy across scale and rotation using Difference-of-Gaussians and 128-D descriptors, but is computationally slower. SURF speeds up SIFT significantly by approximating Gaussian filters with box filters over integral images and Haar wavelets. ORB (FAST keypoints + rotated BRIEF binary descriptors) is by far the fastest and completely free of patents, making it ideal for real-time applications, though slightly less invariant to large scale changes than SIFT/SURF.
-                  </p>
-                </div>
-
-                <div className="comic-box-sm" style={{ padding: '14px', background: 'var(--bg-surface)' }}>
-                  <strong style={{ fontSize: '13px', display: 'block', color: 'var(--text-primary)', fontWeight: 700, marginBottom: '4px' }}>
-                    OpenCV Version &amp; Patent Note
-                  </strong>
-                  <p style={{ fontSize: '12.5px', lineHeight: 1.55, color: 'var(--text-secondary)', margin: 0 }}>
-                    SURF is patented and excluded from standard prebuilt OpenCV 4+/5 pip wheels unless compiled with OPENCV_ENABLE_NONFREE. When native SURF_create is disabled, this lab uses a Determinant-of-Hessian blob detector alongside native OpenCV SIFT and ORB (recommended free alternative).
-                  </p>
-                </div>
-              </div>
-            </div>
           </>
         )}
+
+        <LabQASection title="Lab Activity 4: Questions for Students & Notes" items={LAB04_QA} />
       </div>
     </div>
   );

@@ -2,6 +2,25 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Upload, RotateCcw, Image as ImageIcon } from 'lucide-react';
 import { SAMPLE_IMAGES } from '../utils/sampleImages';
 import { processEdgeDetection } from '../utils/cvEngine';
+import LabQASection from '../components/LabQASection';
+
+const LAB02_QA = [
+  {
+    question: '1. Explain the differences between the edge maps produced by Sobel and Canny.',
+    answer:
+      'Sobel computes first-order directional intensity gradients (Gx, Gy), producing thicker grayscale edges whose brightness reflects local contrast strength. Canny extends gradient computation with Non-Maximum Suppression (thinning edges to 1 pixel wide) and double-threshold hysteresis (low and high thresholds) to produce clean, continuous binary contours while rejecting weak noise.'
+  },
+  {
+    question: '2. Why is Gaussian Blur applied before edge detection?',
+    answer:
+      'Edge detection relies on spatial pixel derivatives that are highly sensitive to sensor noise. Applying cv2.GaussianBlur prior to Sobel or Canny smooths out high-frequency pixel jitter so the detectors highlight genuine object boundaries instead of spurious noise edges.'
+  },
+  {
+    question: '3. Conclusion',
+    answer:
+      'Gaussian preprocessing significantly improves edge stability. Use Sobel when directional gradient magnitude and orientation (Gx, Gy) are needed, and use Canny when clean, single-pixel closed boundaries are required for contour analysis, shape detection, or segmentation.'
+  }
+];
 
 export default function Lab02_EdgeDetection({ currentImage, onImageChange }) {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -591,37 +610,10 @@ export default function Lab02_EdgeDetection({ currentImage, onImageChange }) {
               </div>
             )}
 
-            {/* 3. Concise Lab Question & Conclusion Summary */}
-            <div className="comic-box" style={{ padding: '20px' }}>
-              <div style={{ marginBottom: '14px' }}>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700, color: 'var(--text-primary)' }}>
-                  Lab Activity 2: Observation &amp; Conclusion
-                </span>
-              </div>
-
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
-                <div className="comic-box-sm" style={{ padding: '14px', background: 'var(--bg-surface)' }}>
-                  <span className="comic-tag comic-tag-yellow" style={{ fontSize: '10px', marginBottom: '8px', display: 'inline-block' }}>
-                    Sobel vs. Canny Differences
-                  </span>
-                  <p style={{ fontSize: '13px', lineHeight: 1.6, color: 'var(--text-primary)', margin: 0 }}>
-                    <strong>Sobel</strong> computes first-order directional gradients (Gx, Gy), producing thicker edges with varying brightness based on contrast strength.{' '}
-                    <strong>Canny</strong> applies non-maximum suppression and dual-threshold hysteresis to produce clean, 1-pixel thin binary contours while filtering out weak noise.
-                  </p>
-                </div>
-
-                <div className="comic-box-sm" style={{ padding: '14px', background: 'var(--bg-surface)' }}>
-                  <span className="comic-tag comic-tag-green" style={{ fontSize: '10px', marginBottom: '8px', display: 'inline-block' }}>
-                    Conclusion
-                  </span>
-                  <p style={{ fontSize: '13px', lineHeight: 1.6, color: 'var(--text-primary)', margin: 0 }}>
-                    Gaussian smoothing prior to edge extraction significantly reduces false edges. Use <strong>Sobel</strong> when raw gradient magnitude and orientation are needed, and <strong>Canny</strong> when accurate, single-pixel object boundaries are required for segmentation or shape detection.
-                  </p>
-                </div>
-              </div>
-            </div>
           </>
         )}
+
+        <LabQASection title="Lab Activity 2: Questions & Answers" items={LAB02_QA} />
       </div>
     </div>
   );

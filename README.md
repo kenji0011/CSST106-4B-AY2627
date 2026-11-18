@@ -23,6 +23,9 @@ Designed with a **Neo-Brutalist Comic Book Aesthetic** (featuring halftone dot p
 | **Lab 02** | `EXP 02 // EDGE DETECTION` | Noise reduction using Gaussian Blur (`cv2.GaussianBlur`), 1st-order Sobel gradient estimation along $X$ and $Y$ (`cv2.Sobel`), combined gradient magnitude calculation (`cv2.magnitude`), and multi-stage Canny edge detection (`cv2.Canny`) featuring Non-Maximum Suppression (1-pixel thin edges) and double-threshold hysteresis. | Triple-column side-by-side comparison suite (`Original Grayscale` vs. `Sobel Edge Map` vs. `Canny Edge Map`) directly matching `plt.subplot(1, 3, 1..3)`, Gaussian kernel size switcher ($3\times3$, $5\times5$, $7\times7$), directional gradient mode ($G_x$, $G_y$, Combined Magnitude), Sobel aperture slider ($k=1,3,5,7$), interactive Canny lower ($T_{low}$) and upper ($T_{high}$) threshold sliders, edge sketch inversion toggle, edge density metric counters, and dedicated interactive academic Q&A answering Question 1 and Lab Conclusion. |
 | **Lab 03** | `EXP 03 // HISTOGRAM EQUALIZATION` | Image contrast enhancement, probability density function (PDF) and cumulative distribution function (CDF) intensity mapping, global histogram equalization (`cv2.equalizeHist`), Contrast Limited Adaptive Histogram Equalization (`cv2.createCLAHE`), and linear contrast stretching (min-max normalization) across grayscale and YUV luminance channels. | 4-way side-by-side comparison grid (`Original` vs. `Contrast Stretched` vs. `Global Equalization` vs. `Adaptive CLAHE`) with inline interactive 256-bin histogram frequency charts for each version, color space toggle (Grayscale vs. YUV Luminance channel), interactive CLAHE clip limit slider ($1.0 - 5.0$) and tile grid size selector ($4\times4, 8\times8, 16\times16$), standard deviation ($\sigma$) contrast spread metrics, and interactive Q&A answering all 5 lab evaluation questions. |
 | **Lab 04** | `EXP 04 // SURF FEATURES` | Speeded-Up Robust Features (`SURF` and `U-SURF` upright mode), Hessian threshold filtering, scale and orientation keypoint visualization (`cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS`), comparison with `SIFT` (`128-D`) and `ORB` (`32-B`), and two-image descriptor matching (`cv2.BFMatcher`). | 3-column keypoint comparison (`SURF` vs. `SIFT` vs. `ORB`) with live keypoint counts and execution latency, interactive Hessian threshold slider ($100 - 1200$), `U-SURF` upright mode toggle, rich keypoint toggle, two-image `BFMatcher` descriptor matching panel (with optional Query Image 2 upload or auto rotated/scaled query), and complete Q&A covering all 3 evaluation questions. |
+| **Lab 05** | `EXP 05 // PCA EIGENFACES` | Dimensionality reduction and facial recognition via Principal Component Analysis (`sklearn.decomposition.PCA` with `svd_solver='randomized'` and `whiten=True`), Eigenfaces visualization, Cumulative Explained Variance (`90%` threshold), and RBF SVM classification (`sklearn.svm.SVC`) on the Labeled Faces in the Wild (`LFW`) dataset. | Interactive `n_components` slider ($10 - 250$), `whiten` toggle (`True`/`False`) showing live SVM accuracy delta, Cumulative Explained Variance canvas chart with $90\%$ marker ($k=85$), Top 12 Eigenfaces gallery + Mean Face + First 3 vs. Last 3 Eigenfaces visual comparison, per-class SVM classification report table, interactive Test Face Reconstruction inspector, Failure Analysis gallery (`y_pred != y_test`), and answers to all Post-Lab and Follow-Up questions. |
+| **Lab 06** | `EXP 06 // YOLOV11` | Real-time object detection using `YOLOv11` (`yolo11n`, `yolo11s`, `yolo11m`), normalized YOLO `.txt` annotation format (`class_id x_center y_center width height`), `data.yaml` dataset organization, custom training (`epochs=100, imgsz=640`), and evaluation metrics (`Confidence`, `IoU`, `Precision`, `Recall`, `mAP`). | Image upload, sample street scene, or live browser webcam detection, model variant switcher (`11n`, `11s`, `11m`), Confidence and IoU NMS sliders, live bounding-box table + normalized YOLO `.txt` export, interactive `data.yaml` generator, training/validation CLI reference, and complete Q&A. |
+| **Lab 07** | `EXP 07 // SEGMENTATION` | Comparative image segmentation: Global Otsu & Adaptive thresholding, seeded Region Growing, Watershed segmentation, Edge-based Canny closed contours, and Deep Learning Semantic Segmentation (`LRASPP MobileNetV3` on PASCAL VOC). | 6-method side-by-side segmentation grid, interactive click-on-image seed picker for Region Growing, Adaptive block size & Canny threshold sliders, Watershed basin & contour counters, semantic class pixel coverage pills, and full Q&A + IoU analysis. |
 
 
 
@@ -48,6 +51,9 @@ python_labs/
 ├── lab02_edge_detection.py   # Sobel & Canny edge detection with matplotlib side-by-side
 ├── lab03_histogram.py        # Global HE, CLAHE, and Contrast Stretching with histograms
 ├── lab04_features.py         # SURF, U-SURF, SIFT, ORB keypoint detection & matching
+├── lab05_pca.py              # LFW PCA Eigenfaces, variance analysis & RBF SVM classifier
+├── lab06_yolo.py             # YOLOv11 real-time object detection & YOLO .txt exporter
+├── lab07_segmentation.py     # Otsu, Adaptive, Region Growing, Watershed, Contours & Semantic
 ```
 
 ### Running Standalone Python Labs
@@ -66,6 +72,12 @@ python python_labs/lab03_histogram.py <optional_path_to_image>
 
 # Run Lab 04 (SURF, SIFT, and ORB Feature Detection comparison)
 python python_labs/lab04_features.py <optional_path_to_image>
+
+# Run Lab 05 (LFW PCA Eigenfaces & SVM Face Recognition)
+python python_labs/lab05_pca.py
+
+# Run Lab 06 (YOLOv11 Webcam Detection)
+python python_labs/lab06_yolo.py
 ```
 
 ---

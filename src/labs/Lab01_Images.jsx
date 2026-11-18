@@ -1,6 +1,50 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Upload, Image as ImageIcon } from 'lucide-react';
 import { SAMPLE_IMAGES } from '../utils/sampleImages';
+import LabQASection from '../components/LabQASection';
+
+const LAB01_QA = [
+  {
+    question: 'Part 1.1: What is an image in computer vision (2D/3D array, color spaces, resolution)?',
+    answer:
+      'In computer vision, a digital image is represented as a 2D or 3D matrix (NumPy array) of numerical pixel intensities ranging from 0 (black) to 255 (white). Grayscale images are 2D arrays of shape (height, width) with 1 intensity channel, while color images are 3D arrays of shape (height, width, 3) containing 3 color channels. Resolution refers to the spatial dimensions (width x height) of this pixel grid.'
+  },
+  {
+    question: 'Part 1.2: How does OpenCV load images, report shape, and handle BGR ordering vs. Grayscale?',
+    answer:
+      'cv2.imread() loads a color image as a 3D NumPy array where img.shape returns (height, width, channels). Unlike standard RGB, OpenCV orders color channels as Blue-Green-Red (BGR) for historical hardware compatibility. Converting to grayscale with cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) collapses the 3 channels into a single weighted luminance channel (reducing memory by 66.7%).'
+  },
+  {
+    question: 'Part 1.3: How do we inspect and modify pixel values at specific coordinates?',
+    answer:
+      'OpenCV/NumPy image matrices use [row, column] indexing, corresponding to img[y, x]. Accessing img[y, x] returns the [B, G, R] intensity triplet at that point, and assigning a new [B, G, R] value (or drawing a patch) directly alters the rendered color at those coordinates.'
+  },
+  {
+    question: 'Part 2.4: How are ROI cropping, resizing, and 90-degree rotation performed?',
+    answer:
+      'A Region of Interest (ROI) is cropped via NumPy array slicing img[y1:y2, x1:x2]. Resizing to larger or smaller dimensions uses cv2.resize(img, (new_w, new_h)) with interpolation, and 90-degree clockwise rotation uses cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE).'
+  },
+  {
+    question: 'Summary 1: How are images digitally represented and manipulated?',
+    answer:
+      'Digital images are structured grids of discrete integer numbers. Because every image is a NumPy matrix, operations like cropping, scaling, rotating, and color-space conversion translate directly into fast vectorized array slicing and linear transformations.'
+  },
+  {
+    question: 'Summary 2: What is the significance of color channels and pixel values?',
+    answer:
+      'Pixel intensity values encode local brightness and texture, while separate color channels (B, G, R) encode chromatic information. Understanding channel layout prevents color-inversion bugs and lets vision pipelines isolate brightness (grayscale) from color when detecting edges or objects.'
+  },
+  {
+    question: 'Summary 3: What are real-life applications of computer vision image processing?',
+    answer:
+      'Medical imaging (X-ray, CT, and MRI enhancement), autonomous vehicles (lane and pedestrian detection), facial recognition and biometrics, industrial defect inspection on assembly lines, agricultural crop monitoring, and automated document OCR scanning.'
+  },
+  {
+    question: 'Short Report Summary (Steps Performed & Key Takeaways)',
+    answer:
+      'In this activity, a sample image was loaded with OpenCV, inspected via img.shape for (H, W, C) dimensions, converted from BGR to grayscale, queried and modified at specific (X, Y) coordinates, and manipulated using ROI cropping, scaling, and 90-degree rotation. The experiment demonstrated how visual changes map directly to NumPy array indexing and matrix operations.'
+  }
+];
 
 export default function Lab01_Images({ currentImage, onImageChange, onSnapshotReady }) {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -775,6 +819,8 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
             )}
           </>
         )}
+
+        <LabQASection title="Lab Activity 1: Questions & Answers" items={LAB01_QA} />
       </div>
     </div>
   );

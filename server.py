@@ -10,6 +10,9 @@ from python_labs.lab01_images import router as lab01_router
 from python_labs.lab02_edge_detection import router as lab02_router
 from python_labs.lab03_histogram import router as lab03_router
 from python_labs.lab04_features import router as lab04_router
+from python_labs.lab05_pca import router as lab05_router
+from python_labs.lab06_yolo import router as lab06_router
+from python_labs.lab07_segmentation import router as lab07_router
 
 app = FastAPI(
     title="CSST 106 - Computer Vision API",
@@ -31,6 +34,9 @@ app.include_router(lab01_router)
 app.include_router(lab02_router)
 app.include_router(lab03_router)
 app.include_router(lab04_router)
+app.include_router(lab05_router)
+app.include_router(lab06_router)
+app.include_router(lab07_router)
 
 @app.get("/")
 def root():

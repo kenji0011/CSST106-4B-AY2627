@@ -2,6 +2,40 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Upload, RotateCcw, Image as ImageIcon } from 'lucide-react';
 import { SAMPLE_IMAGES } from '../utils/sampleImages';
 import { processLab03, computeHistograms } from '../utils/cvEngine';
+import LabQASection from '../components/LabQASection';
+
+const LAB03_QA = [
+  {
+    question: '1. What is histogram equalization?',
+    answer:
+      'Histogram equalization is an image processing contrast-enhancement technique that redistributes pixel intensity frequencies across the entire available dynamic range ([0, 255]), transforming a narrow, clustered histogram into an approximately uniform distribution.'
+  },
+  {
+    question: '2. Why do we need histogram equalization?',
+    answer:
+      'Images captured in real-world environments often suffer from poor lighting, glare, backlighting, or sensor limitations, causing details to hide in dark shadows or washed-out highlights. Equalization reveals obscured features necessary for downstream computer vision tasks like segmentation, feature matching, and object detection.'
+  },
+  {
+    question: '3. How does histogram equalization work?',
+    answer:
+      'It computes the normalized Probability Density Function (PDF) of pixel intensities, derives the Cumulative Distribution Function (CDF), and scales the CDF monotonically: T(k) = round(((CDF(k) - CDF_min) / (Total - CDF_min)) * (L - 1)), effectively remapping frequent intensities into wider intervals.'
+  },
+  {
+    question: '4. How does CLAHE work?',
+    answer:
+      'Contrast Limited Adaptive Histogram Equalization divides the image into contextual local tiles (e.g. 8x8). For each tile, it clips the histogram at a predefined clip limit to prevent over-amplifying background noise, redistributes clipped pixels uniformly across all bins, and uses bilinear interpolation across tile boundaries to eliminate artificial seams.'
+  },
+  {
+    question: '5. What are the possible real-world applications?',
+    answer:
+      'Medical diagnostic imaging (enhancing soft tissue in X-rays, CT scans, and MRIs), underwater/marine vision, night-vision surveillance systems, satellite and aerial terrain mapping, and biometric facial authentication under uneven shadows.'
+  },
+  {
+    question: 'Conclusion',
+    answer:
+      'While Global Histogram Equalization is computationally fast, it tends to over-amplify noise and wash out natural gradients in uniform areas. CLAHE solves this limitation by operating locally with noise-clipping constraints, producing natural, artifact-free contrast enhancement ideal for practical perception pipelines.'
+  }
+];
 
 // Lightweight Canvas for rendering a 256-bin frequency histogram
 function MiniHistogram({ bins, color = '#ffe600' }) {
@@ -623,72 +657,10 @@ export default function Lab03_Histogram({ currentImage, onImageChange }) {
               </div>
             )}
 
-            {/* 3. Comprehensive Academic Q&A */}
-            <div className="comic-box" style={{ padding: '20px' }}>
-              <div style={{ marginBottom: '14px' }}>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700 }}>
-                  Lab Activity 3: Evaluation Questions &amp; Answers
-                </span>
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                <div className="comic-box-sm" style={{ padding: '14px', background: 'var(--bg-surface)' }}>
-                  <strong style={{ fontSize: '13px', display: 'block', color: 'var(--text-primary)', fontWeight: 700, marginBottom: '4px' }}>
-                    1. What is histogram equalization?
-                  </strong>
-                  <p style={{ fontSize: '12.5px', lineHeight: 1.55, color: 'var(--text-secondary)', fontWeight: 400, margin: 0 }}>
-                    Histogram equalization is an image processing contrast-enhancement technique that redistributes pixel intensity frequencies across the entire available dynamic range ([0, 255]), transforming a narrow, clustered histogram into an approximately uniform distribution.
-                  </p>
-                </div>
-
-                <div className="comic-box-sm" style={{ padding: '14px', background: 'var(--bg-surface)' }}>
-                  <strong style={{ fontSize: '13px', display: 'block', color: 'var(--text-primary)', fontWeight: 700, marginBottom: '4px' }}>
-                    2. Why do we need histogram equalization?
-                  </strong>
-                  <p style={{ fontSize: '12.5px', lineHeight: 1.55, color: 'var(--text-secondary)', fontWeight: 400, margin: 0 }}>
-                    Images captured in real-world environments often suffer from poor lighting, glare, backlighting, or sensor limitations, causing details to hide in dark shadows or washed-out highlights. Equalization reveals obscured features necessary for downstream computer vision tasks like segmentation, feature matching, and object detection.
-                  </p>
-                </div>
-
-                <div className="comic-box-sm" style={{ padding: '14px', background: 'var(--bg-surface)' }}>
-                  <strong style={{ fontSize: '13px', display: 'block', color: 'var(--text-primary)', fontWeight: 700, marginBottom: '4px' }}>
-                    3. How does histogram equalization work?
-                  </strong>
-                  <p style={{ fontSize: '12.5px', lineHeight: 1.55, color: 'var(--text-secondary)', fontWeight: 400, margin: 0 }}>
-                    It computes the normalized Probability Density Function (PDF) of pixel intensities, derives the Cumulative Distribution Function (CDF), and scales the CDF monotonically: <code>T(k) = round(((CDF(k) - CDF_min) / (Total - CDF_min)) × (L - 1))</code>, effectively remapping frequent intensities into wider intervals.
-                  </p>
-                </div>
-
-                <div className="comic-box-sm" style={{ padding: '14px', background: 'var(--bg-surface)' }}>
-                  <strong style={{ fontSize: '13px', display: 'block', color: 'var(--text-primary)', fontWeight: 700, marginBottom: '4px' }}>
-                    4. How does CLAHE work?
-                  </strong>
-                  <p style={{ fontSize: '12.5px', lineHeight: 1.55, color: 'var(--text-secondary)', fontWeight: 400, margin: 0 }}>
-                    Contrast Limited Adaptive Histogram Equalization divides the image into contextual local tiles (e.g. 8×8). For each tile, it clips the histogram at a predefined clip limit to prevent over-amplifying background noise, redistributes clipped pixels uniformly across all bins, and uses bilinear interpolation across tile boundaries to eliminate artificial seams.
-                  </p>
-                </div>
-
-                <div className="comic-box-sm" style={{ padding: '14px', background: 'var(--bg-surface)' }}>
-                  <strong style={{ fontSize: '13px', display: 'block', color: 'var(--text-primary)', fontWeight: 700, marginBottom: '4px' }}>
-                    5. What are the possible real-world applications?
-                  </strong>
-                  <p style={{ fontSize: '12.5px', lineHeight: 1.55, color: 'var(--text-secondary)', fontWeight: 400, margin: 0 }}>
-                    Medical diagnostic imaging (enhancing soft tissue in X-rays, CT scans, and MRIs), underwater/marine vision, night-vision surveillance systems, satellite and aerial terrain mapping, and biometric facial authentication under uneven shadows.
-                  </p>
-                </div>
-
-                <div className="comic-box-sm" style={{ padding: '14px', background: 'var(--bg-surface)' }}>
-                  <strong style={{ fontSize: '13px', display: 'block', color: 'var(--text-primary)', fontWeight: 700, marginBottom: '4px' }}>
-                    Conclusion
-                  </strong>
-                  <p style={{ fontSize: '12.5px', lineHeight: 1.55, color: 'var(--text-secondary)', fontWeight: 400, margin: 0 }}>
-                    While Global Histogram Equalization is computationally fast, it tends to over-amplify noise and wash out natural gradients in uniform areas. CLAHE solves this limitation by operating locally with noise-clipping constraints, producing natural, artifact-free contrast enhancement ideal for practical perception pipelines.
-                  </p>
-                </div>
-              </div>
-            </div>
           </>
         )}
+
+        <LabQASection title="Lab Activity 3: Evaluation Questions & Answers" items={LAB03_QA} />
       </div>
     </div>
   );

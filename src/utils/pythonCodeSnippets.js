@@ -261,5 +261,124 @@ img_keypoints = cv2.drawKeypoints(
 cv2.imshow('SURF Keypoints', img_keypoints)
 cv2.waitKey(0)
 cv2.destroyAllWindows()`
+  },
+  'lab-05': {
+    filename: 'python_labs/lab05_pca.py',
+    code: `"""
+CSST 106 - Perception and Computer Vision
+Laboratory Exercise No. 5: Facial Recognition using PCA (Eigenfaces)
+Laguna State Polytechnic University (LSPU) - AY 2026-2027
+"""
+
+import time
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import fetch_lfw_people
+from sklearn.model_selection import train_test_split
+from sklearn.decomposition import PCA
+from sklearn.svm import SVC
+from sklearn.metrics import classification_report
+
+# Task 1: Fetch LFW dataset and split 80/20
+lfw_people = fetch_lfw_people(min_faces_per_person=70, resize=0.4)
+n_samples, h, w = lfw_people.images.shape
+X, y = lfw_people.data, lfw_people.target
+target_names = lfw_people.target_names
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Task 2: Fit PCA ONLY on X_train (n_components=150, svd_solver='randomized', whiten=True)
+n_components = 150
+pca = PCA(n_components=n_components, svd_solver='randomized', whiten=True).fit(X_train)
+X_train_pca = pca.transform(X_train)
+X_test_pca = pca.transform(X_test)
+
+# Task 3: Extract & visualize top 12 Eigenfaces
+eigenfaces = pca.components_.reshape((n_components, h, w))
+
+# Task 4: Train RBF SVM on reduced PCA weights & evaluate
+clf = SVC(kernel='rbf', class_weight='balanced').fit(X_train_pca, y_train)
+y_pred = clf.predict(X_test_pca)
+print(classification_report(y_test, y_pred, target_names=target_names))
+
+# Post-Lab Q1: Cumulative Explained Variance & 90% threshold
+cum_var = pca.explained_variance_ratio_.cumsum()
+k_90 = int(np.argmax(cum_var >= 0.90) + 1)
+print(f"Components required for 90% variance: {k_90}")`
+  },
+  'lab-06': {
+    filename: 'python_labs/lab06_yolo.py',
+    code: `"""
+CSST 106 - Perception and Computer Vision
+Laboratory Exercise No. 6: Object Detection with YOLOv11
+Laguna State Polytechnic University (LSPU) - AY 2026-2027
+"""
+
+import cv2
+from ultralytics import YOLO
+
+# Part 1: Real-time Object Detection using Pre-trained YOLOv11
+model = YOLO('yolo11n.pt')
+cap = cv2.VideoCapture(0)
+
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break
+    results = model(frame, conf=0.35)
+    cv2.imshow('YOLOv11 Real-time Detection', results[0].plot())
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+
+# Part 3: Training YOLOv11 on Custom Dataset (data.yaml)
+# model = YOLO('yolo11n.pt')
+# model.train(data='data.yaml', epochs=100, imgsz=640)
+
+# Part 4: Validate & Run Inference on Custom Weights
+# best_model = YOLO('runs/detect/train/weights/best.pt')
+# results = best_model('new_image.jpg')
+# results[0].show()`
+  },
+  'lab-07': {
+    filename: 'python_labs/lab07_segmentation.py',
+    code: `"""
+CSST 106 - Perception and Computer Vision
+Laboratory Exercise No. 7: Image Segmentation Techniques
+Laguna State Polytechnic University (LSPU) - AY 2026-2027
+"""
+
+import cv2
+import numpy as np
+import torch
+from PIL import Image
+from torchvision.models.segmentation import lraspp_mobilenet_v3_large, LRASPP_MobileNet_V3_Large_Weights
+
+img_bgr = cv2.imread('input.jpg')
+gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
+blur = cv2.GaussianBlur(gray, (5, 5), 0)
+
+# 1. Thresholding: Global Otsu & Adaptive
+_, otsu = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+adaptive = cv2.adaptiveThreshold(blur, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 4)
+
+# 2. Region-Based: Watershed
+opening = cv2.morphologyEx(otsu, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8), iterations=2)
+dist = cv2.distanceTransform(opening, cv2.DIST_L2, 5)
+_, sure_fg = cv2.threshold(dist, 0.35 * dist.max(), 255, 0)
+_, markers = cv2.connectedComponents(np.uint8(sure_fg))
+markers = cv2.watershed(img_bgr.copy(), markers + 1)
+
+# 3. Edge-Based: Canny + Closed Contours
+edges = cv2.Canny(blur, 80, 180)
+contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+# 4. Semantic Segmentation (PyTorch PASCAL VOC)
+weights = LRASPP_MobileNet_V3_Large_Weights.DEFAULT
+model = lraspp_mobilenet_v3_large(weights=weights).eval()
+inp = weights.transforms()(Image.fromarray(cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB))).unsqueeze(0)
+with torch.no_grad():
+    pred_mask = model(inp)['out'][0].argmax(0).numpy()`
   }
 };

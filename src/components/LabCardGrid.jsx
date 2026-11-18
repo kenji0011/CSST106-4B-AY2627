@@ -1,14 +1,36 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { LAB_MODULES } from '../labs/registry';
 import { COURSE_INFO } from '../utils/courseInfo';
 import { ArrowRight, Clock } from 'lucide-react';
 
-export default function LabCardGrid({ onSelectLab }) {
+export default function LabCardGrid({ onSelectLab, onHeroTitleVisibilityChange }) {
+  const heroTitleRef = useRef(null);
+
+  useEffect(() => {
+    const el = heroTitleRef.current;
+    if (!el || !onHeroTitleVisibilityChange) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        onHeroTitleVisibilityChange(entry.isIntersecting);
+      },
+      {
+        rootMargin: '-64px 0px 0px 0px',
+        threshold: 0
+      }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [onHeroTitleVisibilityChange]);
   const LAB_TAGS = {
     'lab-01': ['RGB & BGR', 'Grayscale', 'Channels', 'Pixel Inspect', 'ROI Crop', 'Resize', 'Rotate 90°'],
     'lab-02': ['Sobel Operator', 'Canny Detector', 'Gaussian Blur', 'Gradients Gx/Gy', 'Hysteresis', '3-Way Comparison'],
     'lab-03': ['Histogram', 'equalizeHist', 'CLAHE', 'Contrast Stretch', 'YUV Luminance', 'CDF Mapping'],
-    'lab-04': ['SURF', 'Hessian Threshold', 'U-SURF', 'SIFT', 'ORB', 'Feature Matching']
+    'lab-04': ['SURF', 'Hessian Threshold', 'U-SURF', 'SIFT', 'ORB', 'Feature Matching'],
+    'lab-05': ['PCA', 'Eigenfaces', 'LFW Dataset', 'Explained Variance', 'Whitening', 'SVM Classifier'],
+    'lab-06': ['YOLOv11', 'Bounding Boxes', 'YOLO .txt', 'data.yaml', 'Conf / IoU', 'Webcam'],
+    'lab-07': ['Otsu Threshold', 'Adaptive', 'Region Growing', 'Watershed', 'Edge Contours', 'Semantic (VOC)']
   };
 
   return (
@@ -16,16 +38,16 @@ export default function LabCardGrid({ onSelectLab }) {
       {/* Hero Header Section */}
       <section className="comic-box" style={{ padding: '28px 32px', position: 'relative' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-          <span className="comic-tag comic-tag-yellow" style={{ fontSize: '11px', padding: '4px 10px' }}>
-            CSST 106
-          </span>
           <span className="comic-tag-outline" style={{ fontSize: '11px', padding: '4px 10px' }}>
             Course Overview
           </span>
         </div>
 
         <div style={{ maxWidth: '880px' }}>
-          <h1 style={{ fontSize: 'clamp(26px, 3.5vw, 36px)', fontWeight: 700, lineHeight: 1.15, marginBottom: '10px' }}>
+          <h1
+            ref={heroTitleRef}
+            style={{ fontSize: 'clamp(26px, 3.5vw, 36px)', fontWeight: 700, lineHeight: 1.15, marginBottom: '10px' }}
+          >
             Computer Vision Laboratory Suite
           </h1>
           <p style={{ fontSize: '15px', color: 'var(--text-secondary)', fontWeight: 400, lineHeight: 1.6, marginBottom: '20px' }}>
@@ -71,13 +93,21 @@ export default function LabCardGrid({ onSelectLab }) {
           gap: '20px'
         }}
       >
-        {LAB_MODULES.map((lab) => {
+        {LAB_MODULES.map((lab, index) => {
           const tags = LAB_TAGS[lab.id] || [];
           return (
             <div
               key={lab.id}
+              role="button"
+              tabIndex={0}
               onClick={() => onSelectLab(lab.id)}
-              className="comic-box comic-card-hover"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  onSelectLab(lab.id);
+                }
+              }}
+              className="comic-box comic-card-hover card-stagger-enter"
               style={{
                 padding: '24px',
                 display: 'flex',
@@ -85,7 +115,8 @@ export default function LabCardGrid({ onSelectLab }) {
                 justifyContent: 'space-between',
                 cursor: 'pointer',
                 minHeight: '290px',
-                position: 'relative'
+                position: 'relative',
+                animationDelay: `${index * 45}ms`
               }}
             >
               <div>
@@ -147,17 +178,18 @@ export default function LabCardGrid({ onSelectLab }) {
               </div>
 
               {/* Bottom Action Button */}
-              <div style={{ paddingTop: '14px', borderTop: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-muted)', fontWeight: 600 }}>
-                  Lab {lab.number}
-                </span>
-
+              <div style={{ paddingTop: '14px', borderTop: '1px solid var(--border-color)', display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
                 <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onSelectLab(lab.id);
+                  }}
                   className="comic-btn comic-btn-accent"
                   style={{ padding: '7px 14px', fontSize: '12px', gap: '6px' }}
                 >
                   <span>Open Lab {lab.number}</span>
-                  <ArrowRight size={14} />
+                  <ArrowRight size={14} className="card-arrow-icon" />
                 </button>
               </div>
             </div>
@@ -166,6 +198,7 @@ export default function LabCardGrid({ onSelectLab }) {
 
         {/* Placeholder Card for upcoming Labs */}
         <div
+          className="card-stagger-enter"
           style={{
             padding: '24px',
             border: '1.5px dashed var(--border-strong)',
@@ -177,7 +210,8 @@ export default function LabCardGrid({ onSelectLab }) {
             alignItems: 'center',
             textAlign: 'center',
             gap: '14px',
-            minHeight: '290px'
+            minHeight: '290px',
+            animationDelay: `${LAB_MODULES.length * 45}ms`
           }}
         >
           <div
