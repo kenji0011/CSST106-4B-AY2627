@@ -224,7 +224,7 @@ export default function Lab06_YOLO({ currentImage, onImageChange }) {
 
   const handleLoadSample = async () => {
     stopWebcam();
-    const sampleUrl = '/samples/yolo_sample.jpg';
+    const sampleUrl = `${import.meta.env.BASE_URL}samples/yolo_sample.jpg`;
     try {
       const res = await fetch(sampleUrl);
       const blob = await res.blob();

@@ -178,7 +178,7 @@ export default function Lab07_Segmentation({ currentImage, onImageChange }) {
   };
 
   const handleLoadSample = async () => {
-    const sampleUrl = '/samples/yolo_sample.jpg';
+    const sampleUrl = `${import.meta.env.BASE_URL}samples/yolo_sample.jpg`;
     setSeedCoord({ x: -1, y: -1 });
     try {
       const res = await fetch(sampleUrl);

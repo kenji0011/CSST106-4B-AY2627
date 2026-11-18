@@ -3,6 +3,8 @@
 // Currently compiled: Laboratory Activity 01 (More will be added as instructions arrive)
 // ============================================================================
 
+const BASE = import.meta.env.BASE_URL;
+
 export const LAB_MODULES = [
   {
     id: 'lab-01',
@@ -16,7 +18,7 @@ export const LAB_MODULES = [
     category: 'Fundamentals',
     icon: 'ImageIcon',
     docxFilename: 'lab01_report.docx',
-    docxPath: '/docs/lab01_report.docx'
+    docxPath: `${BASE}docs/lab01_report.docx`
   },
   {
     id: 'lab-02',
@@ -30,7 +32,7 @@ export const LAB_MODULES = [
     category: 'Feature Extraction',
     icon: 'Activity',
     docxFilename: 'lab02_report.docx',
-    docxPath: '/docs/lab02_report.docx'
+    docxPath: `${BASE}docs/lab02_report.docx`
   },
   {
     id: 'lab-03',
@@ -44,7 +46,7 @@ export const LAB_MODULES = [
     category: 'Image Enhancement',
     icon: 'BarChart2',
     docxFilename: 'lab03_report.docx',
-    docxPath: '/docs/lab03_report.docx'
+    docxPath: `${BASE}docs/lab03_report.docx`
   },
   {
     id: 'lab-04',
@@ -58,7 +60,7 @@ export const LAB_MODULES = [
     category: 'Feature Detection',
     icon: 'Crosshair',
     docxFilename: 'lab04_report.docx',
-    docxPath: '/docs/lab04_report.docx'
+    docxPath: `${BASE}docs/lab04_report.docx`
   },
   {
     id: 'lab-05',
@@ -72,7 +74,7 @@ export const LAB_MODULES = [
     category: 'Machine Learning',
     icon: 'Users',
     docxFilename: 'lab05_report.docx',
-    docxPath: '/docs/lab05_report.docx'
+    docxPath: `${BASE}docs/lab05_report.docx`
   },
   {
     id: 'lab-06',
@@ -86,7 +88,7 @@ export const LAB_MODULES = [
     category: 'Deep Learning',
     icon: 'Box',
     docxFilename: 'lab06_report.docx',
-    docxPath: '/docs/lab06_report.docx'
+    docxPath: `${BASE}docs/lab06_report.docx`
   },
   {
     id: 'lab-07',
@@ -100,7 +102,7 @@ export const LAB_MODULES = [
     category: 'Segmentation',
     icon: 'Layers',
     docxFilename: 'lab07_report.docx',
-    docxPath: '/docs/lab07_report.docx'
+    docxPath: `${BASE}docs/lab07_report.docx`
   }
 ];
 
