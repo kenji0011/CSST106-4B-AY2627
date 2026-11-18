@@ -78,6 +78,9 @@ python python_labs/lab05_pca.py
 
 # Run Lab 06 (YOLOv11 Webcam Detection)
 python python_labs/lab06_yolo.py
+
+# Run Lab 07 (Image Segmentation & Deep Learning Semantic Segmentation)
+python python_labs/lab07_segmentation.py <optional_path_to_image>
 ```
 
 ---
@@ -85,31 +88,54 @@ python python_labs/lab06_yolo.py
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js (v18 or higher)
-- Python 3.10+ with `opencv-python`, `fastapi`, `uvicorn`, `numpy`, and `matplotlib`
+- **Node.js** (v18 or higher) and `npm`
+- **Python** (3.10 or higher) and `pip`
 
 ### Installation & Local Run
 
-#### 1. Start the FastAPI Backend Server
+#### 1. Clone the Repository
 ```bash
-python server.py
-# Backend API runs at http://localhost:8000 (Swagger docs at /docs)
+git clone https://github.com/kenji0011/CSST106-4B-AY2627.git
+cd CSST106-4B-AY2627
 ```
 
-#### 2. Start the Vite React Frontend
+#### 2. Install Python Backend Dependencies
+*(Recommended: use a Python virtual environment)*
+```bash
+pip install fastapi uvicorn python-multipart opencv-python numpy matplotlib scikit-learn ultralytics torch torchvision pillow
+```
+- `fastapi`, `uvicorn`, `python-multipart`: FastAPI server and file/form upload handling
+- `opencv-python`, `numpy`, `matplotlib`: Core image processing & standalone lab plots (Labs 01–04, 07)
+- `scikit-learn`: LFW dataset, PCA Eigenfaces, and RBF SVM classifier (Lab 05)
+- `ultralytics`: YOLOv11 object detection (Lab 06)
+- `torch`, `torchvision`, `pillow`: LRASPP MobileNetV3 semantic segmentation (Lab 07)
+
+#### 3. Install Frontend Dependencies
 ```bash
 npm install
+```
+
+#### 4. Start Both Servers (Two Separate Terminals)
+
+**Terminal 1 — FastAPI Backend Server:**
+```bash
+python server.py
+# Backend API runs at http://localhost:8000 (Swagger docs at http://localhost:8000/docs)
+```
+
+**Terminal 2 — Vite React Frontend:**
+```bash
 npm run dev
 # Frontend runs at http://localhost:5173
 ```
 
+> **Note:** Keep both `python server.py` (port `8000`) and `npm run dev` (port `5173`) running simultaneously so interactive labs such as Lab 05 (PCA Eigenfaces), Lab 06 (YOLOv11), and Lab 07 (Semantic Segmentation) can communicate with the backend.
+
 ### Production Build
 ```bash
 npm run build
+npm run preview
 ```
-
----
-
 
 ---
 
