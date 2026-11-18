@@ -1,6 +1,6 @@
 /* ==========================================================================
    CSST 106 - Perception & Computer Vision Laboratory Suite
-   Neo-Brutalist Comic Design System (Matches kenji-dev.vercel.app portfolio)
+   Minimal, Flat, Rounded Design System
    ========================================================================== */
 
 :root {
@@ -10,47 +10,43 @@
   --font-mono: 'Space Grotesk', 'Fira Code', monospace;
   --font-code: 'Fira Code', monospace;
 
-  /* Light Theme (Crisp comic book print - deep true black for high readability) */
-  --bg-page: #fafaf9;
+  /* Light Theme - Flat & Minimal */
+  --bg-page: #fafafa;
   --bg-card: #ffffff;
   --bg-surface: #f4f4f5;
-  --bg-nav: rgba(250, 250, 249, 0.96);
-  --text-primary: #000000;
-  --text-secondary: #18181b;
-  --text-muted: #3f3f46;
-  --border-color: #000000;
-  --shadow-color: #000000;
-  --tag-bg: #000000;
+  --bg-nav: #ffffff;
+  --text-primary: #09090b;
+  --text-secondary: #3f3f46;
+  --text-muted: #52525b;
+  --border-color: #e4e4e7;
+  --border-strong: #d4d4d8;
+  --tag-bg: #18181b;
   --tag-text: #ffffff;
-  --accent-yellow: #ffe600;
-  --accent-cyan: #00e5ff;
-  --accent-pink: #ff2a85;
-  --accent-green: #10b981;
-  --accent-blue: #3b82f6;
-  --dot-color: rgba(0, 0, 0, 0.14);
-  --grid-line: rgba(0, 0, 0, 0.10);
+  --accent-primary: #18181b;
+  --accent-primary-text: #ffffff;
+  --accent-primary-hover: #27272a;
+  --accent-green: #16a34a;
+  --accent-blue: #2563eb;
 }
 
 [data-theme="dark"] {
-  /* Dark Theme (Crisp pure white and high-contrast light typography) */
-  --bg-page: #0a0b10;
-  --bg-card: #131622;
-  --bg-surface: #1c2030;
-  --bg-nav: rgba(10, 11, 16, 0.96);
+  /* Dark Theme - Flat & Minimal */
+  --bg-page: #09090b;
+  --bg-card: #121215;
+  --bg-surface: #1c1c21;
+  --bg-nav: #09090b;
   --text-primary: #ffffff;
-  --text-secondary: #e4e4e7;
-  --text-muted: #d4d4d8;
-  --border-color: #f4f4f5;
-  --shadow-color: #f4f4f5;
-  --tag-bg: #ffffff;
-  --tag-text: #000000;
-  --accent-yellow: #ffe600;
-  --accent-cyan: #00e5ff;
-  --accent-pink: #ff2a85;
-  --accent-green: #10b981;
+  --text-secondary: #d4d4d8;
+  --text-muted: #a1a1aa;
+  --border-color: #27272a;
+  --border-strong: #3f3f46;
+  --tag-bg: #f4f4f5;
+  --tag-text: #09090b;
+  --accent-primary: #ffffff;
+  --accent-primary-text: #09090b;
+  --accent-primary-hover: #e4e4e7;
+  --accent-green: #22c55e;
   --accent-blue: #3b82f6;
-  --dot-color: rgba(255, 255, 255, 0.14);
-  --grid-line: rgba(255, 255, 255, 0.10);
 }
 
 /* Base Styles */
@@ -73,74 +69,67 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: -0.02em;
-  text-transform: uppercase;
   color: var(--text-primary);
 }
 
 p {
   color: var(--text-primary);
-  font-weight: 500;
+  font-weight: 400;
 }
 
 label {
   color: var(--text-primary);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 code {
   font-family: var(--font-code);
-  font-weight: 700;
-  padding: 1px 5px;
+  font-weight: 600;
+  padding: 2px 6px;
   background: var(--bg-surface);
   border: 1px solid var(--border-color);
+  border-radius: 6px;
   color: var(--text-primary);
 }
 
-/* Comic Halftone Dots Background */
-.comic-dots-bg {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background-image: radial-gradient(var(--dot-color) 1.5px, transparent 1.5px);
-  background-size: 20px 20px;
-}
-
-/* Neo-Brutalist Comic Containers */
+/* Minimal Rounded Containers */
 .comic-box {
-  border: 2.5px solid var(--border-color);
-  box-shadow: 4px 4px 0px var(--shadow-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: none;
   background: var(--bg-card);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
 .comic-box-sm {
-  border: 2px solid var(--border-color);
-  box-shadow: 2px 2px 0px var(--shadow-color);
-  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: none;
+  background: var(--bg-surface);
 }
 
 .comic-box-lg {
-  border: 3px solid var(--border-color);
-  box-shadow: 8px 8px 0px var(--shadow-color);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  box-shadow: none;
   background: var(--bg-card);
 }
 
-/* Comic Badges & Tags */
+/* Minimal Flat Badges & Pills */
 .comic-tag {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  border: 2px solid var(--border-color);
+  border: 1px solid var(--tag-bg);
+  border-radius: 6px;
   box-shadow: none;
   font-family: var(--font-mono);
   font-size: 11px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  padding: 3px 8px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 4px 10px;
   background: var(--tag-bg);
   color: var(--tag-text);
   line-height: 1;
@@ -150,74 +139,79 @@ code {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  border: 2px solid var(--border-color);
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
   box-shadow: none;
   font-family: var(--font-mono);
   font-size: 11px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  padding: 3px 8px;
-  background: transparent;
-  color: var(--text-primary);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 4px 10px;
+  background: var(--bg-card);
+  color: var(--text-secondary);
   line-height: 1;
 }
 
 .comic-tag-yellow {
-  background: var(--accent-yellow);
-  color: #000000;
-  border-color: #000000;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border-color: var(--border-strong);
   box-shadow: none;
 }
 
 .comic-tag-cyan {
-  background: var(--accent-cyan);
-  color: #000000;
-  border-color: #000000;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border-color: var(--border-strong);
   box-shadow: none;
 }
 
 .comic-tag-pink {
-  background: var(--accent-pink);
-  color: #ffffff;
-  border-color: #000000;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border-color: var(--border-strong);
   box-shadow: none;
 }
 
 .comic-tag-green {
-  background: var(--accent-green);
-  color: #ffffff;
-  border-color: #000000;
+  background: #dcfce7;
+  color: #166534;
+  border-color: #bbf7d0;
   box-shadow: none;
 }
 
-/* Comic Buttons */
+[data-theme="dark"] .comic-tag-green {
+  background: #14532d;
+  color: #dcfce7;
+  border-color: #166534;
+}
+
+/* Minimal Flat Rounded Buttons */
 .comic-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  border: 2px solid var(--border-color);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
   box-shadow: none !important;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 12px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   padding: 8px 16px;
   cursor: pointer;
-  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, opacity 0.15s ease;
   user-select: none;
 }
 
 .comic-btn:hover {
   transform: none;
   box-shadow: none !important;
-  opacity: 0.9;
 }
 
 .comic-btn:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
   box-shadow: none !important;
 }
 
@@ -229,13 +223,19 @@ code {
 }
 
 .comic-btn-primary {
-  background: var(--text-primary);
-  color: var(--bg-page);
+  background: var(--accent-primary);
+  color: var(--accent-primary-text);
+  border-color: var(--accent-primary);
+}
+
+.comic-btn-primary:hover {
+  background: var(--accent-primary-hover);
 }
 
 .comic-btn-secondary {
   background: var(--bg-card);
   color: var(--text-primary);
+  border-color: var(--border-strong);
 }
 
 .comic-btn-secondary:hover {
@@ -243,14 +243,14 @@ code {
 }
 
 .comic-btn-accent {
-  background: var(--accent-yellow);
-  color: #000000;
-  border-color: var(--border-color);
+  background: var(--accent-primary);
+  color: var(--accent-primary-text);
+  border-color: var(--accent-primary);
   box-shadow: none !important;
 }
 
 .comic-btn-accent:hover {
-  background: #fde047;
+  background: var(--accent-primary-hover);
 }
 
 .comic-btn-icon {
@@ -263,8 +263,7 @@ code {
   top: 0;
   z-index: 40;
   background: var(--bg-nav);
-  backdrop-filter: blur(12px);
-  border-bottom: 2.5px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
   padding: 12px 0;
 }
 
@@ -280,12 +279,13 @@ code {
 
 /* Main Layout Grid */
 .comic-card-hover {
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
 .comic-card-hover:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: 7px 7px 0px var(--shadow-color);
+  border-color: var(--text-secondary);
+  box-shadow: none;
+  transform: none;
 }
 
 .comic-single-layout {
@@ -294,7 +294,7 @@ code {
   max-width: 1400px;
   margin: 0 auto;
   padding: 24px;
-  min-height: calc(100vh - 75px);
+  min-height: calc(100vh - 65px);
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -316,7 +316,8 @@ code {
   flex-direction: column;
   gap: 6px;
   padding: 12px 14px;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.15s ease;
   background: transparent;
@@ -333,7 +334,7 @@ code {
 
 .comic-nav-item.active {
   background: var(--bg-card);
-  border-color: var(--border-color);
+  border-color: var(--border-strong);
   box-shadow: none !important;
 }
 
@@ -341,28 +342,28 @@ code {
 .comic-mode-tabs {
   display: flex;
   gap: 8px;
-  border-bottom: 2.5px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
   padding-bottom: 16px;
   margin-bottom: 20px;
   flex-wrap: wrap;
 }
 
 .comic-tab {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 12px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 8px 16px;
-  border: 2px solid var(--border-color);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 8px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
   background: var(--bg-card);
   color: var(--text-primary);
   cursor: pointer;
   box-shadow: none !important;
-  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .comic-tab:hover {
@@ -372,15 +373,15 @@ code {
 }
 
 .comic-tab.active {
-  background: var(--text-primary);
-  color: var(--bg-page);
-  border-color: var(--text-primary);
+  background: var(--accent-primary);
+  color: var(--accent-primary-text);
+  border-color: var(--accent-primary);
   box-shadow: none !important;
   transform: none;
 }
 
 .comic-tab:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
   box-shadow: none !important;
 }
 
@@ -394,14 +395,15 @@ code {
 .image-canvas-wrapper {
   position: relative;
   overflow: hidden;
-  border: 2.5px solid var(--border-color);
-  background: #050608;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background: #09090b;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 400px;
   max-height: 580px;
-  box-shadow: 4px 4px 0px var(--shadow-color);
+  box-shadow: none;
 }
 
 .image-canvas-wrapper canvas,
@@ -420,7 +422,8 @@ code {
   height: 480px;
   user-select: none;
   cursor: col-resize;
-  background: #000000;
+  background: #09090b;
+  border-radius: 10px;
 }
 
 .split-layer {
@@ -442,8 +445,8 @@ code {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 4px;
-  background: var(--accent-yellow);
+  width: 2px;
+  background: #ffffff;
   cursor: col-resize;
   z-index: 20;
 }
@@ -453,17 +456,17 @@ code {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 36px;
-  height: 36px;
-  background: var(--accent-yellow);
-  border: 2.5px solid #000000;
+  width: 32px;
+  height: 32px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
   box-shadow: none;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 900;
-  color: #000000;
+  font-weight: 700;
+  color: var(--text-primary);
 }
 
 /* Control Panel & Sliders */
@@ -480,44 +483,46 @@ code {
   align-items: center;
   font-family: var(--font-mono);
   font-size: 11px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   color: var(--text-primary);
 }
 
 .comic-slider {
   -webkit-appearance: none;
   width: 100%;
-  height: 8px;
-  background: var(--bg-surface);
-  border: 2px solid var(--border-color);
+  height: 6px;
+  background: var(--border-color);
+  border: none;
+  border-radius: 9999px;
   outline: none;
   cursor: pointer;
 }
 
 .comic-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 20px;
-  height: 20px;
-  background: var(--accent-yellow);
-  border: 2px solid var(--border-color);
+  width: 16px;
+  height: 16px;
+  background: var(--text-primary);
+  border: 2px solid var(--bg-card);
+  border-radius: 50%;
   box-shadow: none;
   cursor: pointer;
   transition: transform 0.1s;
 }
 
 .comic-slider::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
+  transform: scale(1.1);
 }
 
 .comic-select, .comic-input {
   width: 100%;
-  padding: 10px 12px;
+  padding: 9px 12px;
   font-family: var(--font-mono);
   font-size: 12px;
-  font-weight: 700;
-  border: 2px solid var(--border-color);
+  font-weight: 600;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
   box-shadow: none !important;
   background: var(--bg-card);
   color: var(--text-primary);
@@ -526,10 +531,10 @@ code {
 }
 
 .comic-select:focus, .comic-input:focus {
-  border-color: var(--accent-cyan);
+  border-color: var(--text-primary);
 }
 
-/* Universal Flat Button Rule: Zero shadows on all buttons for a clean, non-cluttered UI */
+/* Universal Flat Button Rule */
 button,
 button:hover,
 button:active,
@@ -544,14 +549,16 @@ button:focus,
   width: 100%;
   height: 140px;
   background: var(--bg-surface);
-  border: 2px solid var(--border-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
   display: block;
 }
 
 /* Code Viewer */
 .code-viewer-container {
-  border: 2.5px solid var(--border-color);
-  box-shadow: 6px 6px 0px var(--shadow-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: none;
   background: #0d0f15;
   color: #f8fafc;
   overflow: hidden;
@@ -563,7 +570,7 @@ button:focus,
   justify-content: space-between;
   padding: 10px 16px;
   background: #141724;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   font-family: var(--font-mono);
   font-size: 12px;
 }
@@ -574,4 +581,13 @@ button:focus,
   font-family: var(--font-code);
   font-size: 13px;
   line-height: 1.65;
+}
+
+.code-viewer-pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  border-radius: 0;
+  color: inherit;
+  font-weight: 400;
 }

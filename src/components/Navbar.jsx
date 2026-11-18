@@ -16,23 +16,23 @@ export default function Navbar({
     <header className="comic-nav">
       <div className="comic-nav-container">
         {/* Left: Branding & Back Button */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-          <div className="comic-tag comic-tag-yellow" style={{ fontSize: '14px', padding: '6px 12px' }}>
-            <span>CSST 106.</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div className="comic-tag" style={{ fontSize: '13px', padding: '6px 12px' }}>
+            <span>CSST 106</span>
           </div>
 
-          <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: '14px', letterSpacing: '0.02em' }}>
-            COMPUTER VISION LAB SUITE
+          <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '15px', letterSpacing: '-0.01em', color: 'var(--text-primary)' }}>
+            Computer Vision Lab Suite
           </span>
 
           {isInsideLab && (
             <button
               onClick={onBackToGrid}
               className="comic-btn comic-btn-secondary"
-              style={{ padding: '5px 12px', fontSize: '11px', gap: '6px', marginLeft: '6px' }}
+              style={{ padding: '6px 12px', fontSize: '12px', gap: '6px', marginLeft: '6px' }}
               title="Return to Laboratory Cards Overview"
             >
-              <ArrowLeft size={13} />
+              <ArrowLeft size={14} />
               <span>All Labs</span>
             </button>
           )}

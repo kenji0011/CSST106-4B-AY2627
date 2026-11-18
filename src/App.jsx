@@ -51,9 +51,6 @@ export default function App() {
 
   return (
     <div style={{ minHeight: '100vh', position: 'relative' }}>
-      {/* Halftone Comic Dots Pattern Background */}
-      <div className="comic-dots-bg" />
-
       {/* Top Navbar */}
       <Navbar
         activeLabId={activeLabId}
@@ -78,36 +75,36 @@ export default function App() {
             {/* Unified Experiment Header Banner */}
             <div className="comic-box" style={{ padding: '20px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
               <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-                  <span className="comic-tag comic-tag-yellow" style={{ fontSize: '10px', padding: '2px 8px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                  <span className="comic-tag comic-tag-yellow" style={{ fontSize: '11px', padding: '3px 8px' }}>
                     {activeLab.shortTag}
                   </span>
-                  <span className="comic-tag-outline" style={{ fontSize: '10px' }}>
-                    {activeLab.category.toUpperCase()}
+                  <span className="comic-tag-outline" style={{ fontSize: '11px', padding: '3px 8px' }}>
+                    {activeLab.category}
                   </span>
                 </div>
-                <h1 style={{ fontSize: '26px', fontWeight: 900, lineHeight: 1.2, margin: '0 0 4px 0' }}>
+                <h1 style={{ fontSize: '24px', fontWeight: 700, lineHeight: 1.25, margin: '0 0 4px 0' }}>
                   {activeLab.title}
                 </h1>
-                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', fontWeight: 500, maxWidth: '800px', margin: 0 }}>
+                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', fontWeight: 400, maxWidth: '800px', margin: 0 }}>
                   {activeLab.description}
                 </p>
               </div>
 
               {/* Prev / Next Experiment Switcher */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <button
                   disabled={!prevLab}
                   onClick={() => prevLab && handleSelectLab(prevLab.id)}
                   className="comic-btn comic-btn-secondary"
-                  style={{ padding: '6px 10px', fontSize: '10px', gap: '4px' }}
+                  style={{ padding: '6px 12px', fontSize: '12px', gap: '4px' }}
                   title="Previous Lab"
                 >
-                  <ChevronLeft size={13} />
+                  <ChevronLeft size={14} />
                   <span>Prev</span>
                 </button>
 
-                <span className="comic-tag comic-tag-yellow" style={{ fontSize: '10px', padding: '4px 8px' }}>
+                <span className="comic-tag comic-tag-yellow" style={{ fontSize: '11px', padding: '5px 10px' }}>
                   {String(currentIndex + 1).padStart(2, '0')} / {String(LAB_MODULES.length).padStart(2, '0')}
                 </span>
 
@@ -115,11 +112,11 @@ export default function App() {
                   disabled={!nextLab}
                   onClick={() => nextLab && handleSelectLab(nextLab.id)}
                   className="comic-btn comic-btn-secondary"
-                  style={{ padding: '6px 10px', fontSize: '10px', gap: '4px' }}
+                  style={{ padding: '6px 12px', fontSize: '12px', gap: '4px' }}
                   title="Next Lab"
                 >
                   <span>Next</span>
-                  <ChevronRight size={13} />
+                  <ChevronRight size={14} />
                 </button>
               </div>
             </div>

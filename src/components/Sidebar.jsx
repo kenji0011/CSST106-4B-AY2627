@@ -24,7 +24,7 @@ export default function Sidebar({ activeLabId, onSelectLab }) {
           {COURSE_INFO.section} • {COURSE_INFO.courseCode}
         </p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', paddingTop: '10px', borderTop: '2.5px dashed var(--border-color)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', paddingTop: '10px', borderTop: '1px solid var(--border-color)' }}>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px' }}>
             <span style={{ color: 'var(--text-secondary)', fontWeight: 700, display: 'block' }}>MODULES</span>
             <strong style={{ color: 'var(--text-primary)' }}>7 LABS READY</strong>

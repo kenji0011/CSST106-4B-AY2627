@@ -48,10 +48,10 @@ function MiniHistogram({ bins, color = '#ffe600' }) {
   }, [bins, color]);
 
   return (
-    <div style={{ marginTop: '8px', background: '#0a0d14', padding: '6px 8px', border: '1.5px solid var(--border-color)' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '9px', fontFamily: 'var(--font-mono)', color: '#94a3b8', fontWeight: 600, marginBottom: '4px' }}>
+    <div style={{ marginTop: '10px', background: '#09090b', padding: '8px', border: '1px solid var(--border-color)', borderRadius: '8px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '9px', fontFamily: 'var(--font-mono)', color: '#a1a1aa', fontWeight: 600, marginBottom: '4px' }}>
         <span>0 (Dark)</span>
-        <span>HISTOGRAM (256 BINS)</span>
+        <span>Histogram (256 bins)</span>
         <span>255 (Bright)</span>
       </div>
       <canvas ref={canvasRef} width={260} height={70} style={{ width: '100%', height: '70px', display: 'block' }} />
@@ -278,16 +278,16 @@ export default function Lab03_Histogram({ currentImage, onImageChange }) {
             />
 
             {!previewUrl ? (
-              <div style={{ padding: '8px 10px', background: 'var(--bg-surface)', border: '1.5px dashed var(--border-color)', fontSize: '11px', fontFamily: 'var(--font-mono)', textAlign: 'center', color: 'var(--text-primary)', fontWeight: 600 }}>
+              <div style={{ padding: '10px 12px', background: 'var(--bg-surface)', border: '1px dashed var(--border-strong)', borderRadius: '8px', fontSize: '12px', textAlign: 'center', color: 'var(--text-secondary)', fontWeight: 500 }}>
                 Upload or load a sample image on the right workspace to unlock controls
               </div>
             ) : (
               <>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '6px 8px', background: 'var(--bg-surface)', border: '1.5px solid var(--border-color)', fontSize: '11px', fontFamily: 'var(--font-mono)' }}>
-                  <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '180px', fontWeight: 800, color: 'var(--text-primary)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 10px', background: 'var(--bg-surface)', border: '1px solid var(--border-color)', borderRadius: '8px', fontSize: '11px', fontFamily: 'var(--font-mono)' }}>
+                  <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '180px', fontWeight: 600, color: 'var(--text-primary)' }}>
                     {selectedFile?.name || 'sample_contrast.jpg'}
                   </span>
-                  <span style={{ color: 'var(--text-secondary)', fontWeight: 700 }}>
+                  <span style={{ color: 'var(--text-secondary)', fontWeight: 500 }}>
                     {metadata ? `${metadata.width}×${metadata.height}` : ''}
                   </span>
                 </div>
@@ -295,7 +295,7 @@ export default function Lab03_Histogram({ currentImage, onImageChange }) {
                 <button
                   onClick={() => fileInputRef.current?.click()}
                   className="comic-btn comic-btn-secondary"
-                  style={{ padding: '8px 12px', fontSize: '11px', width: '100%', gap: '6px' }}
+                  style={{ padding: '8px 12px', fontSize: '12px', width: '100%', gap: '6px' }}
                 >
                   <Upload size={14} />
                   <span>Change Image</span>
@@ -306,17 +306,17 @@ export default function Lab03_Histogram({ currentImage, onImageChange }) {
         </div>
 
         {/* Step 2: Color Space & Channel Selection */}
-        <div style={{ borderTop: '2px dashed var(--border-color)', paddingTop: '16px', opacity: previewUrl ? 1 : 0.45, pointerEvents: previewUrl ? 'auto' : 'none' }}>
+        <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '16px', opacity: previewUrl ? 1 : 0.45, pointerEvents: previewUrl ? 'auto' : 'none' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 900 }}>
-              2. COLOR SPACE
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700 }}>
+              2. Color Space
             </span>
-            <span className="comic-tag-outline" style={{ fontSize: '9px' }}>
-              {colorMode.toUpperCase()}
+            <span className="comic-tag-outline" style={{ fontSize: '10px' }}>
+              {colorMode}
             </span>
           </div>
 
-          <p style={{ fontSize: '11px', color: 'var(--text-secondary)', fontWeight: 600, margin: '0 0 8px 0' }}>
+          <p style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: 400, margin: '0 0 8px 0' }}>
             Equalization target domain:
           </p>
 
@@ -324,27 +324,27 @@ export default function Lab03_Histogram({ currentImage, onImageChange }) {
             <button
               onClick={() => setColorMode('grayscale')}
               className={`comic-tab ${colorMode === 'grayscale' ? 'active' : ''}`}
-              style={{ padding: '7px 4px', fontSize: '10px', justifyContent: 'center' }}
+              style={{ padding: '7px 4px', fontSize: '11px', justifyContent: 'center' }}
             >
-              Grayscale (cv2.equalizeHist)
+              Grayscale
             </button>
             <button
               onClick={() => setColorMode('color')}
               className={`comic-tab ${colorMode === 'color' ? 'active' : ''}`}
-              style={{ padding: '7px 4px', fontSize: '10px', justifyContent: 'center' }}
+              style={{ padding: '7px 4px', fontSize: '11px', justifyContent: 'center' }}
             >
-              Color (YUV Luminance)
+              Color (YUV)
             </button>
           </div>
         </div>
 
         {/* Step 3: CLAHE Parameters */}
-        <div style={{ borderTop: '2px dashed var(--border-color)', paddingTop: '16px', opacity: previewUrl ? 1 : 0.45, pointerEvents: previewUrl ? 'auto' : 'none' }}>
+        <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '16px', opacity: previewUrl ? 1 : 0.45, pointerEvents: previewUrl ? 'auto' : 'none' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 900 }}>
-              3. CLAHE SETTINGS
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700 }}>
+              3. CLAHE Settings
             </span>
-            <span className="comic-tag-outline" style={{ fontSize: '9px' }}>
+            <span className="comic-tag-outline" style={{ fontSize: '10px' }}>
               {clipLimit} / {gridSize}×{gridSize}
             </span>
           </div>
@@ -367,7 +367,7 @@ export default function Lab03_Histogram({ currentImage, onImageChange }) {
             </div>
 
             <div>
-              <label style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)', fontWeight: 700, display: 'block', marginBottom: '5px' }}>
+              <label style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)', fontWeight: 600, display: 'block', marginBottom: '5px' }}>
                 Tile Grid Size:
               </label>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
@@ -376,7 +376,7 @@ export default function Lab03_Histogram({ currentImage, onImageChange }) {
                     key={g}
                     onClick={() => setGridSize(g)}
                     className={`comic-tab ${gridSize === g ? 'active' : ''}`}
-                    style={{ padding: '6px 4px', fontSize: '10px', justifyContent: 'center' }}
+                    style={{ padding: '6px 4px', fontSize: '11px', justifyContent: 'center' }}
                   >
                     {g}×{g} {g === 8 ? '(PDF)' : ''}
                   </button>
@@ -388,7 +388,7 @@ export default function Lab03_Histogram({ currentImage, onImageChange }) {
               <button
                 onClick={handleResetDefaults}
                 className="comic-btn comic-btn-secondary"
-                style={{ width: '100%', padding: '6px', fontSize: '10px', gap: '5px' }}
+                style={{ width: '100%', padding: '6px', fontSize: '11px', gap: '5px' }}
               >
                 <RotateCcw size={12} />
                 <span>Reset to Lab Defaults</span>
@@ -398,8 +398,8 @@ export default function Lab03_Histogram({ currentImage, onImageChange }) {
         </div>
 
         {/* Engine Status Footer */}
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', borderTop: '2px dashed var(--border-color)', paddingTop: '10px' }}>
-          ENGINE: <strong style={{ color: 'var(--text-primary)' }}>{backendMode}</strong>
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', borderTop: '1px solid var(--border-color)', paddingTop: '12px' }}>
+          Engine: <strong style={{ color: 'var(--text-primary)' }}>{backendMode}</strong>
         </div>
       </div>
 
@@ -420,7 +420,8 @@ export default function Lab03_Histogram({ currentImage, onImageChange }) {
             }}
             style={{
               padding: '64px 28px',
-              border: isDragging ? '3px dashed var(--accent-yellow)' : '2.5px dashed var(--border-color)',
+              border: isDragging ? '1.5px dashed var(--text-primary)' : '1.5px dashed var(--border-strong)',
+              borderRadius: '12px',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -434,37 +435,37 @@ export default function Lab03_Histogram({ currentImage, onImageChange }) {
           >
             <div
               style={{
-                width: '68px',
-                height: '68px',
+                width: '64px',
+                height: '64px',
                 borderRadius: '50%',
-                border: '2.5px solid var(--border-color)',
-                background: 'var(--accent-yellow)',
+                border: '1px solid var(--border-strong)',
+                background: 'var(--bg-surface)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#000000'
+                color: 'var(--text-primary)'
               }}
             >
-              <Upload size={32} />
+              <Upload size={28} />
             </div>
 
             <div style={{ maxWidth: '480px' }}>
-              <div className="comic-tag comic-tag-yellow" style={{ fontSize: '10px', marginBottom: '10px' }}>
-                IMAGE REQUIRED
+              <div className="comic-tag comic-tag-yellow" style={{ fontSize: '11px', marginBottom: '10px' }}>
+                Image Required
               </div>
-              <h2 style={{ fontSize: '24px', fontWeight: 900, marginBottom: '8px' }}>
-                UPLOAD AN IMAGE TO EVALUATE HISTOGRAMS
+              <h2 style={{ fontSize: '22px', fontWeight: 700, marginBottom: '8px' }}>
+                Upload an Image to Evaluate Histograms
               </h2>
-              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', fontWeight: 500, lineHeight: 1.6 }}>
+              <p style={{ fontSize: '13.5px', color: 'var(--text-secondary)', fontWeight: 400, lineHeight: 1.6 }}>
                 Upload an image or load a sample benchmark to inspect contrast distributions, compare Min-Max stretching, Global Equalization, and CLAHE side by side.
               </p>
             </div>
 
-            <div style={{ display: 'flex', gap: '12px', marginTop: '6px' }}>
+            <div style={{ display: 'flex', gap: '12px', marginTop: '4px' }}>
               <button
                 onClick={(e) => { e.stopPropagation(); fileInputRef.current?.click(); }}
                 className="comic-btn comic-btn-accent"
-                style={{ padding: '12px 24px', fontSize: '12px', gap: '8px' }}
+                style={{ padding: '10px 22px', fontSize: '13px', gap: '8px' }}
               >
                 <Upload size={16} />
                 <span>Upload Image</span>
@@ -473,7 +474,7 @@ export default function Lab03_Histogram({ currentImage, onImageChange }) {
               <button
                 onClick={(e) => { e.stopPropagation(); handleLoadSample(); }}
                 className="comic-btn comic-btn-secondary"
-                style={{ padding: '12px 24px', fontSize: '12px', gap: '8px' }}
+                style={{ padding: '10px 22px', fontSize: '13px', gap: '8px' }}
               >
                 <ImageIcon size={16} />
                 <span>Load Sample Image</span>
@@ -482,24 +483,24 @@ export default function Lab03_Histogram({ currentImage, onImageChange }) {
           </div>
         ) : (
           <>
-            {/* 1. 4-Column Side-by-Side Suite (Matches PDF Part 2.3 Matplotlib Output) */}
+            {/* 1. 4-Column Side-by-Side Suite */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '14px' }}>
               {/* Card 1: Original Image */}
               <div className="comic-box" style={{ padding: '12px', display: 'flex', flexDirection: 'column' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                  <span className="comic-tag" style={{ fontSize: '9px' }}>
-                    1. ORIGINAL
+                  <span className="comic-tag" style={{ fontSize: '10px' }}>
+                    1. Original
                   </span>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'var(--text-secondary)', fontWeight: 700 }}>
-                    RAW INPUT
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 600 }}>
+                    Raw Input
                   </span>
                 </div>
 
-                <div style={{ width: '100%', height: '220px', background: '#050608', border: '2px solid var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                <div style={{ width: '100%', height: '220px', background: '#09090b', border: '1px solid var(--border-color)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
                   {images.original ? (
                     <img src={images.original} alt="Original Input" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
                   ) : (
-                    <span style={{ fontSize: '11px', color: '#94a3b8', fontFamily: 'var(--font-mono)' }}>Loading...</span>
+                    <span style={{ fontSize: '11px', color: '#a1a1aa', fontFamily: 'var(--font-mono)' }}>Loading...</span>
                   )}
                 </div>
 
@@ -509,17 +510,17 @@ export default function Lab03_Histogram({ currentImage, onImageChange }) {
               {/* Card 2: Linear Contrast Stretched */}
               <div className="comic-box" style={{ padding: '12px', display: 'flex', flexDirection: 'column' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                  <span className="comic-tag comic-tag-yellow" style={{ fontSize: '9px' }}>
-                    2. CONTRAST STRETCH
+                  <span className="comic-tag comic-tag-yellow" style={{ fontSize: '10px' }}>
+                    2. Contrast Stretch
                   </span>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'var(--text-secondary)', fontWeight: 700 }}>
-                    MIN-MAX [0-255]
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 600 }}>
+                    Min-Max [0-255]
                   </span>
                 </div>
 
-                <div style={{ width: '100%', height: '220px', background: '#050608', border: '2px solid var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                <div style={{ width: '100%', height: '220px', background: '#09090b', border: '1px solid var(--border-color)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
                   {loading ? (
-                    <div className="comic-tag comic-tag-yellow animate-pulse" style={{ fontSize: '10px' }}>STRETCHING...</div>
+                    <div className="comic-tag comic-tag-yellow animate-pulse" style={{ fontSize: '10px' }}>Stretching...</div>
                   ) : images.stretched ? (
                     <img src={images.stretched} alt="Contrast Stretched" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
                   ) : null}
@@ -531,39 +532,39 @@ export default function Lab03_Histogram({ currentImage, onImageChange }) {
               {/* Card 3: Global Histogram Equalization */}
               <div className="comic-box" style={{ padding: '12px', display: 'flex', flexDirection: 'column' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                  <span className="comic-tag comic-tag-yellow" style={{ fontSize: '9px' }}>
-                    3. GLOBAL EQUALIZATION
+                  <span className="comic-tag comic-tag-yellow" style={{ fontSize: '10px' }}>
+                    3. Global Equalization
                   </span>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'var(--text-secondary)', fontWeight: 700 }}>
-                    CV2.EQUALIZEHIST
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 600 }}>
+                    equalizeHist
                   </span>
                 </div>
 
-                <div style={{ width: '100%', height: '220px', background: '#050608', border: '2px solid var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                <div style={{ width: '100%', height: '220px', background: '#09090b', border: '1px solid var(--border-color)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
                   {loading ? (
-                    <div className="comic-tag comic-tag-yellow animate-pulse" style={{ fontSize: '10px' }}>EQUALIZING...</div>
+                    <div className="comic-tag comic-tag-yellow animate-pulse" style={{ fontSize: '10px' }}>Equalizing...</div>
                   ) : images.equalized ? (
                     <img src={images.equalized} alt="Global Equalized" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
                   ) : null}
                 </div>
 
-                <MiniHistogram bins={histograms.equalized} color="#ffe600" />
+                <MiniHistogram bins={histograms.equalized} color="#a1a1aa" />
               </div>
 
               {/* Card 4: CLAHE */}
               <div className="comic-box" style={{ padding: '12px', display: 'flex', flexDirection: 'column' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                  <span className="comic-tag comic-tag-green" style={{ fontSize: '9px' }}>
-                    4. ADAPTIVE CLAHE
+                  <span className="comic-tag comic-tag-green" style={{ fontSize: '10px' }}>
+                    4. Adaptive CLAHE
                   </span>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'var(--text-secondary)', fontWeight: 700 }}>
-                    CLIP={clipLimit}
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 600 }}>
+                    Clip={clipLimit}
                   </span>
                 </div>
 
-                <div style={{ width: '100%', height: '220px', background: '#050608', border: '2px solid var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                <div style={{ width: '100%', height: '220px', background: '#09090b', border: '1px solid var(--border-color)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
                   {loading ? (
-                    <div className="comic-tag comic-tag-yellow animate-pulse" style={{ fontSize: '10px' }}>ADAPTING...</div>
+                    <div className="comic-tag comic-tag-yellow animate-pulse" style={{ fontSize: '10px' }}>Adapting...</div>
                   ) : images.clahe ? (
                     <img src={images.clahe} alt="CLAHE Result" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
                   ) : null}
@@ -622,65 +623,65 @@ export default function Lab03_Histogram({ currentImage, onImageChange }) {
               </div>
             )}
 
-            {/* 3. Comprehensive Academic Q&A (Answers All 5 PDF Questions + Conclusion) */}
+            {/* 3. Comprehensive Academic Q&A */}
             <div className="comic-box" style={{ padding: '20px' }}>
               <div style={{ marginBottom: '14px' }}>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 900 }}>
-                  LAB ACTIVITY 3 — EVALUATION QUESTIONS &amp; ANSWERS
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700 }}>
+                  Lab Activity 3: Evaluation Questions &amp; Answers
                 </span>
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                <div className="comic-box-sm" style={{ padding: '12px', background: 'var(--bg-surface)' }}>
-                  <strong style={{ fontSize: '12px', display: 'block', color: 'var(--text-primary)', fontWeight: 900, marginBottom: '4px' }}>
+                <div className="comic-box-sm" style={{ padding: '14px', background: 'var(--bg-surface)' }}>
+                  <strong style={{ fontSize: '13px', display: 'block', color: 'var(--text-primary)', fontWeight: 700, marginBottom: '4px' }}>
                     1. What is histogram equalization?
                   </strong>
-                  <p style={{ fontSize: '11.5px', lineHeight: 1.5, color: 'var(--text-primary)', fontWeight: 500, margin: 0 }}>
+                  <p style={{ fontSize: '12.5px', lineHeight: 1.55, color: 'var(--text-secondary)', fontWeight: 400, margin: 0 }}>
                     Histogram equalization is an image processing contrast-enhancement technique that redistributes pixel intensity frequencies across the entire available dynamic range ([0, 255]), transforming a narrow, clustered histogram into an approximately uniform distribution.
                   </p>
                 </div>
 
-                <div className="comic-box-sm" style={{ padding: '12px', background: 'var(--bg-surface)' }}>
-                  <strong style={{ fontSize: '12px', display: 'block', color: 'var(--text-primary)', fontWeight: 900, marginBottom: '4px' }}>
+                <div className="comic-box-sm" style={{ padding: '14px', background: 'var(--bg-surface)' }}>
+                  <strong style={{ fontSize: '13px', display: 'block', color: 'var(--text-primary)', fontWeight: 700, marginBottom: '4px' }}>
                     2. Why do we need histogram equalization?
                   </strong>
-                  <p style={{ fontSize: '11.5px', lineHeight: 1.5, color: 'var(--text-primary)', fontWeight: 500, margin: 0 }}>
+                  <p style={{ fontSize: '12.5px', lineHeight: 1.55, color: 'var(--text-secondary)', fontWeight: 400, margin: 0 }}>
                     Images captured in real-world environments often suffer from poor lighting, glare, backlighting, or sensor limitations, causing details to hide in dark shadows or washed-out highlights. Equalization reveals obscured features necessary for downstream computer vision tasks like segmentation, feature matching, and object detection.
                   </p>
                 </div>
 
-                <div className="comic-box-sm" style={{ padding: '12px', background: 'var(--bg-surface)' }}>
-                  <strong style={{ fontSize: '12px', display: 'block', color: 'var(--text-primary)', fontWeight: 900, marginBottom: '4px' }}>
+                <div className="comic-box-sm" style={{ padding: '14px', background: 'var(--bg-surface)' }}>
+                  <strong style={{ fontSize: '13px', display: 'block', color: 'var(--text-primary)', fontWeight: 700, marginBottom: '4px' }}>
                     3. How does histogram equalization work?
                   </strong>
-                  <p style={{ fontSize: '11.5px', lineHeight: 1.5, color: 'var(--text-primary)', fontWeight: 500, margin: 0 }}>
+                  <p style={{ fontSize: '12.5px', lineHeight: 1.55, color: 'var(--text-secondary)', fontWeight: 400, margin: 0 }}>
                     It computes the normalized Probability Density Function (PDF) of pixel intensities, derives the Cumulative Distribution Function (CDF), and scales the CDF monotonically: <code>T(k) = round(((CDF(k) - CDF_min) / (Total - CDF_min)) × (L - 1))</code>, effectively remapping frequent intensities into wider intervals.
                   </p>
                 </div>
 
-                <div className="comic-box-sm" style={{ padding: '12px', background: 'var(--bg-surface)' }}>
-                  <strong style={{ fontSize: '12px', display: 'block', color: 'var(--text-primary)', fontWeight: 900, marginBottom: '4px' }}>
+                <div className="comic-box-sm" style={{ padding: '14px', background: 'var(--bg-surface)' }}>
+                  <strong style={{ fontSize: '13px', display: 'block', color: 'var(--text-primary)', fontWeight: 700, marginBottom: '4px' }}>
                     4. How does CLAHE work?
                   </strong>
-                  <p style={{ fontSize: '11.5px', lineHeight: 1.5, color: 'var(--text-primary)', fontWeight: 500, margin: 0 }}>
+                  <p style={{ fontSize: '12.5px', lineHeight: 1.55, color: 'var(--text-secondary)', fontWeight: 400, margin: 0 }}>
                     Contrast Limited Adaptive Histogram Equalization divides the image into contextual local tiles (e.g. 8×8). For each tile, it clips the histogram at a predefined clip limit to prevent over-amplifying background noise, redistributes clipped pixels uniformly across all bins, and uses bilinear interpolation across tile boundaries to eliminate artificial seams.
                   </p>
                 </div>
 
-                <div className="comic-box-sm" style={{ padding: '12px', background: 'var(--bg-surface)' }}>
-                  <strong style={{ fontSize: '12px', display: 'block', color: 'var(--text-primary)', fontWeight: 900, marginBottom: '4px' }}>
+                <div className="comic-box-sm" style={{ padding: '14px', background: 'var(--bg-surface)' }}>
+                  <strong style={{ fontSize: '13px', display: 'block', color: 'var(--text-primary)', fontWeight: 700, marginBottom: '4px' }}>
                     5. What are the possible real-world applications?
                   </strong>
-                  <p style={{ fontSize: '11.5px', lineHeight: 1.5, color: 'var(--text-primary)', fontWeight: 500, margin: 0 }}>
+                  <p style={{ fontSize: '12.5px', lineHeight: 1.55, color: 'var(--text-secondary)', fontWeight: 400, margin: 0 }}>
                     Medical diagnostic imaging (enhancing soft tissue in X-rays, CT scans, and MRIs), underwater/marine vision, night-vision surveillance systems, satellite and aerial terrain mapping, and biometric facial authentication under uneven shadows.
                   </p>
                 </div>
 
-                <div className="comic-box-sm" style={{ padding: '12px', borderLeft: '4px solid var(--border-color)', background: 'var(--bg-surface)' }}>
-                  <strong style={{ fontSize: '12px', display: 'block', color: 'var(--text-primary)', fontWeight: 900, marginBottom: '4px' }}>
+                <div className="comic-box-sm" style={{ padding: '14px', background: 'var(--bg-surface)' }}>
+                  <strong style={{ fontSize: '13px', display: 'block', color: 'var(--text-primary)', fontWeight: 700, marginBottom: '4px' }}>
                     Conclusion
                   </strong>
-                  <p style={{ fontSize: '11.5px', lineHeight: 1.5, color: 'var(--text-primary)', fontWeight: 500, margin: 0 }}>
+                  <p style={{ fontSize: '12.5px', lineHeight: 1.55, color: 'var(--text-secondary)', fontWeight: 400, margin: 0 }}>
                     While Global Histogram Equalization is computationally fast, it tends to over-amplify noise and wash out natural gradients in uniform areas. CLAHE solves this limitation by operating locally with noise-clipping constraints, producing natural, artifact-free contrast enhancement ideal for practical perception pipelines.
                   </p>
                 </div>

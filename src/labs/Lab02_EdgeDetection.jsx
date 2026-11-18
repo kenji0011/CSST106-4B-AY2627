@@ -221,16 +221,16 @@ export default function Lab02_EdgeDetection({ currentImage, onImageChange }) {
             />
 
             {!previewUrl ? (
-              <div style={{ padding: '8px 10px', background: 'var(--bg-surface)', border: '1.5px dashed var(--border-color)', fontSize: '11px', fontFamily: 'var(--font-mono)', textAlign: 'center', color: 'var(--text-primary)', fontWeight: 600 }}>
+              <div style={{ padding: '10px 12px', background: 'var(--bg-surface)', border: '1px dashed var(--border-strong)', borderRadius: '8px', fontSize: '12px', textAlign: 'center', color: 'var(--text-secondary)', fontWeight: 500 }}>
                 Upload or load a sample image on the right workspace to unlock controls
               </div>
             ) : (
               <>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '6px 8px', background: 'var(--bg-surface)', border: '1.5px solid var(--border-color)', fontSize: '11px', fontFamily: 'var(--font-mono)' }}>
-                  <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '180px', fontWeight: 800, color: 'var(--text-primary)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 10px', background: 'var(--bg-surface)', border: '1px solid var(--border-color)', borderRadius: '8px', fontSize: '11px', fontFamily: 'var(--font-mono)' }}>
+                  <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '180px', fontWeight: 600, color: 'var(--text-primary)' }}>
                     {selectedFile?.name || 'sample_benchmark.jpg'}
                   </span>
-                  <span style={{ color: 'var(--text-secondary)', fontWeight: 700 }}>
+                  <span style={{ color: 'var(--text-secondary)', fontWeight: 500 }}>
                     {metadata ? `${metadata.width}×${metadata.height}` : ''}
                   </span>
                 </div>
@@ -238,7 +238,7 @@ export default function Lab02_EdgeDetection({ currentImage, onImageChange }) {
                 <button
                   onClick={() => fileInputRef.current?.click()}
                   className="comic-btn comic-btn-secondary"
-                  style={{ padding: '8px 12px', fontSize: '11px', width: '100%', gap: '6px' }}
+                  style={{ padding: '8px 12px', fontSize: '12px', width: '100%', gap: '6px' }}
                 >
                   <Upload size={14} />
                   <span>Change Image</span>
@@ -249,17 +249,17 @@ export default function Lab02_EdgeDetection({ currentImage, onImageChange }) {
         </div>
 
         {/* Step 2: Preprocessing (Gaussian Blur) */}
-        <div style={{ borderTop: '2px dashed var(--border-color)', paddingTop: '16px', opacity: previewUrl ? 1 : 0.45, pointerEvents: previewUrl ? 'auto' : 'none' }}>
+        <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '16px', opacity: previewUrl ? 1 : 0.45, pointerEvents: previewUrl ? 'auto' : 'none' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 900 }}>
-              2. NOISE REDUCTION
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700 }}>
+              2. Noise Reduction
             </span>
-            <span className="comic-tag-outline" style={{ fontSize: '9px' }}>
-              GAUSSIAN BLUR
+            <span className="comic-tag-outline" style={{ fontSize: '10px' }}>
+              Gaussian Blur
             </span>
           </div>
 
-          <p style={{ fontSize: '11px', color: 'var(--text-secondary)', fontWeight: 600, margin: '0 0 8px 0' }}>
+          <p style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: 400, margin: '0 0 8px 0' }}>
             Smooths image before edge extraction:
           </p>
 
@@ -274,7 +274,7 @@ export default function Lab02_EdgeDetection({ currentImage, onImageChange }) {
                 key={item.val}
                 onClick={() => setGaussianKsize(item.val)}
                 className={`comic-tab ${gaussianKsize === item.val ? 'active' : ''}`}
-                style={{ padding: '7px 4px', fontSize: '10px', justifyContent: 'center' }}
+                style={{ padding: '7px 4px', fontSize: '11px', justifyContent: 'center' }}
               >
                 {item.label}
               </button>
@@ -283,19 +283,19 @@ export default function Lab02_EdgeDetection({ currentImage, onImageChange }) {
         </div>
 
         {/* Step 3: Sobel Settings */}
-        <div style={{ borderTop: '2px dashed var(--border-color)', paddingTop: '16px', opacity: previewUrl ? 1 : 0.45, pointerEvents: previewUrl ? 'auto' : 'none' }}>
+        <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '16px', opacity: previewUrl ? 1 : 0.45, pointerEvents: previewUrl ? 'auto' : 'none' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 900 }}>
-              3. SOBEL DETECTOR
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700 }}>
+              3. Sobel Detector
             </span>
-            <span className="comic-tag-outline" style={{ fontSize: '9px' }}>
-              GRADIENT
+            <span className="comic-tag-outline" style={{ fontSize: '10px' }}>
+              Gradient
             </span>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             <div>
-              <label style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)', fontWeight: 700, display: 'block', marginBottom: '5px' }}>
+              <label style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)', fontWeight: 600, display: 'block', marginBottom: '5px' }}>
                 Gradient Direction:
               </label>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
@@ -308,7 +308,7 @@ export default function Lab02_EdgeDetection({ currentImage, onImageChange }) {
                     key={m.id}
                     onClick={() => setSobelMode(m.id)}
                     className={`comic-tab ${sobelMode === m.id ? 'active' : ''}`}
-                    style={{ padding: '7px 4px', fontSize: '10px', justifyContent: 'center' }}
+                    style={{ padding: '7px 4px', fontSize: '11px', justifyContent: 'center' }}
                   >
                     {m.label}
                   </button>
@@ -317,7 +317,7 @@ export default function Lab02_EdgeDetection({ currentImage, onImageChange }) {
             </div>
 
             <div>
-              <label style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)', fontWeight: 700, display: 'block', marginBottom: '5px' }}>
+              <label style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)', fontWeight: 600, display: 'block', marginBottom: '5px' }}>
                 Kernel Size (ksize):
               </label>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
@@ -326,7 +326,7 @@ export default function Lab02_EdgeDetection({ currentImage, onImageChange }) {
                     key={k}
                     onClick={() => setSobelKsize(k)}
                     className={`comic-tab ${sobelKsize === k ? 'active' : ''}`}
-                    style={{ padding: '6px 4px', fontSize: '10px', justifyContent: 'center' }}
+                    style={{ padding: '6px 4px', fontSize: '11px', justifyContent: 'center' }}
                   >
                     {k}×{k} Kernel
                   </button>
@@ -337,12 +337,12 @@ export default function Lab02_EdgeDetection({ currentImage, onImageChange }) {
         </div>
 
         {/* Step 4: Canny Thresholds */}
-        <div style={{ borderTop: '2px dashed var(--border-color)', paddingTop: '16px', opacity: previewUrl ? 1 : 0.45, pointerEvents: previewUrl ? 'auto' : 'none' }}>
+        <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '16px', opacity: previewUrl ? 1 : 0.45, pointerEvents: previewUrl ? 'auto' : 'none' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 900 }}>
-              4. CANNY THRESHOLDS
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700 }}>
+              4. Canny Thresholds
             </span>
-            <span className="comic-tag-outline" style={{ fontSize: '9px' }}>
+            <span className="comic-tag-outline" style={{ fontSize: '10px' }}>
               {cannyLow} / {cannyHigh}
             </span>
           </div>
@@ -394,15 +394,15 @@ export default function Lab02_EdgeDetection({ currentImage, onImageChange }) {
         </div>
 
         {/* Engine Status Footer */}
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', borderTop: '2px dashed var(--border-color)', paddingTop: '10px' }}>
-          ENGINE: <strong style={{ color: 'var(--text-primary)' }}>{backendMode}</strong>
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', borderTop: '1px solid var(--border-color)', paddingTop: '12px' }}>
+          Engine: <strong style={{ color: 'var(--text-primary)' }}>{backendMode}</strong>
         </div>
       </div>
 
       {/* RIGHT COLUMN: VISUAL OUTPUTS & ANALYSIS */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
         {!previewUrl ? (
-          /* Empty State Upload Dropzone (Matches Lab 01) */
+          /* Empty State Upload Dropzone */
           <div
             className="comic-box"
             onClick={() => fileInputRef.current?.click()}
@@ -416,7 +416,8 @@ export default function Lab02_EdgeDetection({ currentImage, onImageChange }) {
             }}
             style={{
               padding: '64px 28px',
-              border: isDragging ? '3px dashed var(--accent-yellow)' : '2.5px dashed var(--border-color)',
+              border: isDragging ? '1.5px dashed var(--text-primary)' : '1.5px dashed var(--border-strong)',
+              borderRadius: '12px',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -430,37 +431,37 @@ export default function Lab02_EdgeDetection({ currentImage, onImageChange }) {
           >
             <div
               style={{
-                width: '68px',
-                height: '68px',
+                width: '64px',
+                height: '64px',
                 borderRadius: '50%',
-                border: '2.5px solid var(--border-color)',
-                background: 'var(--accent-yellow)',
+                border: '1px solid var(--border-strong)',
+                background: 'var(--bg-surface)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#000000'
+                color: 'var(--text-primary)'
               }}
             >
-              <Upload size={32} />
+              <Upload size={28} />
             </div>
 
             <div style={{ maxWidth: '480px' }}>
-              <div className="comic-tag comic-tag-yellow" style={{ fontSize: '10px', marginBottom: '10px' }}>
-                IMAGE REQUIRED
+              <div className="comic-tag comic-tag-yellow" style={{ fontSize: '11px', marginBottom: '10px' }}>
+                Image Required
               </div>
-              <h2 style={{ fontSize: '24px', fontWeight: 900, marginBottom: '8px', color: 'var(--text-primary)' }}>
-                UPLOAD AN IMAGE TO COMPARE EDGES
+              <h2 style={{ fontSize: '22px', fontWeight: 700, marginBottom: '8px', color: 'var(--text-primary)' }}>
+                Upload an Image to Compare Edges
               </h2>
-              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+              <p style={{ fontSize: '13.5px', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
                 Upload a photo or load a sample image to compare Original Grayscale, Sobel Edge Detection, and Canny Edge Detection side by side.
               </p>
             </div>
 
-            <div style={{ display: 'flex', gap: '12px', marginTop: '6px' }}>
+            <div style={{ display: 'flex', gap: '12px', marginTop: '4px' }}>
               <button
                 onClick={(e) => { e.stopPropagation(); fileInputRef.current?.click(); }}
                 className="comic-btn comic-btn-accent"
-                style={{ padding: '12px 24px', fontSize: '12px', gap: '8px' }}
+                style={{ padding: '10px 22px', fontSize: '13px', gap: '8px' }}
               >
                 <Upload size={16} />
                 <span>Upload Image</span>
@@ -469,7 +470,7 @@ export default function Lab02_EdgeDetection({ currentImage, onImageChange }) {
               <button
                 onClick={(e) => { e.stopPropagation(); handleLoadSample(); }}
                 className="comic-btn comic-btn-secondary"
-                style={{ padding: '12px 24px', fontSize: '12px', gap: '8px' }}
+                style={{ padding: '10px 22px', fontSize: '13px', gap: '8px' }}
               >
                 <ImageIcon size={16} />
                 <span>Load Sample Image</span>
@@ -484,14 +485,14 @@ export default function Lab02_EdgeDetection({ currentImage, onImageChange }) {
               <div className="comic-box" style={{ padding: '14px', display: 'flex', flexDirection: 'column' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
                   <span className="comic-tag" style={{ fontSize: '10px' }}>
-                    1. ORIGINAL IMAGE
+                    1. Original Image
                   </span>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 700 }}>
-                    GRAYSCALE
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 600 }}>
+                    Grayscale
                   </span>
                 </div>
 
-                <div style={{ width: '100%', height: '300px', background: '#050608', border: '2px solid var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                <div style={{ width: '100%', height: '300px', background: '#09090b', border: '1px solid var(--border-color)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
                   {images.gray ? (
                     <img src={images.gray} alt="Original Grayscale" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
                   ) : (
@@ -504,16 +505,16 @@ export default function Lab02_EdgeDetection({ currentImage, onImageChange }) {
               <div className="comic-box" style={{ padding: '14px', display: 'flex', flexDirection: 'column' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
                   <span className="comic-tag comic-tag-yellow" style={{ fontSize: '10px' }}>
-                    2. SOBEL EDGES
+                    2. Sobel Edges
                   </span>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 700 }}>
-                    {sobelMode === 'combined' ? 'MAGNITUDE' : sobelMode === 'horizontal' ? 'X-GRADIENT' : 'Y-GRADIENT'}
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 600 }}>
+                    {sobelMode === 'combined' ? 'Magnitude' : sobelMode === 'horizontal' ? 'X-Gradient' : 'Y-Gradient'}
                   </span>
                 </div>
 
-                <div style={{ width: '100%', height: '300px', background: '#050608', border: '2px solid var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                <div style={{ width: '100%', height: '300px', background: '#09090b', border: '1px solid var(--border-color)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
                   {loading ? (
-                    <div className="comic-tag comic-tag-yellow animate-pulse" style={{ fontSize: '10px' }}>PROCESSING...</div>
+                    <div className="comic-tag comic-tag-yellow animate-pulse" style={{ fontSize: '10px' }}>Processing...</div>
                   ) : images.sobel ? (
                     <img src={images.sobel} alt="Sobel Edges" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
                   ) : null}
@@ -524,16 +525,16 @@ export default function Lab02_EdgeDetection({ currentImage, onImageChange }) {
               <div className="comic-box" style={{ padding: '14px', display: 'flex', flexDirection: 'column' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
                   <span className="comic-tag comic-tag-green" style={{ fontSize: '10px' }}>
-                    3. CANNY EDGES
+                    3. Canny Edges
                   </span>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 700 }}>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 600 }}>
                     [{cannyLow}, {cannyHigh}]
                   </span>
                 </div>
 
-                <div style={{ width: '100%', height: '300px', background: '#050608', border: '2px solid var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                <div style={{ width: '100%', height: '300px', background: '#09090b', border: '1px solid var(--border-color)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
                   {loading ? (
-                    <div className="comic-tag comic-tag-yellow animate-pulse" style={{ fontSize: '10px' }}>PROCESSING...</div>
+                    <div className="comic-tag comic-tag-yellow animate-pulse" style={{ fontSize: '10px' }}>Processing...</div>
                   ) : images.canny ? (
                     <img src={images.canny} alt="Canny Edges" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
                   ) : null}
@@ -593,17 +594,17 @@ export default function Lab02_EdgeDetection({ currentImage, onImageChange }) {
             {/* 3. Concise Lab Question & Conclusion Summary */}
             <div className="comic-box" style={{ padding: '20px' }}>
               <div style={{ marginBottom: '14px' }}>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 900, color: 'var(--text-primary)' }}>
-                  LAB ACTIVITY 2 — OBSERVATION &amp; CONCLUSION
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700, color: 'var(--text-primary)' }}>
+                  Lab Activity 2: Observation &amp; Conclusion
                 </span>
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
                 <div className="comic-box-sm" style={{ padding: '14px', background: 'var(--bg-surface)' }}>
                   <span className="comic-tag comic-tag-yellow" style={{ fontSize: '10px', marginBottom: '8px', display: 'inline-block' }}>
-                    SOBEL VS. CANNY DIFFERENCES
+                    Sobel vs. Canny Differences
                   </span>
-                  <p style={{ fontSize: '12.5px', lineHeight: 1.6, color: 'var(--text-primary)', margin: 0 }}>
+                  <p style={{ fontSize: '13px', lineHeight: 1.6, color: 'var(--text-primary)', margin: 0 }}>
                     <strong>Sobel</strong> computes first-order directional gradients (Gx, Gy), producing thicker edges with varying brightness based on contrast strength.{' '}
                     <strong>Canny</strong> applies non-maximum suppression and dual-threshold hysteresis to produce clean, 1-pixel thin binary contours while filtering out weak noise.
                   </p>
@@ -611,9 +612,9 @@ export default function Lab02_EdgeDetection({ currentImage, onImageChange }) {
 
                 <div className="comic-box-sm" style={{ padding: '14px', background: 'var(--bg-surface)' }}>
                   <span className="comic-tag comic-tag-green" style={{ fontSize: '10px', marginBottom: '8px', display: 'inline-block' }}>
-                    CONCLUSION
+                    Conclusion
                   </span>
-                  <p style={{ fontSize: '12.5px', lineHeight: 1.6, color: 'var(--text-primary)', margin: 0 }}>
+                  <p style={{ fontSize: '13px', lineHeight: 1.6, color: 'var(--text-primary)', margin: 0 }}>
                     Gaussian smoothing prior to edge extraction significantly reduces false edges. Use <strong>Sobel</strong> when raw gradient magnitude and orientation are needed, and <strong>Canny</strong> when accurate, single-pixel object boundaries are required for segmentation or shape detection.
                   </p>
                 </div>

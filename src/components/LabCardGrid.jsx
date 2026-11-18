@@ -5,62 +5,60 @@ import { ArrowRight, Clock } from 'lucide-react';
 
 export default function LabCardGrid({ onSelectLab }) {
   const LAB_TAGS = {
-    'lab-01': ['RGB & BGR', 'GRAYSCALE', 'CHANNELS', 'PIXEL INSPECT', 'ROI CROP', 'RESIZE', 'ROTATE 90°'],
-    'lab-02': ['SOBEL OPERATOR', 'CANNY DETECTOR', 'GAUSSIAN BLUR', 'GRADIENTS GX/GY', 'HYSTERESIS', '3-WAY COMPARISON'],
-    'lab-03': ['HISTOGRAM', 'EQUALIZEHIST', 'CLAHE', 'CONTRAST STRETCH', 'YUV LUMINANCE', 'CDF MAPPING']
+    'lab-01': ['RGB & BGR', 'Grayscale', 'Channels', 'Pixel Inspect', 'ROI Crop', 'Resize', 'Rotate 90°'],
+    'lab-02': ['Sobel Operator', 'Canny Detector', 'Gaussian Blur', 'Gradients Gx/Gy', 'Hysteresis', '3-Way Comparison'],
+    'lab-03': ['Histogram', 'equalizeHist', 'CLAHE', 'Contrast Stretch', 'YUV Luminance', 'CDF Mapping']
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', maxWidth: '1400px', margin: '0 auto', width: '100%' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '28px', maxWidth: '1400px', margin: '0 auto', width: '100%' }}>
       {/* Hero Header Section */}
-      <section className="comic-box" style={{ padding: '32px 36px', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px', marginBottom: '16px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <span className="comic-tag comic-tag-yellow" style={{ fontSize: '11px', padding: '4px 10px' }}>
-              CHAPTER 01
-            </span>
-          </div>
+      <section className="comic-box" style={{ padding: '28px 32px', position: 'relative' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+          <span className="comic-tag comic-tag-yellow" style={{ fontSize: '11px', padding: '4px 10px' }}>
+            CSST 106
+          </span>
+          <span className="comic-tag-outline" style={{ fontSize: '11px', padding: '4px 10px' }}>
+            Course Overview
+          </span>
         </div>
 
-        <div style={{ maxWidth: '900px' }}>
-          <h1 style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 900, lineHeight: 1.1, marginBottom: '12px' }}>
-            COMPUTER VISION LABORATORY SUITE.
+        <div style={{ maxWidth: '880px' }}>
+          <h1 style={{ fontSize: 'clamp(26px, 3.5vw, 36px)', fontWeight: 700, lineHeight: 1.15, marginBottom: '10px' }}>
+            Computer Vision Laboratory Suite
           </h1>
-          <p style={{ fontSize: '15px', color: 'var(--text-secondary)', fontWeight: 500, lineHeight: 1.6, marginBottom: '20px' }}>
+          <p style={{ fontSize: '15px', color: 'var(--text-secondary)', fontWeight: 400, lineHeight: 1.6, marginBottom: '20px' }}>
             A unified interactive laboratory compilation for <strong>CSST 106: Perception and Computer Vision</strong> at Laguna State Polytechnic University.
-            Explore fundamental image processing concepts, test live OpenCV pipelines with custom uploaded images, and directly inspect the underlying Python backend implementations.
+            Explore fundamental image processing concepts, test live OpenCV pipelines with custom uploaded images, and inspect the underlying Python implementations.
           </p>
         </div>
 
         {/* Student & Course Metadata Strip */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', paddingTop: '18px', borderTop: '2.5px dashed var(--border-color)' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '28px', paddingTop: '16px', borderTop: '1px solid var(--border-color)' }}>
           <div>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 700, display: 'block' }}>STUDENT</span>
-            <strong style={{ fontSize: '14px', fontFamily: 'var(--font-mono)', color: 'var(--text-primary)' }}>{COURSE_INFO.studentName}</strong>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-muted)', fontWeight: 600, display: 'block', marginBottom: '2px' }}>Student</span>
+            <strong style={{ fontSize: '14px', color: 'var(--text-primary)' }}>{COURSE_INFO.studentName}</strong>
           </div>
           <div>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 700, display: 'block' }}>SECTION</span>
-            <strong style={{ fontSize: '14px', fontFamily: 'var(--font-mono)', color: 'var(--text-primary)' }}>{COURSE_INFO.section}</strong>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-muted)', fontWeight: 600, display: 'block', marginBottom: '2px' }}>Section</span>
+            <strong style={{ fontSize: '14px', color: 'var(--text-primary)' }}>{COURSE_INFO.section}</strong>
           </div>
           <div>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 700, display: 'block' }}>INSTITUTION</span>
-            <strong style={{ fontSize: '14px', fontFamily: 'var(--font-mono)', color: 'var(--text-primary)' }}>{COURSE_INFO.institution}</strong>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-muted)', fontWeight: 600, display: 'block', marginBottom: '2px' }}>Institution</span>
+            <strong style={{ fontSize: '14px', color: 'var(--text-primary)' }}>{COURSE_INFO.institution}</strong>
           </div>
         </div>
       </section>
 
       {/* Laboratory Modules Section Title */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 4px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div className="comic-tag" style={{ fontSize: '12px', padding: '4px 10px' }}>
-            CHAPTER 02 
-          </div>
-          <h2 style={{ fontSize: '20px', fontWeight: 900, letterSpacing: '-0.02em', margin: 0, color: 'var(--text-primary)' }}>
-            LABORATORY ACTIVITIES
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 4px', flexWrap: 'wrap', gap: '12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <h2 style={{ fontSize: '20px', fontWeight: 700, letterSpacing: '-0.02em', margin: 0, color: 'var(--text-primary)' }}>
+            Laboratory Activities
           </h2>
         </div>
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700, color: 'var(--text-secondary)' }}>
-          {LAB_MODULES.length} COMPILED • UPCOMING MODULES PENDING
+        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 600, color: 'var(--text-secondary)' }}>
+          {LAB_MODULES.length} Compiled / Upcoming Modules Pending
         </span>
       </div>
 
@@ -69,10 +67,9 @@ export default function LabCardGrid({ onSelectLab }) {
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))',
-          gap: '24px'
+          gap: '20px'
         }}
       >
-        {/* Lab 01 Card */}
         {LAB_MODULES.map((lab) => {
           const tags = LAB_TAGS[lab.id] || [];
           return (
@@ -81,47 +78,48 @@ export default function LabCardGrid({ onSelectLab }) {
               onClick={() => onSelectLab(lab.id)}
               className="comic-box comic-card-hover"
               style={{
-                padding: '26px',
+                padding: '24px',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 cursor: 'pointer',
-                minHeight: '300px',
+                minHeight: '290px',
                 position: 'relative'
               }}
             >
               <div>
-                {/* Card Header: Number box */}
+                {/* Card Header: Number badge */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <div
-                      className="comic-box-sm"
                       style={{
-                        width: '42px',
-                        height: '42px',
-                        background: 'var(--accent-yellow)',
-                        color: '#000000',
+                        width: '38px',
+                        height: '38px',
+                        borderRadius: '10px',
+                        border: '1px solid var(--border-strong)',
+                        background: 'var(--bg-surface)',
+                        color: 'var(--text-primary)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        fontWeight: 900,
+                        fontWeight: 700,
                         fontFamily: 'var(--font-mono)',
-                        fontSize: '18px'
+                        fontSize: '15px'
                       }}
                     >
                       {lab.number}
                     </div>
-                    <span className="comic-tag-outline" style={{ fontSize: '10px' }}>
-                      {lab.category.toUpperCase()}
+                    <span className="comic-tag-outline" style={{ fontSize: '11px' }}>
+                      {lab.category}
                     </span>
                   </div>
                 </div>
 
                 {/* Card Title & Description */}
-                <h3 style={{ fontSize: '20px', fontWeight: 900, lineHeight: 1.25, marginBottom: '8px', color: 'var(--text-primary)' }}>
+                <h3 style={{ fontSize: '19px', fontWeight: 700, lineHeight: 1.3, marginBottom: '8px', color: 'var(--text-primary)' }}>
                   {lab.title}
                 </h3>
-                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', fontWeight: 500, lineHeight: 1.6, marginBottom: '18px' }}>
+                <p style={{ fontSize: '13.5px', color: 'var(--text-secondary)', fontWeight: 400, lineHeight: 1.55, marginBottom: '18px' }}>
                   {lab.description}
                 </p>
 
@@ -132,10 +130,11 @@ export default function LabCardGrid({ onSelectLab }) {
                       key={tag}
                       style={{
                         fontFamily: 'var(--font-mono)',
-                        fontSize: '10px',
-                        fontWeight: 700,
-                        padding: '3px 8px',
-                        border: '1.5px solid var(--border-color)',
+                        fontSize: '11px',
+                        fontWeight: 500,
+                        padding: '3px 9px',
+                        border: '1px solid var(--border-color)',
+                        borderRadius: '6px',
                         background: 'var(--bg-surface)',
                         color: 'var(--text-primary)'
                       }}
@@ -147,29 +146,29 @@ export default function LabCardGrid({ onSelectLab }) {
               </div>
 
               {/* Bottom Action Button */}
-              <div style={{ paddingTop: '16px', borderTop: '2px dashed var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-secondary)', fontWeight: 700 }}>
-                  {lab.chapter}
+              <div style={{ paddingTop: '14px', borderTop: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-muted)', fontWeight: 600 }}>
+                  Lab {lab.number}
                 </span>
 
                 <button
                   className="comic-btn comic-btn-accent"
-                  style={{ padding: '8px 16px', fontSize: '11px', gap: '6px' }}
+                  style={{ padding: '7px 14px', fontSize: '12px', gap: '6px' }}
                 >
                   <span>Open Lab {lab.number}</span>
-                  <ArrowRight size={13} />
+                  <ArrowRight size={14} />
                 </button>
               </div>
             </div>
           );
         })}
 
-        {/* Placeholder Card for Labs 2 through n */}
+        {/* Placeholder Card for upcoming Labs */}
         <div
-          className="comic-box-sm"
           style={{
-            padding: '26px',
-            borderStyle: 'dashed',
+            padding: '24px',
+            border: '1.5px dashed var(--border-strong)',
+            borderRadius: '12px',
             background: 'transparent',
             display: 'flex',
             flexDirection: 'column',
@@ -177,31 +176,31 @@ export default function LabCardGrid({ onSelectLab }) {
             alignItems: 'center',
             textAlign: 'center',
             gap: '14px',
-            minHeight: '300px'
+            minHeight: '290px'
           }}
         >
           <div
             style={{
-              width: '48px',
-              height: '48px',
+              width: '44px',
+              height: '44px',
               borderRadius: '50%',
-              border: '2.5px solid var(--border-color)',
+              border: '1px solid var(--border-strong)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               background: 'var(--bg-surface)',
-              color: 'var(--text-primary)'
+              color: 'var(--text-secondary)'
             }}
           >
-            <Clock size={24} />
+            <Clock size={20} />
           </div>
 
           <div>
-            <h3 style={{ fontSize: '18px', fontWeight: 900, marginBottom: '6px', color: 'var(--text-primary)' }}>
-              LABORATORY ACTIVITIES
+            <h3 style={{ fontSize: '16px', fontWeight: 700, marginBottom: '6px', color: 'var(--text-primary)' }}>
+              Upcoming Activities
             </h3>
-            <p style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: 500, maxWidth: '300px', margin: '0 auto', lineHeight: 1.5 }}>
-              Upcoming laboratory modules will be added here one by one as instructions and starter files are provided.
+            <p style={{ fontSize: '13px', color: 'var(--text-secondary)', fontWeight: 400, maxWidth: '280px', margin: '0 auto', lineHeight: 1.5 }}>
+              Subsequent laboratory modules will appear here as new experiments are added.
             </p>
           </div>
         </div>

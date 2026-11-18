@@ -275,16 +275,16 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
             />
 
             {!previewUrl ? (
-              <div style={{ padding: '8px 10px', background: 'var(--bg-surface)', border: '1.5px dashed var(--border-color)', fontSize: '11px', fontFamily: 'var(--font-mono)', textAlign: 'center', color: 'var(--text-primary)', fontWeight: 600 }}>
+              <div style={{ padding: '10px 12px', background: 'var(--bg-surface)', border: '1px dashed var(--border-strong)', borderRadius: '8px', fontSize: '12px', textAlign: 'center', color: 'var(--text-secondary)', fontWeight: 500 }}>
                 Upload an image on the right workspace to unlock operations
               </div>
             ) : (
               <>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '6px 8px', background: 'var(--bg-surface)', border: '1.5px solid var(--border-color)', fontSize: '11px', fontFamily: 'var(--font-mono)' }}>
-                  <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '180px', fontWeight: 800, color: 'var(--text-primary)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 10px', background: 'var(--bg-surface)', border: '1px solid var(--border-color)', borderRadius: '8px', fontSize: '11px', fontFamily: 'var(--font-mono)' }}>
+                  <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '180px', fontWeight: 600, color: 'var(--text-primary)' }}>
                     {selectedFile?.name || 'custom_image.jpg'}
                   </span>
-                  <span style={{ color: 'var(--text-secondary)', fontWeight: 700 }}>
+                  <span style={{ color: 'var(--text-secondary)', fontWeight: 500 }}>
                     {selectedFile ? `${Math.round(selectedFile.size / 1024)} KB` : ''}
                   </span>
                 </div>
@@ -292,7 +292,7 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
                 <button
                   onClick={() => fileInputRef.current?.click()}
                   className="comic-btn comic-btn-secondary"
-                  style={{ padding: '8px 12px', fontSize: '11px', width: '100%', gap: '6px' }}
+                  style={{ padding: '8px 12px', fontSize: '12px', width: '100%', gap: '6px' }}
                 >
                   <Upload size={14} />
                   <span>Change Image</span>
@@ -303,13 +303,13 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
         </div>
 
         {/* Section 2: Operation Buttons */}
-        <div style={{ borderTop: '2px dashed var(--border-color)', paddingTop: '16px' }}>
+        <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '16px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 900 }}>
-              2. SELECT OPERATION
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700 }}>
+              2. Select Operation
             </span>
-            <span className="comic-tag-outline" style={{ fontSize: '9px' }}>
-              6 MODES
+            <span className="comic-tag-outline" style={{ fontSize: '10px' }}>
+              6 Modes
             </span>
           </div>
 
@@ -372,7 +372,7 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
 
         {/* Section 3: Sub-Controls (Conditional based on active operation) */}
         {previewUrl && (
-          <div style={{ borderTop: '2px dashed var(--border-color)', paddingTop: '16px' }}>
+          <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '16px' }}>
             {action === 'resize' && (
               <div className="comic-box-sm" style={{ padding: '12px', background: 'var(--bg-surface)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 <div className="comic-control-label">
@@ -466,9 +466,8 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
                   </span>
                 </div>
 
-                <div style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: 'var(--text-primary)', padding: '6px 8px', background: 'var(--bg-card)', border: '1.5px dashed var(--border-color)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <span>🎯</span>
-                  <span><strong>Tip:</strong> Click anywhere on the original photo to pick coordinates!</span>
+                <div style={{ fontSize: '11px', color: 'var(--text-secondary)', padding: '8px 10px', background: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: '6px' }}>
+                  <span><strong>Tip:</strong> Click anywhere on the original photo to pick coordinates.</span>
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
@@ -575,8 +574,8 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
         )}
 
         {/* Engine status indicator */}
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', borderTop: '2px dashed var(--border-color)', paddingTop: '10px' }}>
-          ENGINE: <strong style={{ color: 'var(--text-primary)' }}>{backendMode}</strong>
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', borderTop: '1px solid var(--border-color)', paddingTop: '12px' }}>
+          Engine: <strong style={{ color: 'var(--text-primary)' }}>{backendMode}</strong>
         </div>
       </div>
 
@@ -591,7 +590,8 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
             onDrop={handleDrop}
             style={{
               padding: '64px 28px',
-              border: isDragging ? '3px dashed var(--accent-yellow)' : '2.5px dashed var(--border-color)',
+              border: isDragging ? '1.5px dashed var(--text-primary)' : '1.5px dashed var(--border-strong)',
+              borderRadius: '12px',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -606,28 +606,28 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
           >
             <div
               style={{
-                width: '68px',
-                height: '68px',
+                width: '64px',
+                height: '64px',
                 borderRadius: '50%',
-                border: '2.5px solid var(--border-color)',
-                background: 'var(--accent-yellow)',
+                border: '1px solid var(--border-strong)',
+                background: 'var(--bg-surface)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#000000'
+                color: 'var(--text-primary)'
               }}
             >
-              <Upload size={32} />
+              <Upload size={28} />
             </div>
 
             <div style={{ maxWidth: '480px' }}>
-              <div className="comic-tag comic-tag-yellow" style={{ fontSize: '10px', marginBottom: '10px' }}>
-                IMAGE REQUIRED
+              <div className="comic-tag comic-tag-yellow" style={{ fontSize: '11px', marginBottom: '10px' }}>
+                Image Required
               </div>
-              <h2 style={{ fontSize: '24px', fontWeight: 900, marginBottom: '8px' }}>
-                PLEASE UPLOAD AN IMAGE TO PROCEED
+              <h2 style={{ fontSize: '22px', fontWeight: 700, marginBottom: '8px' }}>
+                Upload an Image to Proceed
               </h2>
-              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', fontWeight: 500, lineHeight: 1.6 }}>
+              <p style={{ fontSize: '13.5px', color: 'var(--text-secondary)', fontWeight: 400, lineHeight: 1.6 }}>
                 Upload an image to start experimenting with OpenCV image operations, pixel coordinates inspection, BGR color channels, cropping, resizing, and rotation.
               </p>
             </div>
@@ -635,13 +635,13 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
             <button
               onClick={(e) => { e.stopPropagation(); fileInputRef.current?.click(); }}
               className="comic-btn comic-btn-accent"
-              style={{ padding: '12px 28px', fontSize: '12px', gap: '8px', marginTop: '6px' }}
+              style={{ padding: '10px 24px', fontSize: '13px', gap: '8px', marginTop: '4px' }}
             >
               <Upload size={16} />
               <span>Upload Image</span>
             </button>
 
-            <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)' }}>
+            <span style={{ fontSize: '12px', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>
               Drag &amp; drop file here, or click to browse (PNG, JPG, JPEG, WEBP)
             </span>
           </div>
@@ -653,14 +653,14 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
               <div className="comic-box" style={{ padding: '16px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
                   <span className="comic-tag" style={{ fontSize: '10px' }}>
-                    ORIGINAL INPUT
+                    Original Input
                   </span>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 700 }}>
-                    BGR COLOR
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 600 }}>
+                    BGR Color
                   </span>
                 </div>
 
-                <div style={{ width: '100%', height: '360px', background: '#050608', border: '2px solid var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                <div style={{ width: '100%', height: '360px', background: '#09090b', border: '1px solid var(--border-color)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
                   <img src={previewUrl} alt="Original Input" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
                 </div>
               </div>
@@ -669,22 +669,22 @@ export default function Lab01_Images({ currentImage, onImageChange, onSnapshotRe
               <div className="comic-box" style={{ padding: '16px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
                   <span className="comic-tag comic-tag-yellow" style={{ fontSize: '10px' }}>
-                    PROCESSED OUTPUT ({action.toUpperCase()})
+                    Processed ({action})
                   </span>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--accent-green)', fontWeight: 800 }}>
-                    {loading ? 'PROCESSING...' : 'RESULT READY'}
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 600 }}>
+                    {loading ? 'Processing...' : 'Ready'}
                   </span>
                 </div>
 
-                <div style={{ width: '100%', height: '360px', background: '#050608', border: '2px solid var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                <div style={{ width: '100%', height: '360px', background: '#09090b', border: '1px solid var(--border-color)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
                   {loading ? (
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-                      <div className="comic-tag comic-tag-yellow animate-pulse">EXECUTING OPENCV...</div>
+                      <div className="comic-tag comic-tag-yellow animate-pulse">Executing OpenCV...</div>
                     </div>
                   ) : processedImageUrl ? (
                     <img src={processedImageUrl} alt="Processed Output" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
                   ) : (
-                    <span style={{ fontSize: '11px', color: '#ffffff', fontFamily: 'var(--font-mono)' }}>Run an operation to see output</span>
+                    <span style={{ fontSize: '12px', color: '#ffffff', fontFamily: 'var(--font-mono)' }}>Run an operation to see output</span>
                   )}
                 </div>
               </div>
