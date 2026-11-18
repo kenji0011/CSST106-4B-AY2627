@@ -125,17 +125,10 @@ npm run dev
 npm run build
 npm run preview
 ```
-
----
-
-<<<<<<< HEAD
-## 👨‍💻 Author
-=======
-
 ---
 
 ##  Author
->>>>>>> ef7027774e5e53145ed19960d6ad135a576d7c08
+
 
 **Kean Gabriel Salvahan**  
 BS Computer Science — Laguna State Polytechnic University  
