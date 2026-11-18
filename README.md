@@ -7,7 +7,7 @@
 
 ---
 
-## 📌 Project Overview
+##  Project Overview
 
 This web application serves as the **centralized compilation and interactive evaluation platform** for all Computer Vision laboratory activities (Lab 1 through Lab 7, plus extensible modules for Lab $n$). 
 
@@ -15,7 +15,7 @@ Designed with a **Neo-Brutalist Comic Book Aesthetic** (featuring halftone dot p
 
 ---
 
-## 🧪 Compiled Laboratory Modules
+##  Compiled Laboratory Modules
 
 | Experiment | Chapter Tag | Core Topics & Computer Vision Techniques | Interactive Web Features |
 | :--- | :--- | :--- | :--- |
@@ -30,7 +30,7 @@ Designed with a **Neo-Brutalist Comic Book Aesthetic** (featuring halftone dot p
 
 
 
-## 💻 Standalone Python Scripts
+##  Standalone Python Scripts
 
 In addition to the interactive Web UI, standalone Python scripts corresponding to each laboratory experiment are provided in the [`python_labs/`](./python_labs/) directory:
 
@@ -71,7 +71,7 @@ python python_labs/lab06_yolo.py
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 - Node.js (v18 or higher)
@@ -102,7 +102,7 @@ npm run build
 
 ---
 
-## 👨‍💻 Author
+##  Author
 
 **Kean Gabriel Salvahan**  
 BS Computer Science — Laguna State Polytechnic University  
